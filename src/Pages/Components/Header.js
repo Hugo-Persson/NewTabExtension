@@ -32,11 +32,10 @@ import axios from "axios"
      },[])
       
     return (
-        <div>
-            <header>
-                <h1>Welcome {props.name}</h1>
-                <h2>The current weather in {weather.data.name} is {Math.round((weather.data.main.temp-273)*10)/10}</h2>
-            </header>
+        <div className="header">
+            <h1>Welcome {props.name}</h1>
+            <h2>The current weather in {weather.data.name} is {Math.round((weather.data.main.temp-273)*10)/10} °C</h2>
+    
         </div>
     )
 }

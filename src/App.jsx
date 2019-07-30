@@ -4,15 +4,21 @@ import "./App.css"
 import Header from './Pages/Components/Header';
 import MainContent from './Pages/MainContent';
 import Sidebar from './Pages/Sidebar';
-import { async } from 'q';
+
 import WinterRoad from "./Wallpapers/WinterRoad.jpg";
-import Fire from "./Wallpapers/Fire.jpg";
+
 export default function App() {
   
   useEffect(()=>{
     async function LoadChromeSettings(){
       chrome.storage.sync.get("settings", function(chromeSettings){
-        setSetting(chromeSettings);
+        if(chromeSettings!=undefined){
+          setSetting(chromeSettings);
+        }
+        else{
+          chrome.storage.sync.set({"settings": settings});
+        }
+        
       })
     }
 
@@ -24,11 +30,20 @@ const [settings, setSetting] = useState({
   },
   backgroundImage: WinterRoad,
   defaultRoute: "/",
+  dateFormat: "sv",
+  metricUnits: true,
+  location:{
+    auto: true,
+    city:undefined,
+    lat: undefined,
+    lon: undefined,
+    
+  }
   //settings object
 })
 function UpdateBackground(){
   
-document.querySelector("html").style.backgroundImage = "url("+settings.backgroundImage+")"
+document.querySelector("html").style.backgroundImage = "url("+settings.backgroundImage +")"
 }
 UpdateBackground();
   return (

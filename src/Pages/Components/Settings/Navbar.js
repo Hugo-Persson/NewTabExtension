@@ -7,9 +7,9 @@ export default function Navbar() {
 
         <div className="navbar">
             <NavLink to="/settings/customization"activeClassName="active">Customization </NavLink>
-            <NavLink to="/settings/calender" activeClassName="active">Calender</NavLink>
-            <NavLink to="/settings/todo" activeClassName="active">ToDo</NavLink>
-            <NavLink to="/settings/weather"activeClassName="active">Weather</NavLink>
+            <NavLink to="/settings/general" activeClassName="active">General</NavLink>
+            <NavLink to="/settings/sidebar" activeClassName="active">Sidebar</NavLink>
+            <NavLink to="/settings/other"activeClassName="active">Other</NavLink>
             
         </div>
     )

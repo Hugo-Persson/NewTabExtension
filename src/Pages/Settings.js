@@ -1,3 +1,4 @@
+/*global chrome*/
 import React,{useState} from 'react'
 import {BrowserRouter as Router, Route, Link} from "react-router-dom"
 import Navbar from './Components/Settings/Navbar';
@@ -15,6 +16,7 @@ import AbandonedHouseIcon from "./Components/Settings/WallpaperIcons/AbandonedHo
 import LandscapeIcon from "./Components/Settings/WallpaperIcons/Landscape.jpg";
 import PersonCloseToFireIcon from "./Components/Settings/WallpaperIcons/PersonCloseToFire.jpg";
 import PlantsIcon from "./Components/Settings/WallpaperIcons/Plants.jpg";
+import GeneralSettings from './Components/Settings/GeneralSettings';
 
 export default function Settings(props) {
     const [settings, setSettings] = useState(props.settings);
@@ -25,38 +27,46 @@ export default function Settings(props) {
         console.log(settings)
     }
     function SaveSettings(){
-        console.log("Saving");
+        chrome.storage.sync.set({"settings": settings},function(){
+            alert("Save succesful");
+        })
     }
+
     return (
         
             <React.Fragment>
             
                 <React.Fragment>
-                <Link to={settings.defaultRoute} className="settingsReturn">←</Link>
+                
                 <div className="settings">
-                    
+                    <div className="settingsHeader">
+                    <Link to={settings.defaultRoute} className="settingsReturn">←</Link>
                     <h1>Settings</h1>
-                    
-                    <Route path="/settings/customization" exact render={props => (
-                    <div className="customization">
-                        <span>Background image</span>
-                        <div className="availableWallpapers"> 
-                            <img src={FireIcon} onClick={SetBackgroundImage.bind(Fire)}/>
-                            <img src={WinterRoadIcon} onClick={SetBackgroundImage.bind(WinterRoad)}/>
-                            <img src={AbandonedHouseIcon} onClick={SetBackgroundImage.bind(AbandonedHouse)}/>
-                            <img src={LandscapeIcon}  onClick={SetBackgroundImage.bind(Landscape)}/>
-                            <img src={PersonCloseToFireIcon}  onClick={SetBackgroundImage.bind(PersonCloseToFire)}/>
-                            <img src={PlantsIcon}  onClick={SetBackgroundImage.bind(Plants)}/>
-    
-                        </div>
-    
                     </div>
-                    )} />
+                
+                    <div className="settingsBody">
+                        <Route path="/settings/customization" exact render={props => (
+                        <div className="customization">
+                            <span>Background image</span>
+                            <div className="availableWallpapers"> 
+                                <img src={FireIcon} onClick={SetBackgroundImage.bind(Fire)}/>
+                                <img src={WinterRoadIcon} onClick={SetBackgroundImage.bind(WinterRoad)}/>
+                                <img src={AbandonedHouseIcon} onClick={SetBackgroundImage.bind(AbandonedHouse)}/>
+                                <img src={LandscapeIcon}  onClick={SetBackgroundImage.bind(Landscape)}/>
+                                <img src={PersonCloseToFireIcon}  onClick={SetBackgroundImage.bind(PersonCloseToFire)}/>
+                                <img src={PlantsIcon}  onClick={SetBackgroundImage.bind(Plants)}/>
+        
+                            </div>
+        
+                        </div>
+                        )} />
+                        <Route path="/settings/general" exact render={props => (
+                        <div className="general">
+                            <GeneralSettings settings={settings}/>
+                        </div>
+                        )} />
+                    </div>
                     <div className="saveSettings" onClick={SaveSettings}>Save Settings</div>
-                    
-                    
-    
-    
                     <Navbar/>
                 </div>
                 </React.Fragment>

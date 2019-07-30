@@ -1,6 +1,6 @@
 
 import React, {useState} from 'react'
-import {BrowserRouter as Router, Route, Link} from "react-router-dom"
+import {MemoryRouter, Route, Link} from "react-router-dom"
 import Calender from './Calender';
 import Tasks from './Tasks';
 import Settings from './Settings';
@@ -14,7 +14,8 @@ const [itemFullscreen, setItemFullscreen] = useState(0);
 
     return (
 
-      <Router>
+      <MemoryRouter>
+        
         <Route path="/" exact render={props => (
           <div className="sideBar">
             <Calender/>
@@ -61,7 +62,7 @@ const [itemFullscreen, setItemFullscreen] = useState(0);
         
         
         
-      </Router>
+      </MemoryRouter>
         
     )
 }

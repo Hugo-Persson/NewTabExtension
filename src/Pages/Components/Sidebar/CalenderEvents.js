@@ -5,7 +5,7 @@ export default function CalenderEvents(props) {
     function dateStringFromatter(date){
         var parsedEvent = new Date(date);
         console.log(parsedEvent.toLocaleDateString());
-        return parsedEvent.toLocaleString("sv")
+        return parsedEvent.toLocaleString(props.settings)
         
     }
     function locationFormatter(location){

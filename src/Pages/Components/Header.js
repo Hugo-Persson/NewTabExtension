@@ -1,3 +1,5 @@
+/* global chrome */
+
 import React, {useState, useEffect} from 'react'
 import axios from "axios"
 
@@ -9,22 +11,41 @@ import axios from "axios"
      useEffect(() =>{
          const fetchData = async () =>{
              //TODO: Switch to using chrome api for the location
-            if("geolocation" in navigator){
-                navigator.geolocation.getCurrentPosition(async function(location){
-                    const result = await axios(
-                
-                        "https://api.openweathermap.org/data/2.5/weather?lat="+location.coords.latitude+"&lon="+location.coords.longitude + "&appid=182687c0b69f8681a9c697a2ac368d68"
-                    )
-                   
-                   console.log(result);
-                   if(result!=undefined){
-                    setWeather(result);
-                   }
-                   
-                   console.log(weather);
-                })
+             if(props.settings.location.auto){
+                if("geolocation" in navigator){
+                    navigator.geolocation.getCurrentPosition(async function(location){
+                        const result = await axios(
+                    
+                            "https://api.openweathermap.org/data/2.5/weather?lat="+location.coords.latitude+"&lon="+location.coords.longitude + "&appid=182687c0b69f8681a9c697a2ac368d68"
+                        )
+                       
+                       console.log(result);
+                       if(result!=undefined){
+                        setWeather(result);
+                        props.settings.location.lat=result.data.coord.lat;
+                        props.settings.location.lon = result.data.coord.lon;
+                        props.settings.location.city = result.data.name;
+                        // TODO: chrome.storage.sync.set({"settings": props.settings});
+                       }
+                       
+                       console.log(weather);
+                    })
+    
+                }
+             }
+             else{
+                 const result = await axios(
+                    "https://api.openweathermap.org/data/2.5/weather?lat="+props.settings.location.lat+"&lon="+props.settings.location.lon + "&appid=182687c0b69f8681a9c697a2ac368d68"
+                 )
+                 if(result!=undefined){
+                     setWeather(result);
+                     
+                 }
+             }
 
-            }
+
+
+            
             
          };
          fetchData();

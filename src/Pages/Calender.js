@@ -60,7 +60,7 @@ export default function Calender(props) {
          
             <div className="calender">
             <h1><Link to="/hideCalender">Calender ▼</Link></h1>
-              <CalenderEvents events={events} />
+              <CalenderEvents events={events} settings={props.settings}/>
             </div>
     )
 }

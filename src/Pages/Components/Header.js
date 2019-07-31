@@ -10,7 +10,7 @@ import axios from "axios"
      
      useEffect(() =>{
          const fetchData = async () =>{
-             //TODO: Switch to using chrome api for the location
+             //TODO: Error handeling
              if(props.settings.location.auto){
                 if("geolocation" in navigator){
                     navigator.geolocation.getCurrentPosition(async function(location){

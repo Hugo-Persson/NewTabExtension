@@ -26,12 +26,16 @@ export default function App() {
 
 const [settings, setSetting] = useState({
   calender:{
-    calenderID:[
+    calenderIDs:[
+      {
+        id:"test",
+          enabled: false,
+      }
       
     ]
   },
   backgroundImage: WinterRoad,
-  defaultRoute: "/settings/general",
+  defaultRoute: "/settings/sidebar",
   dateFormat: "sv",
   units: "metric",
   location:{

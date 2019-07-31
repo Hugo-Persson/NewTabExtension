@@ -141,7 +141,14 @@ a{
     cursor: pointer;
     
 }
-
+.sidebarSettings{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.sidebarSettings div{
+    flex: 1;
+}
 
 /*
 --------------------------------- 

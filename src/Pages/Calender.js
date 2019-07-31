@@ -6,7 +6,8 @@ import CalenderEvents from './Components/Sidebar/CalenderEvents';
 
 
 export default function Calender(props) {
-  console.log(props.settings.calender.calenderID.length);
+  var anyCalenderEnabled = false;
+  console.log(props.settings.calender.calenderIDs.length);
     const[events, setEvents] = useState({items:[
         {
           summary: "loading",
@@ -41,16 +42,22 @@ export default function Calender(props) {
               })
               var events =[];
               //Wil go through all calender and add the events toghete
-              if(props.setttings.calender.calenderID.length!=0){
-                props.settings.calender.calenderID.map((item)=>{
+              
+              if(props.setttings.calender.calenderIDs.length!=1){
+                props.settings.calender.calenderIDs.map((item)=>{
+
                   //TODO: Maybe add settings for params
                   //TODO: Add maxTime that can be configured in the settings
-                  fetch("https://www.googleapis.com/calendar/v3/calendars/"+item+"/events?maxResults=5&timeMin:"+(new Date()).toJSON())
+                  if(item.enabled) {
+                    anyCalenderEnabled=true;
+                    fetch("https://www.googleapis.com/calendar/v3/calendars/"+item.id+"/events?maxResults=5&timeMin:"+(new Date()).toJSON())
                   .then((response) => response.json()) // Transform the data into json
                     .then(function(data) {
                         console.log(data);
                         events.push(data.items);
                     })
+                  }
+                  
               })
               setEvents({items:events})
               }
@@ -58,8 +65,8 @@ export default function Calender(props) {
               
           }
       },[])
-
-      if(props.settings.calender.calenderID.length===0){
+      //TODO: Chrome change 1 to 0 for launch
+      if(!anyCalenderEnabled){
         return(
           <div className="calender">
             <h1><Link to="/hideCalender">Calender ▼</Link></h1>

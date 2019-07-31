@@ -4,7 +4,7 @@ import "./App.css"
 import Header from './Pages/Components/Header';
 import MainContent from './Pages/MainContent';
 import Sidebar from './Pages/Sidebar';
-
+import {Redirect} from "react-router-dom"
 import WinterRoad from "./Wallpapers/WinterRoad.jpg";
 
 export default function App() {
@@ -26,12 +26,14 @@ export default function App() {
 
 const [settings, setSetting] = useState({
   calender:{
-    calenderID:[]
+    calenderID:[
+      
+    ]
   },
   backgroundImage: WinterRoad,
-  defaultRoute: "/",
+  defaultRoute: "/settings/general",
   dateFormat: "sv",
-  metricUnits: true,
+  units: "metric",
   location:{
     auto: true,
     city:undefined,
@@ -47,7 +49,9 @@ document.querySelector("html").style.backgroundImage = "url("+settings.backgroun
 }
 UpdateBackground();
   return (
+    
     <React.Fragment>
+      
       <Header name="Hugo Persson" settings={settings}/>
       <MainContent settings={settings}/>
       <Sidebar settings={settings} UpdateBackground={UpdateBackground}/>

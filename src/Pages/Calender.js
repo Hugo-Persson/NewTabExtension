@@ -6,10 +6,11 @@ import CalenderEvents from './Components/Sidebar/CalenderEvents';
 
 
 export default function Calender(props) {
+  console.log(props.settings.calender.calenderID.length);
     const[events, setEvents] = useState({items:[
         {
-          summary: "Riskettan",
-          location: "Ahlbäcks Trafikskola i Halmstad, Brogatan 46, 302 95 Halmstad, Sweden",
+          summary: "loading",
+          location: "loading",
           start:{
             dateTime:"2019-08-13T08:15:00+02:00",
       
@@ -17,7 +18,7 @@ export default function Calender(props) {
           end:{
             dateTime: "2019-08-13T12:30:00+02:00"
           },
-          id: "6hhjcpb36pgjgb9ocph3cb9k6oqj8bb271i34b9m75gj4dhm68p30dpi6c"
+          id: "loading"
         }
       ]});
       useEffect(()=>{
@@ -39,8 +40,9 @@ export default function Calender(props) {
 
               })
               var events =[];
-              //Wil go through all calender and add the events togheter
-              props.settings.calender.calenderID.map((item)=>{
+              //Wil go through all calender and add the events toghete
+              if(props.setttings.calender.calenderID.length!=0){
+                props.settings.calender.calenderID.map((item)=>{
                   //TODO: Maybe add settings for params
                   //TODO: Add maxTime that can be configured in the settings
                   fetch("https://www.googleapis.com/calendar/v3/calendars/"+item+"/events?maxResults=5&timeMin:"+(new Date()).toJSON())
@@ -51,16 +53,30 @@ export default function Calender(props) {
                     })
               })
               setEvents({items:events})
+              }
+              
+              
           }
       },[])
 
-
-    return (
+      if(props.settings.calender.calenderID.length===0){
+        return(
+          <div className="calender">
+            <h1><Link to="/hideCalender">Calender ▼</Link></h1>
+            Please select the calenders you which to use in the setting to start to use the calender. 
+            
+          </div>
+        )
+      }
+      else{
+        return (
         
          
-            <div className="calender">
-            <h1><Link to="/hideCalender">Calender ▼</Link></h1>
-              <CalenderEvents events={events} settings={props.settings}/>
-            </div>
-    )
+          <div className="calender">
+          <h1><Link to="/hideCalender">Calender ▼</Link></h1>
+            <CalenderEvents events={events} settings={props.settings}/>
+          </div>
+  )
+      }
+    
 }

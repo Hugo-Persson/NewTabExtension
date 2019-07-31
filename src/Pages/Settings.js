@@ -17,6 +17,7 @@ import LandscapeIcon from "./Components/Settings/WallpaperIcons/Landscape.jpg";
 import PersonCloseToFireIcon from "./Components/Settings/WallpaperIcons/PersonCloseToFire.jpg";
 import PlantsIcon from "./Components/Settings/WallpaperIcons/Plants.jpg";
 import GeneralSettings from './Components/Settings/GeneralSettings';
+import SideBarSettings from './Components/Settings/SideBarSettings';
 
 export default function Settings(props) {
     const [settings, setSettings] = useState(props.settings);
@@ -40,7 +41,7 @@ export default function Settings(props) {
                 
                 <div className="settings">
                     <div className="settingsHeader">
-                    <Link to={settings.defaultRoute} className="settingsReturn">←</Link>
+                    <Link to={"/"} className="settingsReturn">←</Link>
                     <h1>Settings</h1>
                     </div>
                 
@@ -61,9 +62,14 @@ export default function Settings(props) {
                         </div>
                         )} />
                         <Route path="/settings/general" exact render={props => (
-                        <div className="general">
+                        
                             <GeneralSettings settings={settings}/>
-                        </div>
+                        
+                        )} />
+                        <Route path="/settings/sidebar" exact render={props => (
+                        
+                            <SideBarSettings settings={settings}/>
+                        
                         )} />
                     </div>
                     <div className="saveSettings" onClick={SaveSettings}>Save Settings</div>

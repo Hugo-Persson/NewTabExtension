@@ -1,6 +1,6 @@
 
 import React, {useState} from 'react'
-import {MemoryRouter, Route, Link} from "react-router-dom"
+import {MemoryRouter, Route, Link, Redirect} from "react-router-dom"
 import Calender from './Calender';
 import Tasks from './Tasks';
 import Settings from './Settings';
@@ -15,11 +15,11 @@ const [itemFullscreen, setItemFullscreen] = useState(0);
     return (
 
       <MemoryRouter>
-        
+        <Redirect to={settings.defaultRoute}/>
         <Route path="/" exact render={props => (
           <div className="sideBar">
-            <Calender/>
-            <Tasks/>
+            <Calender settings={settings}/>
+            <Tasks settings={settings}/>
             <Link to="/settings/customization" className="settingsButton">⚙</Link>
         </div>
         )} />

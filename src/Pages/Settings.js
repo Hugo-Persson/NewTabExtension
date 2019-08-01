@@ -32,7 +32,28 @@ export default function Settings(props) {
             alert("Save succesful");
         })
     }
+    function SubmitBackgroundImage(element){
+        var element = element.currentTarget;
+        var file = element.files[0];
+        console.log(file);
+        var imageType = /image.*/;
+        if(file.type.match(imageType)){
+            
 
+            var reader = new FileReader();
+            reader.onload = function(e){
+                
+                
+                var result = reader.result;
+                settings.backgroundImage=result;
+                props.UpdateBackground();
+            }
+            reader.readAsDataURL(file);
+        }
+        else{
+            console.log("File type not supported");
+        }
+    }
     return (
         
             <React.Fragment>
@@ -40,15 +61,19 @@ export default function Settings(props) {
                 <React.Fragment>
                 
                 <div className="settings">
+                    <div className="settingsReturn">
+                        <Link to={"/"}>←</Link>
+                    </div>
+                
                     <div className="settingsHeader">
-                    <Link to={"/"} className="settingsReturn">←</Link>
+                    
                     <h1>Settings</h1>
                     </div>
                 
                     <div className="settingsBody">
                         <Route path="/settings/customization" exact render={props => (
                         <div className="customization">
-                            <span>Background image</span>
+                            <h2>Background image</h2>
                             <div className="availableWallpapers"> 
                                 <img src={FireIcon} onClick={SetBackgroundImage.bind(Fire)}/>
                                 <img src={WinterRoadIcon} onClick={SetBackgroundImage.bind(WinterRoad)}/>
@@ -58,6 +83,12 @@ export default function Settings(props) {
                                 <img src={PlantsIcon}  onClick={SetBackgroundImage.bind(Plants)}/>
         
                             </div>
+                            <div className="submitBackgroundImage">
+                                <h3>Submit local file as Background image</h3>
+                                <input type="file" onChange={SubmitBackgroundImage}/>
+                            </div>
+
+                            
         
                         </div>
                         )} />

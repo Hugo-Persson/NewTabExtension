@@ -92,7 +92,7 @@ a{
 }
 .settingsHeader{
     flex: 1;
-    vertical-align: middle;
+    
 }
 .navbar{
     flex: 1;
@@ -123,6 +123,9 @@ a{
     margin: 0px 15px;
 }
 .settingsReturn{
+    flex: 0.4;
+}
+.settingsReturn a{
     
     font-size: 1.7vw;
     float: left;

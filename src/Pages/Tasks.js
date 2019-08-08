@@ -3,8 +3,8 @@ import React, {useState, useEffect} from 'react'
 import {BrowserRouter as Router, Route, Link} from "react-router-dom"
 import ToDoTask from './Components/Sidebar/ToDoTask';
 
-export default function Tasks() {
-
+export default function Tasks(props) {
+  var anyCalenderEnabled = false;
     const[tasks, setTasks] = useState({
         items:[
           {
@@ -24,7 +24,8 @@ export default function Tasks() {
         //TODO: Chrome
       //   fetchData();
         async function fetchData(){
-            chrome.identity.getAuthToken({"interactive":true},function(token){
+          var array =[];
+            chrome.identity.getAuthToken({"interactive":false},function(token){
               let init = {
                   method: 'GET',
                   async: true,
@@ -36,17 +37,49 @@ export default function Tasks() {
                   
                   'contentType': 'json'
                 };
+                props.settings.ToDo.taskLists.map((item) => {
+                  if(item.enabled){
+                    anyCalenderEnabled=true;
+                    fetch("https://www.googleapis.com/tasks/v1/lists/"+item.id+"/tasks?showHidden=true", init)
+                    .then((response) => response.json()) // Transform the data into json
+                    .then(function(data) {
+                    console.log(data);
+                    data.map((itteration) => {
+                      array.push({
+                        itteration
+                      })
+                    })
+    
+                  })
+                  }
+                }
+                  
+                )
 
             })
-            //TODO: Get tasks from google tasks
+            setTasks(array);
+            
+            
             
             
         }
     },[])
-    return (
+    if(anyCalenderEnabled){
+      return (
         <div className="Tasks">
             <h1><Link to="/hideTasks">Tasks ▼</Link></h1>
             <ToDoTask tasks={tasks}/>
         </div>
     )
+    }
+    else{
+      return(
+        <div className="Tasks">
+        <h1><Link to="/hideTasks">Tasks ▼</Link></h1>
+          Please select the calenders you which to use in the setting to start to use the calender. 
+      </div>
+      )
+      
+    }
+    
 }

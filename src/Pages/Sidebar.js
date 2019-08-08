@@ -4,17 +4,17 @@ import {MemoryRouter, Route, Link, Redirect} from "react-router-dom"
 import Calender from './Calender';
 import Tasks from './Tasks';
 import Settings from './Settings';
-
+import EditQuickAccessItem from "./EditQuickAccessItem";
 export default function Sidebar(prop) {
 
-  const [settings, setSettings] = useState(prop.settings);
+  const {settings} = prop;
 const [itemFullscreen, setItemFullscreen] = useState(0);
 
 
 
     return (
 
-      <MemoryRouter>
+      <React.Fragment>
         <Redirect to={settings.defaultRoute}/>
         <Route path="/" exact render={props => (
           <div className="sideBar">
@@ -56,13 +56,19 @@ const [itemFullscreen, setItemFullscreen] = useState(0);
         )}/>
         <Route path="/settings"  render={props=>(
           <div className="sideBar">
-            <Settings settings={settings} UpdateBackground={prop.UpdateBackground}/>
+            <Settings settings={settings} UpdateApp={prop.UpdateApp}/>
         </div>
         )}/>
+        <Route path="/EditQuickAccessItem"  render={props=>(
+          <div className="sideBar">
+            <EditQuickAccessItem settings={settings} UpdateApp={prop.UpdateApp} selectedQuickAccessItem={prop.selectedQuickAccessItem}/>
+          </div>
+          
+        )}/>
+        </React.Fragment>
         
         
-        
-      </MemoryRouter>
+      
         
     )
 }

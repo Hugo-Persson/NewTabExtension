@@ -1,5 +1,6 @@
 import React from 'react'
 import CalenderSettings from './CalenderSettings';
+import ToDoSettings from './ToDoSettings';
 
 export default function SideBarSettings(props) {
     
@@ -14,7 +15,7 @@ export default function SideBarSettings(props) {
             <div className="toDoSettings">
                 <h2>ToDo</h2>
                 <div>
-                    
+                    <ToDoSettings settings={props.settings}/>
                 </div>
             </div>
             

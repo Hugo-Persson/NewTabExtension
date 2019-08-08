@@ -26,7 +26,7 @@ export default function Calender(props) {
           //TODO: Chrome
         //   fetchData();
           async function fetchData(){
-              chrome.identity.getAuthToken({"interactive":true},function(token){
+              chrome.identity.getAuthToken({"interactive":false},function(token){
                 let init = {
                     method: 'GET',
                     async: true,
@@ -43,7 +43,7 @@ export default function Calender(props) {
               var events =[];
               //Wil go through all calender and add the events toghete
               
-              if(props.setttings.calender.calenderIDs.length!=1){
+              if(props.setttings.calender.calenderIDs.length!==0){
                 props.settings.calender.calenderIDs.map((item)=>{
 
                   //TODO: Maybe add settings for params
@@ -65,7 +65,7 @@ export default function Calender(props) {
               
           }
       },[])
-      //TODO: Chrome change 1 to 0 for launch
+      
       if(!anyCalenderEnabled){
         return(
           <div className="calender">

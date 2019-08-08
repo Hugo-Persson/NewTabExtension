@@ -26,6 +26,7 @@ export default function CalenderSettings(props) {
 
                   data.items.map((item) =>{
                       calenderArray.push({
+                          name: item.summary,
                           id: item.id,
                           enabled: false,
                           
@@ -35,7 +36,7 @@ export default function CalenderSettings(props) {
               })
         })
     }
-    if(calenders==undefined){
+    if(calenders[0].id===undefined){
         return (
         
             <div className="calenderSettings">

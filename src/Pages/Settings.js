@@ -24,7 +24,7 @@ export default function Settings(props) {
     SetBackgroundImage.bind(Fire);
     function SetBackgroundImage(){
         settings.backgroundImage=this;
-        props.UpdateBackground();
+        props.UpdateApp();
         console.log(settings)
     }
     function SaveSettings(){
@@ -46,7 +46,7 @@ export default function Settings(props) {
                 
                 var result = reader.result;
                 settings.backgroundImage=result;
-                props.UpdateBackground();
+                props.UpdateApp();
             }
             reader.readAsDataURL(file);
         }
@@ -62,7 +62,7 @@ export default function Settings(props) {
                 
                 <div className="settings">
                     <div className="settingsReturn">
-                        <Link to={"/"}>←</Link>
+                        <Link to="/">←</Link>
                     </div>
                 
                     <div className="settingsHeader">

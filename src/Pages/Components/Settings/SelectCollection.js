@@ -11,9 +11,11 @@ export default function SelectCollection(props) {
     }
     
     return props.collections.map((item)=>(
-        <React.Fragment>
-            <input type="checkbox" onClick={() => Toggle(item)}/><span>{item.id}</span> <br/>
-        </React.Fragment>
+        <div className="select">
+            <input type="checkbox" onClick={() => Toggle(item)}/><span>{item.name}</span> <br/>
+        </div>
+            
+        
         
         
         

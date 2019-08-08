@@ -1,13 +1,17 @@
 /*global chrome*/
-import React, {useState,useEffect} from 'react'
+import React, {useState,useEffect, useCallback} from 'react'
 import "./App.css"
 import Header from './Pages/Components/Header';
 import MainContent from './Pages/MainContent';
 import Sidebar from './Pages/Sidebar';
 import {Redirect} from "react-router-dom"
 import WinterRoad from "./Wallpapers/WinterRoad.jpg";
-
+import {MemoryRouter} from "react-router-dom";
 export default function App() {
+  const [, updateState] = useState();
+  const forceUpdate = useCallback(() => updateState({}), []);
+
+  const [selectedQuickAccessItem, setSelectedQuickAccessItem] = useState({});
   
   useEffect(()=>{
     async function LoadChromeSettings(){
@@ -25,19 +29,32 @@ export default function App() {
   },[])
 
 const [settings, setSetting] = useState({
+  ToDo:{
+    taskLists:[
+      {
+        name:"TITLE",
+        id: undefined,
+        enabled:false,
+      },
+      
+
+    ]
+  },
   calender:{
     calenderIDs:[
       {
-        id:"test",
-          enabled: false,
-      }
+        name:"SUMMARY",
+        id:undefined,
+          enabled: true,
+      },
+      
       
     ]
   },
   backgroundImage: WinterRoad,
   defaultRoute: "/settings/sidebar",
   dateFormat: "sv",
-  units: "metric",
+  units: "imperial",
   location:{
     auto: true,
     city:undefined,
@@ -45,23 +62,84 @@ const [settings, setSetting] = useState({
     lon: undefined,
     
   }
-  //settings object
 })
-function UpdateBackground(){
-  
-document.querySelector("html").style.backgroundImage = "url("+settings.backgroundImage +")"
+function UpdateApp(){
+  forceUpdate();
+
 }
-UpdateBackground();
-  return (
+function ChangeIndex(object, index){
+  var DeepCopy = JSON.parse(JSON.stringify(QuickAccessLinks));
+  
+  QuickAccessLinks.map((value,itterationIndex,array)=>{
     
-    <React.Fragment>
-      
-      <Header name="Hugo Persson" settings={settings}/>
-      <MainContent settings={settings}/>
-      <Sidebar settings={settings} UpdateBackground={UpdateBackground}/>
-      
-      </React.Fragment>
-      
+    if(itterationIndex>=index){
+       array[itterationIndex+1]=DeepCopy[itterationIndex]
+
+    }
+  })
+  QuickAccessLinks[index] = object;
+}
+const [QuickAccessLinks] = useState([
+  {
+      name: "Youtube",
+      url:"https://www.reddit.com",
+      image: "https://api.faviconkit.com/reddit.com/64"
+  },
+  {
+      name: "Reddit",
+      url:"https://www.reddit.com",
+      image: "https://api.faviconkit.com/reddit.com/64"
+  },
+  {
+      name: "Reddit",
+      url:"https://www.reddit.com",
+      image: "https://api.faviconkit.com/reddit.com/64"
+  },
+  {
+      name: "Reddit",
+      url:"https://www.reddit.com",
+      image: "https://api.faviconkit.com/reddit.com/64"
+  },
+  {
+      name: "Reddit",
+      url:"https://www.reddit.com",
+      image: "https://api.faviconkit.com/reddit.com/64"
+  },
+  {
+      name: "Reddit",
+      url:"https://www.reddit.com",
+      image: "https://api.faviconkit.com/reddit.com/64"
+  },
+  {
+      name: "Reddit",
+      url:"https://www.reddit.com",
+      image: "https://api.faviconkit.com/reddit.com/64"
+  },
+  {
+      name: "Reddit",
+      url:"https://www.reddit.com",
+      image: "https://api.faviconkit.com/reddit.com/64"
+  }
+
+  
+  
+])
+
+ 
+
+
+console.log("Render");
+document.querySelector("html").style.backgroundImage = "url("+settings.backgroundImage +")";
+  return (
+    <MemoryRouter >
+      <React.Fragment>
+        
+        <Header name="Hugo Persson" settings={settings}/>
+        <MainContent QuickAccessLinks={QuickAccessLinks} UpdateApp={UpdateApp} settings={settings} selectedQuickAccessItem={selectedQuickAccessItem} asignSelectedQuickAccessItem={(object) => setSelectedQuickAccessItem(object)}/>
+        <Sidebar settings={settings} UpdateApp={UpdateApp} selectedQuickAccessItem={selectedQuickAccessItem}/>
+        
+        </React.Fragment>
+      </MemoryRouter>
     
   )
 }

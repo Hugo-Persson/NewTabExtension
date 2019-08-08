@@ -1,20 +1,34 @@
 
 import React from 'react'
-
+import {Route} from "react-router-dom"
 
 export default function QuickAccess(props) {
     
-    
-    return props.quickAccessLinks.map((link) => (
-        <a className="quickAccessItem" href={link.url}>
+    function RightClick(e, history, link){
+        console.log("Right Click");
+        e.preventDefault();
+        
+        props.UpdateApp();
+        history.push("/EditQuickAccessItem");
+        props.asignSelectedQuickAccessItem(link);
+        console.log(props.selectedQuickAccessItem)
+        
+        
+
+    }
+    return props.QuickAccessLinks.map((link) => (
+        <Route render={({history}) =>(
+            <a className="quickAccessItem" onContextMenu={(e) => {RightClick(e,history, link)}} href={link.url}>
             <ul>
-                <li><img src={link.image} alt="Image failed to load"/></li>
+                <li><img src={link.image} alt={link.name}/></li>
                 <li><span>{link.name}</span></li>
             </ul>
             
             
             
         </a>
+            )}/>
+        
 
     ));
         

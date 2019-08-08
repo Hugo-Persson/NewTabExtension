@@ -1,6 +1,8 @@
 import React,{useRef} from 'react'
 
 export default function GeneralSettings(props) {
+
+    var metric = true;
     const units = useRef(null)
     const date = useRef(null);
     function UnitChange(){
@@ -12,17 +14,19 @@ export default function GeneralSettings(props) {
     }
     return (
         <div className="generalSettings">
+
             Units:
-            <select ref={units} value={props.settings.units} onChange={UnitChange}>
-                <option value="metric">Metric</option>
-                <option value="imperial">Imperial</option>
+            <select ref={units}  onChange={UnitChange}>
+                <option selected={props.settings.units==="metric"} value="metric">Metric</option>
+                <option selected={props.settings.units==="imperial"} value="imperial">Imperial</option>
             </select>
             <br/>
             Dateformat 
-            <select ref={date} value={props.settings.dateFormat} onChange={DateFormat}>
+            <select ref={date} onChange={DateFormat}>
                 
-                <option value="sv">DMY</option>
-                <option value="en-US">DMY</option>
+                <option selected={props.settings.dateFormat==="sv"} value="sv">DMY</option>
+                <option selected={props.settings.dateFormat==="en-US"} value="en-US">MDY</option>
+                <option selected={props.settings.dateFormat==="zh"} value="zh">YMD</option>
             </select>
 
         </div>

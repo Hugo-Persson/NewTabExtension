@@ -74,6 +74,9 @@ a{
     color: gray;
     transform: rotate(360deg);
 }
+.generalSettings *{
+    margin: 10px;
+}
 /*
 --------------------------------- 
         Settings
@@ -89,9 +92,11 @@ a{
 }
 .settingsBody{
     flex: 12;
+    margin: 0 1vw;
+    overflow: auto;
 }
 .settingsHeader{
-    flex: 1;
+    flex: 0.5;
     
 }
 .navbar{
@@ -123,7 +128,7 @@ a{
     margin: 0px 15px;
 }
 .settingsReturn{
-    flex: 0.4;
+    flex: 0.1;
 }
 .settingsReturn a{
     
@@ -152,6 +157,19 @@ a{
 .sidebarSettings div{
     flex: 1;
 }
+.select{
+    margin: 0.5vw;
+}
+/*
+--------------------------------- 
+        Edit Quick Access item
+---------------------------------
+*/
+
+.editQuickAccessItem .settingsBody *{
+    margin: 0.5vw;
+}
+
 
 /*
 --------------------------------- 

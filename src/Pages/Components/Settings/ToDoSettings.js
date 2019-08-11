@@ -6,7 +6,7 @@ import SelectCollection from './SelectCollection';
 export default function ToDoSettings(props) {
     const [TaskLists, setTaskLists] = useState(props.settings.ToDo.taskLists)
     function GetTaskLists(){
-        chrome.identity.getAuthToken({"interactive": true},function(token){
+        chrome.identity.getAuthToken({"interactive": true, "scopes": "https://www.googleapis.com/auth/tasks"},function(token){
             let init={
                 method: "GET",
                 async: true,
@@ -35,7 +35,7 @@ export default function ToDoSettings(props) {
 
 
     //TODO: Later change undefined to the title being what it is in app.jsx
-    if(TaskLists[0].id===undefined){
+    if(TaskLists[0].id===null){
         return (
         
             <div className="toDoSettings">

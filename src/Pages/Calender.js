@@ -26,7 +26,7 @@ export default function Calender(props) {
           //TODO: Chrome
         //   fetchData();
           async function fetchData(){
-              chrome.identity.getAuthToken({"interactive":false},function(token){
+              chrome.identity.getAuthToken({"interactive":false, "scopes": "https://www.googleapis.com/auth/calendar"},function(token){
                 let init = {
                     method: 'GET',
                     async: true,

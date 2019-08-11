@@ -1,7 +1,7 @@
 /*global chrome*/
 import React, {useState, useEffect} from 'react'
 import QuickAccess from "./Components/QuickAccess"
-
+import {Flipper, Flipped} from "react-flip-toolkit"
 export default function MainContent(props) {
 
 
@@ -19,12 +19,17 @@ export default function MainContent(props) {
         // fetchData();
        
     },[])
+    
+    console.log()
     return (
-
-        <div className="main">
+        <Flipper flipKey={props.QuickAccessLinks.map(e=>e.name).join()} className="main">
+            
+            
             <QuickAccess {...props}/>
             
             
-        </div>
+            
+        </Flipper>
+        
     )
 }

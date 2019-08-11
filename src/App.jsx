@@ -33,7 +33,7 @@ const [settings, setSetting] = useState({
     taskLists:[
       {
         name:"TITLE",
-        id: undefined,
+        id: null,
         enabled:false,
       },
       
@@ -44,7 +44,7 @@ const [settings, setSetting] = useState({
     calenderIDs:[
       {
         name:"SUMMARY",
-        id:undefined,
+        id:null,
           enabled: true,
       },
       
@@ -67,7 +67,8 @@ function UpdateApp(){
   forceUpdate();
 
 }
-function ChangeIndex(object, index){
+function CreateNewLink(object, index){
+
   var DeepCopy = JSON.parse(JSON.stringify(QuickAccessLinks));
   
   QuickAccessLinks.map((value,itterationIndex,array)=>{
@@ -78,45 +79,50 @@ function ChangeIndex(object, index){
     }
   })
   QuickAccessLinks[index] = object;
+  
+}
+function ChangeIndex(object,index,oldIndex){
+  CreateNewLink(object,index);
+  QuickAccessLinks.splice(oldIndex,1);
 }
 const [QuickAccessLinks] = useState([
   {
-      name: "Youtube",
+      name: "1",
       url:"https://www.reddit.com",
       image: "https://api.faviconkit.com/reddit.com/64"
   },
   {
-      name: "Reddit",
+      name: "2",
       url:"https://www.reddit.com",
       image: "https://api.faviconkit.com/reddit.com/64"
   },
   {
-      name: "Reddit",
+      name: "3",
       url:"https://www.reddit.com",
       image: "https://api.faviconkit.com/reddit.com/64"
   },
   {
-      name: "Reddit",
+      name: "4",
       url:"https://www.reddit.com",
       image: "https://api.faviconkit.com/reddit.com/64"
   },
   {
-      name: "Reddit",
+      name: "5",
       url:"https://www.reddit.com",
       image: "https://api.faviconkit.com/reddit.com/64"
   },
   {
-      name: "Reddit",
+      name: "6",
       url:"https://www.reddit.com",
       image: "https://api.faviconkit.com/reddit.com/64"
   },
   {
-      name: "Reddit",
+      name: "7",
       url:"https://www.reddit.com",
       image: "https://api.faviconkit.com/reddit.com/64"
   },
   {
-      name: "Reddit",
+      name: "8",
       url:"https://www.reddit.com",
       image: "https://api.faviconkit.com/reddit.com/64"
   }
@@ -136,7 +142,7 @@ document.querySelector("html").style.backgroundImage = "url("+settings.backgroun
         
         <Header name="Hugo Persson" settings={settings}/>
         <MainContent QuickAccessLinks={QuickAccessLinks} UpdateApp={UpdateApp} settings={settings} selectedQuickAccessItem={selectedQuickAccessItem} asignSelectedQuickAccessItem={(object) => setSelectedQuickAccessItem(object)}/>
-        <Sidebar settings={settings} UpdateApp={UpdateApp} selectedQuickAccessItem={selectedQuickAccessItem}/>
+        <Sidebar ChangeIndex={ChangeIndex} settings={settings} UpdateApp={UpdateApp} QuickAccessLinks={QuickAccessLinks} selectedQuickAccessItem={selectedQuickAccessItem}/>
         
         </React.Fragment>
       </MemoryRouter>

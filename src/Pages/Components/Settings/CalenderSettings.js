@@ -6,7 +6,7 @@ export default function CalenderSettings(props) {
     const [calenders, setCalenders] = useState(props.settings.calender.calenderIDs);
     const selectCalenders = useRef(null);
     function GetCalenders(){
-        chrome.identity.getAuthToken({"interactive":true},function(token){
+        chrome.identity.getAuthToken({"interactive":true, "scopes": "https://www.googleapis.com/auth/calendar"},function(token){
             let init = {
                 method: 'GET',
                 async: true,
@@ -36,7 +36,7 @@ export default function CalenderSettings(props) {
               })
         })
     }
-    if(calenders[0].id===undefined){
+    if(calenders[0].id===null){
         return (
         
             <div className="calenderSettings">

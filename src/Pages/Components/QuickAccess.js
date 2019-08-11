@@ -1,7 +1,7 @@
 
 import React from 'react'
 import {Route} from "react-router-dom"
-
+import {Flipper, Flipped} from "react-flip-toolkit"
 export default function QuickAccess(props) {
     
     function RightClick(e, history, link){
@@ -17,7 +17,8 @@ export default function QuickAccess(props) {
 
     }
     return props.QuickAccessLinks.map((link) => (
-        <Route render={({history}) =>(
+        <Flipped flipId={link.url} key={link.url}>
+            <Route render={({history}) =>(
             <a className="quickAccessItem" onContextMenu={(e) => {RightClick(e,history, link)}} href={link.url}>
             <ul>
                 <li><img src={link.image} alt={link.name}/></li>
@@ -28,6 +29,8 @@ export default function QuickAccess(props) {
             
         </a>
             )}/>
+        </Flipped>
+        
         
 
     ));

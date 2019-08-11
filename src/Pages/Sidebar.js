@@ -61,7 +61,7 @@ const [itemFullscreen, setItemFullscreen] = useState(0);
         )}/>
         <Route path="/EditQuickAccessItem"  render={props=>(
           <div className="sideBar">
-            <EditQuickAccessItem settings={settings} UpdateApp={prop.UpdateApp} selectedQuickAccessItem={prop.selectedQuickAccessItem}/>
+            <EditQuickAccessItem {...prop}/>
           </div>
           
         )}/>

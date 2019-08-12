@@ -5,17 +5,48 @@ export default function EditQuickAccessItem(props) {
     const formEl = useRef(null);
     console.log("rendering edit");
     function Save(){
-        props.UpdateApp();
-        if(changeToIndex!==undefined){
-            props.ChangeIndex(props.selectedQuickAccessItem, changeToIndex);
+        
+        if(changeToPosition!==undefined){
+            if(changeToPosition>index){
+                //Move foward
+                props.QuickAccessLinks.splice(changeToPosition,0,props.selectedQuickAccessItem);
+                props.QuickAccessLinks.splice(index,1);
+            }
+            else{
+                //Move backwards
+                props.QuickAccessLinks.splice(index,1);
+                props.QuickAccessLinks.splice((changeToPosition-1),0,props.selectedQuickAccessItem);
+                
+            }
+            
         }
+        props.UpdateApp();
     }
     
-    var changeToIndex;
+    var changeToPosition;
     
     function ClearForm(e){
         console.log("Load");
         e.currentTarget.reset();
+    }
+    function LocalIcon(e){
+        var file = e.currentTarget.files[0];
+        var imageType = /image.*/;
+        if(file.type.match(imageType)){
+            
+
+            var reader = new FileReader();
+            reader.onload = function(e){
+                
+                
+                var result = reader.result;
+                props.selectedQuickAccessItem.image = result;
+            }
+            reader.readAsDataURL(file);
+        }
+        else{
+            console.log("File type not supported");
+        }
     }
     return (
         <React.Fragment>
@@ -42,28 +73,21 @@ export default function EditQuickAccessItem(props) {
                                 props.selectedQuickAccessItem.url= e.currentTarget.value;
                             }}/>
                             <br/>
-                            Index: <input placeholder={index+1} onChange={(e) => (changeToIndex=e.currentTarget.value)} type="text"/>
+                            Index: <input placeholder={index+1} onChange={(e) => (changeToPosition=e.currentTarget.value)} type="text"/>
                             <br/>
-                            Icon: 
-                            <input type="file" onChange={(e) => {
-                                var file = e.currentTarget.files[0];
-                                var imageType = /image.*/;
-                                if(file.type.match(imageType)){
-                                    
 
-                                    var reader = new FileReader();
-                                    reader.onload = function(e){
-                                        
-                                        
-                                        var result = reader.result;
-                                        props.selectedQuickAccessItem.image = result;
-                                    }
-                                    reader.readAsDataURL(file);
-                                }
-                                else{
-                                    console.log("File type not supported");
-                                }
-                            }}/>
+
+                            Icon: 
+                            <div className="icon">
+                                <span className="localImage">
+                                Local Image: <input type="file" onChange={(e) => {LocalIcon(e)}}/>
+                                </span>
+                                
+                                
+                                <span className="ImageUrl">Image Url: <input type="text"/></span>
+                                <span classname="Automatic Icon">Automatic Icon: <input type="checkbox"/></span>
+                            </div>
+                            
                         </form>
                         
                     </div>

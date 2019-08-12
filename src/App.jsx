@@ -67,24 +67,7 @@ function UpdateApp(){
   forceUpdate();
 
 }
-function CreateNewLink(object, index){
 
-  var DeepCopy = JSON.parse(JSON.stringify(QuickAccessLinks));
-  
-  QuickAccessLinks.map((value,itterationIndex,array)=>{
-    
-    if(itterationIndex>=index){
-       array[itterationIndex+1]=DeepCopy[itterationIndex]
-
-    }
-  })
-  QuickAccessLinks[index] = object;
-  
-}
-function ChangeIndex(object,index,oldIndex){
-  CreateNewLink(object,index);
-  QuickAccessLinks.splice(oldIndex,1);
-}
 const [QuickAccessLinks] = useState([
   {
       name: "1",
@@ -99,7 +82,7 @@ const [QuickAccessLinks] = useState([
   {
       name: "3",
       url:"https://www.reddit.com",
-      image: "https://api.faviconkit.com/reddit.com/64"
+      image: "https://cdn.freebiesupply.com/images/large/2x/facebook-logo-circle-transparent.png"
   },
   {
       name: "4",
@@ -142,7 +125,7 @@ document.querySelector("html").style.backgroundImage = "url("+settings.backgroun
         
         <Header name="Hugo Persson" settings={settings}/>
         <MainContent QuickAccessLinks={QuickAccessLinks} UpdateApp={UpdateApp} settings={settings} selectedQuickAccessItem={selectedQuickAccessItem} asignSelectedQuickAccessItem={(object) => setSelectedQuickAccessItem(object)}/>
-        <Sidebar ChangeIndex={ChangeIndex} settings={settings} UpdateApp={UpdateApp} QuickAccessLinks={QuickAccessLinks} selectedQuickAccessItem={selectedQuickAccessItem}/>
+        <Sidebar settings={settings} UpdateApp={UpdateApp} QuickAccessLinks={QuickAccessLinks} selectedQuickAccessItem={selectedQuickAccessItem}/>
         
         </React.Fragment>
       </MemoryRouter>

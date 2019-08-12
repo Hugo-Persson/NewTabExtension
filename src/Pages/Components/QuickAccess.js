@@ -16,24 +16,35 @@ export default function QuickAccess(props) {
         
 
     }
-    return props.QuickAccessLinks.map((link) => (
-        <Flipped flipId={link.url} key={link.url}>
-            <Route render={({history}) =>(
-            <a className="quickAccessItem" onContextMenu={(e) => {RightClick(e,history, link)}} href={link.url}>
-            <ul>
-                <li><img src={link.image} alt={link.name}/></li>
-                <li><span>{link.name}</span></li>
-            </ul>
-            
-            
-            
-        </a>
-            )}/>
-        </Flipped>
+    console.log(props.QuickAccessLinks.map(e=>e.name).join(""));
+    return(
+        <Route render={({history}) =>(
+            <Flipper flipKey={props.QuickAccessLinks.map(e=>e.name).join("")} className="main">
+            {props.QuickAccessLinks.map(link => (
+                <Flipped flipId={link.name} key={link.name}>
+                    
+                    <a className="quickAccessItem" onContextMenu={(e) => {RightClick(e,history, link)}} href={link.url}>
+                    <ul>
+                        <li><img src={link.image} alt={link.name}/></li>
+                        <li><span>{link.name}</span></li>
+                    </ul>
+                    
+                    
+                    
+                </a>
+                    
+                </Flipped>
+                
+                
         
+            ))}
+        </Flipper>
+        )}/>
         
-
-    ));
+            
+        
+    )
+     
         
     
     

@@ -171,6 +171,7 @@ a{
 }
 
 
+
 /*
 --------------------------------- 
         Main
@@ -207,5 +208,10 @@ a{
     padding-left: 0;
     padding: 10px;
     
+}
+.quickAccessItem img{
+    width: 3.6vw;
+    background-color: transparent;
+
 }
 

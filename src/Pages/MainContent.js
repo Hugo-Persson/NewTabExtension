@@ -22,14 +22,14 @@ export default function MainContent(props) {
     
     console.log()
     return (
-        <Flipper flipKey={props.QuickAccessLinks.map(e=>e.name).join()} className="main">
+        
             
             
             <QuickAccess {...props}/>
             
             
             
-        </Flipper>
+        
         
     )
 }

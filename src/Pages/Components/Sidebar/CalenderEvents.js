@@ -4,8 +4,14 @@ export default function CalenderEvents(props) {
     
     function dateStringFromatter(date){
         var parsedEvent = new Date(date);
-        console.log(parsedEvent.toLocaleDateString());
-        return parsedEvent.toLocaleString(props.settings)
+        if(props.settings.dateFormat==="automatic"){
+            return parsedEvent.toLocaleString(navigator.language);
+        }
+        else{
+            return parsedEvent.toLocaleString(props.settings.dateFormat);
+        }
+        
+        
         
     }
     function locationFormatter(location){

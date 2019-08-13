@@ -51,11 +51,19 @@ import axios from "axios"
          fetchData();
         
      },[])
-      
-    return (
+      function WeatherFormatter(){
+          var celcius= Math.round((weather.data.main.temp-273)*10)/10
+          if(props.settings.units==="metric"){
+            return celcius + " °C";
+          }
+          else{
+            return (celcius*9 + (32*5))/5 + " °F";
+          }
+      }
+      return(
         <div className="header">
             <h1>Welcome {props.name}</h1>
-            <h2>The current weather in {weather.data.name} is {Math.round((weather.data.main.temp-273)*10)/10} °C</h2>
+            <h2>The current weather in {weather.data.name} is {WeatherFormatter()}</h2>
     
         </div>
     )

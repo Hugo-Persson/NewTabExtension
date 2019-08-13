@@ -71,7 +71,7 @@ export default function Settings(props) {
                     </div>
                 
                     <div className="settingsBody">
-                        <Route path="/settings/customization" exact render={props => (
+                        <Route path="/settings/customization" exact render={() => (
                         <div className="customization">
                             <h2>Background image</h2>
                             <div className="availableWallpapers"> 
@@ -92,9 +92,9 @@ export default function Settings(props) {
         
                         </div>
                         )} />
-                        <Route path="/settings/general" exact render={props => (
+                        <Route path="/settings/general" exact render={() => (
                         
-                            <GeneralSettings settings={settings}/>
+                            <GeneralSettings {...props}/>
                         
                         )} />
                         <Route path="/settings/sidebar" exact render={props => (

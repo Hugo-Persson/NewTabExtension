@@ -22,7 +22,9 @@ export default function EditQuickAccessItem(props) {
         }
         props.UpdateApp();
     }
-    
+    function FormatUrl(url){
+        return url.substring(url.indexOf(".")+1)
+    }
     var changeToPosition;
     
     function ClearForm(e){
@@ -69,23 +71,37 @@ export default function EditQuickAccessItem(props) {
                                 props.selectedQuickAccessItem.name=e.currentTarget.value;
                             }}/>
                             <br/>
-                            Url: <input placeholder={props.selectedQuickAccessItem.url} onChange={(e) => {
-                                props.selectedQuickAccessItem.url= e.currentTarget.value;
+                            Url: <input placeholder={FormatUrl(props.selectedQuickAccessItem.url)} type="text" onChange={(e) => {
+                                var text = e.currentTarget.value;
+                                if(text.substring(0,7)==="http://"||text.substring(0,7)==="https://"){
+                                    props.selectedQuickAccessItem.url= text;
+                                    
+                                }
+                                else if(text.substring(0,4)==="www."){
+                                    props.selectedQuickAccessItem.url="https://"+text;
+                                }
+                                else{
+                                    props.selectedQuickAccessItem.url="https://www." + text;
+                                }
+                                
+                                
+                                
                             }}/>
                             <br/>
-                            Index: <input placeholder={index+1} onChange={(e) => (changeToPosition=e.currentTarget.value)} type="text"/>
+                            Position: <input placeholder={index+1} onChange={(e) => (changeToPosition=e.currentTarget.value)} type="text"/>
                             <br/>
 
 
                             Icon: 
                             <div className="icon">
                                 <span className="localImage">
-                                Local Image: <input type="file" onChange={(e) => {LocalIcon(e)}}/>
+                                <input name="file" id="file" type="file" onChange={(e) => {LocalIcon(e)}}/>
+                                <label for ="file">Local Image</label>
                                 </span>
-                                
+                                <br/>
                                 
                                 <span className="ImageUrl">Image Url: <input type="text"/></span>
-                                <span classname="Automatic Icon">Automatic Icon: <input type="checkbox"/></span>
+                                <span className="Automatic Icon">Automatic Icon: <input type="checkbox"/></span>
                             </div>
                             
                         </form>

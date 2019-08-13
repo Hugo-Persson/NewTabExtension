@@ -66,7 +66,7 @@ export default function Calender(props) {
           }
       },[])
       
-      if(!anyCalenderEnabled){
+      if(anyCalenderEnabled){
         return(
           <div className="calender">
             <h1><Link to="/hideCalender">Calender ▼</Link></h1>

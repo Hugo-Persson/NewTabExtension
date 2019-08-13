@@ -23,6 +23,13 @@ a{
   "main main main main sideBar"
   
 }
+input[type=text]{
+    background-color: transparent;
+    color: white;
+    border: solid black;
+    width: 90%;
+    padding: 0.3vw;
+}
 /*
 --------------------------------- 
         Header
@@ -123,6 +130,7 @@ a{
 }
 .availableWallpapers img{
     width: 5vw;
+    cursor: pointer;
 }
 .availableWallpapers{
     margin: 0px 15px;
@@ -160,6 +168,7 @@ a{
 .select{
     margin: 0.5vw;
 }
+
 /*
 --------------------------------- 
         Edit Quick Access item
@@ -169,8 +178,21 @@ a{
 .editQuickAccessItem .settingsBody *{
     margin: 0.5vw;
 }
+.localImage input{
+    width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
 
-
+.localImage label{
+    padding: 1vw;
+    margin: 0.1vw;
+    border: black;
+    
+}
 
 /*
 --------------------------------- 

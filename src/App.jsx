@@ -53,8 +53,8 @@ const [settings, setSetting] = useState({
   },
   backgroundImage: WinterRoad,
   defaultRoute: "/settings/sidebar",
-  dateFormat: "sv",
-  units: "imperial",
+  dateFormat: "automatic",
+  units: "metric",
   location:{
     auto: true,
     city:undefined,

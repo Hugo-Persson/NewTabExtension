@@ -8,6 +8,7 @@ export default function GeneralSettings(props) {
     function UnitChange(){
         console.log(units.current.value);
         props.settings.units=units.current.value;
+        props.UpdateApp();
     }
     function DateFormat(){
         props.settings.dateFormat = date.current.value;
@@ -16,17 +17,17 @@ export default function GeneralSettings(props) {
         <div className="generalSettings">
 
             Units:
-            <select ref={units}  onChange={UnitChange}>
-                <option selected={props.settings.units==="metric"} value="metric">Metric</option>
-                <option selected={props.settings.units==="imperial"} value="imperial">Imperial</option>
+            <select ref={units} defaultValue={props.settings.units} onChange={UnitChange}>
+                <option  value="metric">Metric</option>
+                <option value="imperial">Imperial</option>
             </select>
             <br/>
             Dateformat 
-            <select ref={date} onChange={DateFormat}>
+            <select ref={date} defaultValue={props.settings.dateFormat} onChange={DateFormat}>
+                <option value="automatic">Automatic</option>
+                <option value="sv">DMY</option>
+                <option  value="en-US">MDY</option>
                 
-                <option selected={props.settings.dateFormat==="sv"} value="sv">DMY</option>
-                <option selected={props.settings.dateFormat==="en-US"} value="en-US">MDY</option>
-                <option selected={props.settings.dateFormat==="zh"} value="zh">YMD</option>
             </select>
 
         </div>

@@ -12,7 +12,10 @@ export default function SelectCollection(props) {
     
     return props.collections.map((item)=>(
         <div className="select">
-            <input type="checkbox" onClick={() => Toggle(item)}/><span>{item.name}</span> <br/>
+            
+            <input defaultChecked={item.enabled} id="checkbox" className="checkBox" type="checkbox" onClick={() => Toggle(item)}/>
+            <label htmlFor="checkbox" className="checkLabel"><span > {item.name} </span><div></div></label>
+
         </div>
             
         

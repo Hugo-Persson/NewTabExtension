@@ -26,10 +26,41 @@ a{
 input[type=text]{
     background-color: transparent;
     color: white;
-    border: solid black;
+    border: solid rgb(59, 59, 59);
     width: 90%;
     padding: 0.3vw;
 }
+.checkBox{
+    position: absolute;
+    visibility: hidden;
+}
+.checkLabel{
+    margin-top: 1vw;
+}
+.checkLabel > span{
+    vertical-align: middle;
+    margin: 1vw;
+}
+.checkLabel > div{
+    border: rgb(59, 59, 59) solid;
+    width: 1vw ;
+    
+    height: 1vw;
+    cursor: pointer;
+    user-select: none;
+    display: inline-block;
+    vertical-align: middle;
+    margin:  auto;
+}
+
+
+.checkBox:checked + .checkLabel > div::after{
+    content: "✓"
+    
+
+    
+}
+
 /*
 --------------------------------- 
         Header
@@ -43,6 +74,7 @@ input[type=text]{
     padding: 30px;
     grid-area: header;
 }
+
 /*
 --------------------------------- 
         SideBar
@@ -175,23 +207,27 @@ input[type=text]{
 ---------------------------------
 */
 
-.editQuickAccessItem .settingsBody *{
+.editQuickAccessItem .settingsBody ~ *{
     margin: 0.5vw;
 }
-.localImage input{
-    width: 0.1px;
-	height: 0.1px;
-	opacity: 0;
-	overflow: hidden;
-	position: absolute;
-	z-index: -1;
+.uploadFile{
+    visibility: hidden;
+    position: absolute;
 }
 
-.localImage label{
-    padding: 1vw;
-    margin: 0.1vw;
-    border: black;
+.uploadFileLabel{
+    width: 60%;
+    margin: 0.5vw 2vw !important;
+    padding: 0.3vw;
     
+    display: inline-block;
+    border: rgb(59, 59, 59) solid;
+    cursor: pointer;
+    
+    
+}
+.uploadFileLabel:hover{
+    background-color: rgba(99, 98, 98, 0.212);
 }
 
 /*
@@ -200,6 +236,9 @@ input[type=text]{
 ---------------------------------
 
 */
+#automaticIcon{
+    margin-top: 0.5vw;
+}
 .main{
     
     display: grid;

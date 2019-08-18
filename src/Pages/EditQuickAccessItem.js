@@ -93,16 +93,20 @@ export default function EditQuickAccessItem(props) {
 
 
                             Icon: 
-                            <div className="icon">
-                                <span className="localImage">
-                                <input name="file" id="file" type="file" onChange={(e) => {LocalIcon(e)}}/>
-                                <label for ="file">Local Image</label>
-                                </span>
-                                <br/>
+                            <br/>
+                            <input name="file" id="file" className="uploadFile" type="file" onChange={(e) => {LocalIcon(e)}}/>
+                                <label htmlFor ="file" className="uploadFileLabel">Upload Local Image</label>
                                 
+                                <br/>
                                 <span className="ImageUrl">Image Url: <input type="text"/></span>
-                                <span className="Automatic Icon">Automatic Icon: <input type="checkbox"/></span>
-                            </div>
+
+                                <div id="automaticIcon">
+
+                                <input id="checkbox" className="checkBox" type="checkbox"/>
+                                <label htmlFor="checkbox" className="checkLabel"><span > Automatic Icon:</span><div></div></label>
+                                </div>
+                                
+                            
                             
                         </form>
                         

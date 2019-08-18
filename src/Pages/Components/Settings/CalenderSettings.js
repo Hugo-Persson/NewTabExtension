@@ -36,7 +36,7 @@ export default function CalenderSettings(props) {
               })
         })
     }
-    if(calenders[0].id!==null){
+    if(calenders[0].id===null){
         return (
         
             <div className="calenderSettings">

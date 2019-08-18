@@ -84,7 +84,16 @@ input[type=text]:hover{
 .uploadFileLabel:hover{
     background-color: rgba(99, 98, 98, 0.212);
 }
-
+button{
+    background-color: transparent;
+    color: white;
+    padding: 0.5vw 0.7vw;
+    border: rgb(59, 59, 59) solid;
+    cursor: pointer;
+}
+button:hover{
+    background-color: rgba(99, 98, 98, 0.212)
+}
 /*
 --------------------------------- 
         Header

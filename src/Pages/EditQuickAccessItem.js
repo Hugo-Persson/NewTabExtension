@@ -50,6 +50,9 @@ export default function EditQuickAccessItem(props) {
             console.log("File type not supported");
         }
     }
+    function AutomaticIcon(){
+        props.selectedQuickAccessItem.image="https://api.faviconkit.com/"+props.url+"/64"
+    }
     return (
         <React.Fragment>
                 
@@ -102,8 +105,7 @@ export default function EditQuickAccessItem(props) {
 
                                 <div id="automaticIcon">
 
-                                <input id="checkbox" className="checkBox" type="checkbox"/>
-                                <label htmlFor="checkbox" className="checkLabel"><span > Automatic Icon:</span><div></div></label>
+                                <button onClick={AutomaticIcon}>Automatic Icon</button>
                                 </div>
                                 
                             

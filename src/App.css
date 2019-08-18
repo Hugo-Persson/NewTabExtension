@@ -30,6 +30,9 @@ input[type=text]{
     width: 90%;
     padding: 0.3vw;
 }
+input[type=text]:hover{
+    background-color: rgba(99, 98, 98, 0.212);
+}
 .checkBox{
     position: absolute;
     visibility: hidden;
@@ -52,13 +55,34 @@ input[type=text]{
     vertical-align: middle;
     margin:  auto;
 }
-
+.checkLabel > div:hover{
+    background-color: rgba(99, 98, 98, 0.212);
+}
 
 .checkBox:checked + .checkLabel > div::after{
     content: "✓"
     
 
     
+}
+.uploadFile{
+    visibility: hidden;
+    position: absolute;
+}
+
+.uploadFileLabel{
+    width: 60%;
+    margin: 0.5vw 2vw !important;
+    padding: 0.3vw;
+    
+    display: inline-block;
+    border: rgb(59, 59, 59) solid;
+    cursor: pointer;
+    
+    
+}
+.uploadFileLabel:hover{
+    background-color: rgba(99, 98, 98, 0.212);
 }
 
 /*
@@ -210,25 +234,7 @@ input[type=text]{
 .editQuickAccessItem .settingsBody ~ *{
     margin: 0.5vw;
 }
-.uploadFile{
-    visibility: hidden;
-    position: absolute;
-}
 
-.uploadFileLabel{
-    width: 60%;
-    margin: 0.5vw 2vw !important;
-    padding: 0.3vw;
-    
-    display: inline-block;
-    border: rgb(59, 59, 59) solid;
-    cursor: pointer;
-    
-    
-}
-.uploadFileLabel:hover{
-    background-color: rgba(99, 98, 98, 0.212);
-}
 
 /*
 --------------------------------- 

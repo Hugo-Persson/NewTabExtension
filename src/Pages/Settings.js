@@ -84,8 +84,10 @@ export default function Settings(props) {
         
                             </div>
                             <div className="submitBackgroundImage">
-                                <h3>Submit local file as Background image</h3>
-                                <input type="file" onChange={SubmitBackgroundImage}/>
+                                
+
+                                <input name="file" id="file" className="uploadFile" type="file" onChange={SubmitBackgroundImage}/>
+                                <label htmlFor ="file" className="uploadFileLabel">Use Local Image</label>
                             </div>
 
                             

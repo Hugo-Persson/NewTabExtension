@@ -1,5 +1,5 @@
 /*global chrome*/
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect,useCallback} from 'react'
 import QuickAccess from "./Components/QuickAccess"
 import {Flipper, Flipped} from "react-flip-toolkit"
 export default function MainContent(props) {
@@ -7,7 +7,11 @@ export default function MainContent(props) {
 
     
     
+
+
+    
     useEffect(() =>{
+        
         const fetchData = async () =>{
             //Integrate chrome storage api 
             chrome.storage.sync.get("links", function(data){

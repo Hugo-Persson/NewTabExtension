@@ -222,6 +222,7 @@ button:hover{
     
     padding: 0.5vw;
     cursor: pointer;
+    margin: 0 !important;
     
 }
 .sidebarSettings{

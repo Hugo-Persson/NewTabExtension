@@ -1,15 +1,22 @@
 
-import React from 'react'
+import React,{useState,useCallback} from 'react'
 import {Route} from "react-router-dom"
 import {Flipper, Flipped} from "react-flip-toolkit"
 export default function QuickAccess(props) {
-    
+    const [, updateState] = useState();
+    const forceUpdate = useCallback(() => updateState({}), []);
+    const ReRender = () => {
+        console.log("Update in quickAccess");
+        forceUpdate();
+    }
     function RightClick(e, history, link){
         console.log("Right Click");
         e.preventDefault();
         
         props.UpdateApp();
         history.push("/EditQuickAccessItem");
+        link.reRender=ReRender;
+        console.log(link);
         props.asignSelectedQuickAccessItem(link);
         console.log(props.selectedQuickAccessItem)
         

@@ -1,27 +1,39 @@
+/*global chrome*/
 import React, {useState, useRef, useEffect, useCallback} from 'react'
 import {Link} from "react-router-dom";
 export default function EditQuickAccessItem(props) {
+
+
+    const [, updateState] = useState();
+    const forceUpdate = useCallback(() => updateState({}), []);
     const [imageSrc, setImageSrc] = useState(props.selectedQuickAccessItem.image);
     var index = (props.QuickAccessLinks.findIndex((element) => (element===props.selectedQuickAccessItem)))
     const formEl = useRef(null);
     console.log("rendering edit");
     function Save(){
         
-        if(changeToPosition!==undefined){
-            if(changeToPosition>index){
-                //Move foward
-                props.QuickAccessLinks.splice(changeToPosition,0,props.selectedQuickAccessItem);
-                props.QuickAccessLinks.splice(index,1);
-            }
-            else{
-                //Move backwards
-                props.QuickAccessLinks.splice(index,1);
-                props.QuickAccessLinks.splice((changeToPosition-1),0,props.selectedQuickAccessItem);
-                
-            }
+        chrome.storage.sync.set({"settings":props.settings});
+        
+        
+    }
+    function MoveLink(from,to){
+        console.log(from);
+        console.log(to);
+        if(to>from){
+            //Move foward
+            props.QuickAccessLinks.splice(to,0,props.selectedQuickAccessItem);
+            props.QuickAccessLinks.splice(from,1);
+            console.log("foward");
+        }
+        else{
+            //Move backwards
+            props.QuickAccessLinks.splice(from,1);
+            props.QuickAccessLinks.splice((to-1),0,props.selectedQuickAccessItem);
+            console.log("backwards");
             
         }
-        props.UpdateApp();
+        forceUpdate();
+        props.selectedQuickAccessItem.reRender();
     }
     function FormatUrl(url){
         console.log(url.substring(url.indexOf(".")+1));
@@ -46,6 +58,7 @@ export default function EditQuickAccessItem(props) {
                 var result = reader.result;
                 props.selectedQuickAccessItem.image = result;
                 setImageSrc(result);
+                props.selectedQuickAccessItem.reRender();
             }
             reader.readAsDataURL(file);
         }
@@ -70,6 +83,7 @@ export default function EditQuickAccessItem(props) {
             props.selectedQuickAccessItem.image=src;
             console.log("Automatic icon was successful")
             setImageSrc(src);
+            props.selectedQuickAccessItem.reRender();
             }
             reader.readAsBinaryString(blob);
             
@@ -118,16 +132,22 @@ export default function EditQuickAccessItem(props) {
 
                             Name: <input placeholder={props.selectedQuickAccessItem.name}  type="text" onChange={(e) => {
                                 props.selectedQuickAccessItem.name=e.currentTarget.value;
+                                props.selectedQuickAccessItem.reRender();
                             }}/>
                             <br/>
                             Url: <input placeholder={FormatUrl(props.selectedQuickAccessItem.url)} type="text" onChange={(e) => {
                                 props.selectedQuickAccessItem.url=UrlInputFormatter(e);
+                                props.selectedQuickAccessItem.reRender();
                                 
                                 
                                 
                             }}/>
                             <br/>
-                            Position: <input placeholder={index+1} onChange={(e) => (changeToPosition=e.currentTarget.value)} type="text"/>
+                            Position: <input placeholder={index+1} onChange={(e) => {
+                                if(e.currentTarget.value!==""){
+                                    MoveLink(index,e.currentTarget.value);
+                                }
+                            }} type="text"/>
                             <br/>
 
 
@@ -143,9 +163,7 @@ export default function EditQuickAccessItem(props) {
 
                                 <button onClick={AutomaticIcon}>Automatic Icon</button>
                                 <br/>
-                                Preview:
-                                <br/>
-                                <img src={props.selectedQuickAccessItem.image}/>
+                                
                                 </div>
                                 
                             

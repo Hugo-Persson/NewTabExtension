@@ -13,6 +13,11 @@ export default function App() {
 
   const [selectedQuickAccessItem, setSelectedQuickAccessItem] = useState({});
   
+
+
+
+
+  
   useEffect(()=>{
     async function LoadChromeSettings(){
       chrome.storage.sync.get("settings", function(chromeSettings){
@@ -72,42 +77,51 @@ const [QuickAccessLinks] = useState([
   {
       name: "1",
       url:"https://www.reddit.com",
-      image: "https://api.faviconkit.com/reddit.com/64"
+      image: "https://api.faviconkit.com/reddit.com/64",
+      reRender:undefined
   },
   {
       name: "2",
       url:"https://www.reddit.com",
-      image: "https://api.faviconkit.com/reddit.com/64"
+      image: "https://api.faviconkit.com/reddit.com/64",
+      reRender:undefined
   },
   {
       name: "3",
       url:"https://www.reddit.com",
-      image: "https://cdn.freebiesupply.com/images/large/2x/facebook-logo-circle-transparent.png"
+      image: "https://cdn.freebiesupply.com/images/large/2x/facebook-logo-circle-transparent.png",
+      reRender:undefined
   },
   {
       name: "4",
       url:"https://www.reddit.com",
-      image: "https://api.faviconkit.com/reddit.com/64"
+      image: "https://api.faviconkit.com/reddit.com/64",
+      reRender:undefined
   },
   {
       name: "5",
       url:"https://www.reddit.com",
-      image: "https://api.faviconkit.com/reddit.com/64"
+      image: "https://api.faviconkit.com/reddit.com/64",
+      reRender:undefined
   },
   {
       name: "6",
       url:"https://www.reddit.com",
-      image: "https://api.faviconkit.com/reddit.com/64"
+      image: "https://api.faviconkit.com/reddit.com/64",
+      reRender:undefined
   },
   {
       name: "7",
       url:"https://www.reddit.com",
-      image: "https://api.faviconkit.com/reddit.com/64"
+      image: "https://api.faviconkit.com/reddit.com/64",
+      reRender:undefined
+      
   },
   {
       name: "8",
       url:"https://www.reddit.com",
-      image: "https://api.faviconkit.com/reddit.com/64"
+      image: "https://api.faviconkit.com/reddit.com/64",
+      reRender:undefined
   }
 
   
@@ -125,7 +139,7 @@ document.querySelector("html").style.backgroundImage = "url("+settings.backgroun
         
         <Header name="Hugo Persson" settings={settings}/>
         <MainContent QuickAccessLinks={QuickAccessLinks} UpdateApp={UpdateApp} settings={settings} selectedQuickAccessItem={selectedQuickAccessItem} asignSelectedQuickAccessItem={(object) => setSelectedQuickAccessItem(object)}/>
-        <Sidebar settings={settings} UpdateApp={UpdateApp} QuickAccessLinks={QuickAccessLinks} selectedQuickAccessItem={selectedQuickAccessItem}/>
+        <Sidebar settings={settings}  UpdateApp={UpdateApp} QuickAccessLinks={QuickAccessLinks} selectedQuickAccessItem={selectedQuickAccessItem}/>
         
         </React.Fragment>
       </MemoryRouter>

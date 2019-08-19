@@ -1,6 +1,7 @@
-import React, {useState, useRef, useEffect} from 'react'
+import React, {useState, useRef, useEffect, useCallback} from 'react'
 import {Link} from "react-router-dom";
 export default function EditQuickAccessItem(props) {
+    const [imageSrc, setImageSrc] = useState(props.selectedQuickAccessItem.image);
     var index = (props.QuickAccessLinks.findIndex((element) => (element===props.selectedQuickAccessItem)))
     const formEl = useRef(null);
     console.log("rendering edit");
@@ -44,6 +45,7 @@ export default function EditQuickAccessItem(props) {
                 
                 var result = reader.result;
                 props.selectedQuickAccessItem.image = result;
+                setImageSrc(result);
             }
             reader.readAsDataURL(file);
         }
@@ -67,8 +69,10 @@ export default function EditQuickAccessItem(props) {
             console.log(blob);
             props.selectedQuickAccessItem.image=src;
             console.log("Automatic icon was successful")
+            setImageSrc(src);
             }
             reader.readAsBinaryString(blob);
+            
         })
         .catch((error)=>{
             alert("Getting the icon automaticlly was not successful");
@@ -138,6 +142,10 @@ export default function EditQuickAccessItem(props) {
                                 <div id="automaticIcon">
 
                                 <button onClick={AutomaticIcon}>Automatic Icon</button>
+                                <br/>
+                                Preview:
+                                <br/>
+                                <img src={props.selectedQuickAccessItem.image}/>
                                 </div>
                                 
                             

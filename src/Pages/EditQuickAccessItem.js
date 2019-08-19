@@ -23,6 +23,7 @@ export default function EditQuickAccessItem(props) {
         props.UpdateApp();
     }
     function FormatUrl(url){
+        console.log(url.substring(url.indexOf(".")+1));
         return url.substring(url.indexOf(".")+1)
     }
     var changeToPosition;
@@ -50,8 +51,49 @@ export default function EditQuickAccessItem(props) {
             console.log("File type not supported");
         }
     }
-    function AutomaticIcon(){
-        props.selectedQuickAccessItem.image="https://api.faviconkit.com/"+props.url+"/64"
+    function AutomaticIcon(e){
+        e.preventDefault();
+        let init = {
+            method: 'GET',
+            mode: 'cors',
+            cache: 'default'
+        }
+        fetch("https://api.faviconkit.com/"+FormatUrl(props.selectedQuickAccessItem.url)+"/64",init)
+        .then((res) => res.blob())
+        .then(blob=>{
+            var reader = new FileReader();
+            reader.onload = function(e){
+                var src = "data:image/png;base64,"+btoa(reader.result);
+            console.log(blob);
+            props.selectedQuickAccessItem.image=src;
+            console.log("Automatic icon was successful")
+            }
+            reader.readAsBinaryString(blob);
+        })
+        .catch((error)=>{
+            alert("Getting the icon automaticlly was not successful");
+            
+        });
+        
+            
+        
+        
+    }
+
+    function UrlInputFormatter(e){
+        var text = e.currentTarget.value;
+        var formattedText;
+        if(text.substring(0,7)==="http://"||text.substring(0,7)==="https://"){
+            formattedText= text;
+            
+        }
+        else if(text.substring(0,4)==="www."){
+            formattedText="https://"+text;
+        }
+        else{
+            formattedText="https://www." + text;
+        }
+        return formattedText;
     }
     return (
         <React.Fragment>
@@ -75,17 +117,7 @@ export default function EditQuickAccessItem(props) {
                             }}/>
                             <br/>
                             Url: <input placeholder={FormatUrl(props.selectedQuickAccessItem.url)} type="text" onChange={(e) => {
-                                var text = e.currentTarget.value;
-                                if(text.substring(0,7)==="http://"||text.substring(0,7)==="https://"){
-                                    props.selectedQuickAccessItem.url= text;
-                                    
-                                }
-                                else if(text.substring(0,4)==="www."){
-                                    props.selectedQuickAccessItem.url="https://"+text;
-                                }
-                                else{
-                                    props.selectedQuickAccessItem.url="https://www." + text;
-                                }
+                                props.selectedQuickAccessItem.url=UrlInputFormatter(e);
                                 
                                 
                                 

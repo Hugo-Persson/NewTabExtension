@@ -20,7 +20,7 @@ export default function App() {
 
   
   useEffect(()=>{
-    async function LoadChromeSettings(){
+    async function LoadChrome(){
       chrome.storage.sync.get("settings", function(chromeSettings){
         if(chromeSettings!=undefined){
           setSetting(chromeSettings);
@@ -30,7 +30,18 @@ export default function App() {
         }
         
       })
+      chrome.storage.sync.get("QuickAccessLinks", function(data){
+        if(data!=undefined){
+          setQuickAccessLinks(data);
+        }
+        else{
+          chrome.storage.sync.set({"QuickAccessLinks": QuickAccessLinks});
+        }
+        
+      })
     }
+    
+  
 
   },[])
 
@@ -51,14 +62,14 @@ const [settings, setSetting] = useState({
       {
         name:"SUMMARY",
         id:null,
-          enabled: true,
+          enabled: false,
       },
       
       
     ]
   },
   backgroundImage: WinterRoad,
-  defaultRoute: "/addlink",
+  defaultRoute: "/",
   dateFormat: "automatic",
   units: "metric",
   location:{
@@ -74,7 +85,7 @@ function UpdateApp(){
 
 }
 
-const [QuickAccessLinks] = useState([
+const [QuickAccessLinks, setQuickAccessLinks ] = useState([
   {
       name: "1",
       url:"https://www.reddit.com",

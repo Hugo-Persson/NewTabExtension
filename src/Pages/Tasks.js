@@ -4,7 +4,7 @@ import {BrowserRouter as Router, Route, Link} from "react-router-dom"
 import ToDoTask from './Components/Sidebar/ToDoTask';
 
 export default function Tasks(props) {
-  var anyCalenderEnabled = false;
+  var anyToDoListEnabled = false;
     const[tasks, setTasks] = useState({
         items:[
           {
@@ -39,7 +39,7 @@ export default function Tasks(props) {
                 };
                 props.settings.ToDo.taskLists.map((item) => {
                   if(item.enabled){
-                    anyCalenderEnabled=true;
+                    anyToDoListEnabled=true;
                     fetch("https://www.googleapis.com/tasks/v1/lists/"+item.id+"/tasks?showHidden=true", init)
                     .then((response) => response.json()) // Transform the data into json
                     .then(function(data) {
@@ -64,9 +64,9 @@ export default function Tasks(props) {
             
         }
     },[])
-    if(anyCalenderEnabled){
+    if(!anyToDoListEnabled){
       return (
-        <div className="Tasks">
+        <div className="tasks">
             <h1><Link to="/hideTasks">Tasks ▼</Link></h1>
             <ToDoTask tasks={tasks}/>
         </div>
@@ -74,7 +74,7 @@ export default function Tasks(props) {
     }
     else{
       return(
-        <div className="Tasks">
+        <div className="tasks">
         <h1><Link to="/hideTasks">Tasks ▼</Link></h1>
           Please select the calenders you which to use in the setting to start to use the calender. 
       </div>

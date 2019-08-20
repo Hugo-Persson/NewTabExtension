@@ -1,7 +1,9 @@
-import React from 'react'
+import React,{useState} from 'react'
 
 export default function CalenderEvents(props) {
     
+    const [edit, setEdit] = useState(false);
+    const {event} = props;
     function dateStringFromatter(date){
         var parsedEvent = new Date(date);
         if(props.settings.dateFormat==="automatic"){
@@ -22,13 +24,33 @@ export default function CalenderEvents(props) {
 
         return location.substring(0,index);
     }
-    return props.events.items.map((event) =>(
+    if(edit){
+    return(
         <div className="event">
-            <span className="name">{event.summary}</span>
+            <div onClick={()=>setEdit(false)} className="hamburgerMenu">X</div>
+            <button className="edit">Edit</button>
             <br/>
-            <span className="date">{dateStringFromatter(event.start.dateTime)}</span>
-            <br/>
-             <span className="location">{locationFormatter(event.location)}</span>
+            <button className="delete">Delete</button>
         </div>
-    ))
+    )
+    }
+    else{
+        return (
+            <div className="event">
+    
+    
+                <div className="hamburgerMenu" onClick={()=> setEdit(true)}>
+                    <div className="bar1"></div>
+                    <div className="bar2"></div>
+                    <div className="bar3"></div>
+                </div>
+                <span className="name">{event.summary}</span>
+                <br/>
+                <span className="date">{dateStringFromatter(event.start.dateTime)}</span>
+                <br/>
+                 <span className="location">{locationFormatter(event.location)}</span>
+            </div>
+        )
+    }
+    
 }

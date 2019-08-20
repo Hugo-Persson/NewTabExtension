@@ -74,6 +74,7 @@ export default function AddQuickAccessItem(props) {
             }
             props.QuickAccessLinks.splice(moveToPos,0,obj);
             props.UpdateApp();
+            //chrome.storage.sync.set({"QuickAccessLinks":props.QuickAccessLinks});
         }
         
     }

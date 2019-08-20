@@ -8,10 +8,10 @@ import CalenderEvents from './Components/Sidebar/CalenderEvents';
 export default function Calender(props) {
   var anyCalenderEnabled = false;
   console.log(props.settings.calender.calenderIDs.length);
-    const[events, setEvents] = useState({items:[
+    const[events, setEvents] = useState([
         {
-          summary: "loading",
-          location: "loading",
+          summary: "Name",
+          location: "Location",
           start:{
             dateTime:"2019-08-13T08:15:00+02:00",
       
@@ -20,8 +20,44 @@ export default function Calender(props) {
             dateTime: "2019-08-13T12:30:00+02:00"
           },
           id: "loading"
-        }
-      ]});
+        },
+        {
+          summary: "Name",
+          location: "Location",
+          start:{
+            dateTime:"2019-08-13T08:15:00+02:00",
+      
+          },
+          end:{
+            dateTime: "2019-08-13T12:30:00+02:00"
+          },
+          id: "loading"
+        },
+        {
+          summary: "Name",
+          location: "Location",
+          start:{
+            dateTime:"2019-08-13T08:15:00+02:00",
+      
+          },
+          end:{
+            dateTime: "2019-08-13T12:30:00+02:00"
+          },
+          id: "loading"
+        },
+        {
+          summary: "Name",
+          location: "Location",
+          start:{
+            dateTime:"2019-08-13T08:15:00+02:00",
+      
+          },
+          end:{
+            dateTime: "2019-08-13T12:30:00+02:00"
+          },
+          id: "loading"
+        },
+      ]);
       useEffect(()=>{
           //TODO: Chrome
         //   fetchData();
@@ -41,7 +77,7 @@ export default function Calender(props) {
 
               })
               var events =[];
-              //Wil go through all calender and add the events toghete
+              //Wil go through all calender and add the events togheter
               
               if(props.setttings.calender.calenderIDs.length!==0){
                 props.settings.calender.calenderIDs.map((item)=>{
@@ -81,7 +117,10 @@ export default function Calender(props) {
          
           <div className="calender">
           <h1><Link to="/hideCalender">Calender ▼</Link></h1>
-            <CalenderEvents events={events} settings={props.settings}/>
+          {events.map((event)=>(
+            <CalenderEvents event={event} settings={props.settings}/>
+          ))}
+            
           </div>
   )
       }

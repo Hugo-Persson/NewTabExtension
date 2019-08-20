@@ -140,7 +140,7 @@ export default function EditQuickAccessItem(props) {
                                 
                             }}/>
                             <br/>
-                            Position: <input placeholder={index+1} onChange={(e) => {
+                            Position: <input placeholder={index+1} onBlur={(e) => {
                                 if(e.currentTarget.value!==""){
                                     MoveLink(index,e.currentTarget.value);
                                 }

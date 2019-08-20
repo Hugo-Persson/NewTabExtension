@@ -1,6 +1,6 @@
 /*global chrome*/
 import React, {useState, useRef, useEffect, useCallback} from 'react'
-import {Link} from "react-router-dom";
+import {Link, Route} from "react-router-dom";
 export default function EditQuickAccessItem(props) {
 
 
@@ -110,6 +110,18 @@ export default function EditQuickAccessItem(props) {
         }
         return formattedText;
     }
+    function Delete(history){
+        history.push("/EditQuickAccessItem/Delete")
+    }
+    function ConfirmDeletion(history){
+        props.QuickAccessLinks.splice(index,1);
+        
+        
+        history.push("/");
+        Save();
+
+    }
+    
     return (
         <React.Fragment>
                 
@@ -148,13 +160,19 @@ export default function EditQuickAccessItem(props) {
                             <br/>
 
 
-                            Icon: 
+                            Icon (Pick one): 
                             <br/>
                             <input name="file" id="file" className="uploadFile" type="file" onChange={(e) => {LocalIcon(e)}}/>
                                 <label htmlFor ="file" className="uploadFileLabel">Upload Local Image</label>
                                 
                                 <br/>
-                                <span className="ImageUrl">Image Url: <input type="text"/></span>
+                                <span className="ImageUrl">Image Url: <input type="text" placeholder="Enter the image url for the image you want to use" onChange={e=>{
+                                    if(e.currentTarget.value!==undefined){
+                                        props.selectedQuickAccessItem.image=e.currentTarget.value;
+                                        props.selectedQuickAccessItem.reRender();
+                                        
+                                    }
+                                }}/></span>
 
                                 <div id="automaticIcon">
 
@@ -168,6 +186,21 @@ export default function EditQuickAccessItem(props) {
                         </form>
                         
                     </div>
+                    <Route exact path="/EditQuickAccessItem" render={({history})=>(
+                        <div className="deleteItem saveSettings" onClick={() => Delete(history)}>Delte Link</div>
+                    )}/>
+                    <Route path="/EditQuickAccessItem/Delete" render={({history}) =>(
+                        <div className="deleteConfirm">
+                            <span>Are you sure you want to delete this item permanently</span> 
+                            <div className="deleteOptions">
+                                <div className="no" onClick={()=>{
+                                    history.push("/EditQuickAccessItem")
+                                }}>No</div>
+                                <div className="yes" onClick={()=>ConfirmDeletion(history)}>Yes</div>
+                            </div>   
+                        </div>
+                    )}/>
+                    
                     <div className="saveSettings" onClick={Save}>Save</div>
                     
                 </div>

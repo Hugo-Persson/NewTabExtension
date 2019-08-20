@@ -69,6 +69,9 @@ export default function AddQuickAccessItem(props) {
             if(obj.image===undefined){
                 AutomaticIcon();
             }
+            if(moveToPos>props.QuickAccessLinks.length-2){
+                moveToPos=props.QuickAccessLinks.length-1;
+            }
             props.QuickAccessLinks.splice(moveToPos,0,obj);
             props.UpdateApp();
         }
@@ -127,7 +130,7 @@ export default function AddQuickAccessItem(props) {
                             <br/>
 
 
-                            Icon: 
+                            Icon (Pick one): 
                             <br/>
                             <input name="file" id="file" className="uploadFile" type="file" onChange={(e) => {LocalIcon(e)}}/>
                                 <label htmlFor ="file" className="uploadFileLabel">Upload Local Image</label>

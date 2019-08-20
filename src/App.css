@@ -246,6 +246,27 @@ button:hover{
 .editQuickAccessItem .settingsBody *{
     margin: 0.5vw 0;
 }
+.deleteItem{
+    background-color: #dc3545 !important;
+}
+
+.deleteOptions div{
+    display: inline-block;
+    width: 48%;
+    padding: 1%;
+    cursor: pointer;
+    user-select: none;
+    margin-top: 7px;
+}
+.deleteOptions .no{
+    float: left;
+    background-color: #28a745;
+
+}
+.deleteOptions .yes{
+    float: right;
+    background-color: #dc3545;
+}
 
 
 /*

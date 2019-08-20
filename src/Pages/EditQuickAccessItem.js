@@ -41,10 +41,7 @@ export default function EditQuickAccessItem(props) {
     }
     var changeToPosition;
     
-    function ClearForm(e){
-        console.log("Load");
-        e.currentTarget.reset();
-    }
+    
     function LocalIcon(e){
         var file = e.currentTarget.files[0];
         var imageType = /image.*/;

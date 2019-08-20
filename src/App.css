@@ -243,8 +243,8 @@ button:hover{
 ---------------------------------
 */
 
-.editQuickAccessItem .settingsBody ~ *{
-    margin: 0.5vw;
+.editQuickAccessItem .settingsBody *{
+    margin: 0.5vw 0;
 }
 
 

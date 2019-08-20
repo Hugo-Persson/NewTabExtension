@@ -30,9 +30,13 @@ export default function QuickAccess(props) {
             {props.QuickAccessLinks.map(link => (
                 <Flipped flipId={link.name} key={link.name}>
                     
-                    <a className="quickAccessItem" onContextMenu={(e) => {RightClick(e,history, link)}} href={link.url}>
+                    <a className="quickAccessItem" onClick={e =>{
+                        if(link.name==="Add Link"){
+                            history.push("/AddLink");
+                        }
+                    }} onContextMenu={(e) => {if(link.name!=="Add Link") {RightClick(e,history, link)} else{e.preventDefault()}}} href={link.url}>
                     <ul>
-                        <li><img src={link.image} alt={link.name}/></li>
+                        <li><img src={link.image} alt={"Image failed to load"}/></li>
                         <li><span>{link.name}</span></li>
                     </ul>
                     

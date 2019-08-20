@@ -5,6 +5,7 @@ import Calender from './Calender';
 import Tasks from './Tasks';
 import Settings from './Settings';
 import EditQuickAccessItem from "./EditQuickAccessItem";
+import AddQuickAccessItem from './AddQuickAccessItem';
 export default function Sidebar(prop) {
 
   const {settings} = prop;
@@ -16,12 +17,15 @@ const [itemFullscreen, setItemFullscreen] = useState(0);
 
       <React.Fragment>
         <Redirect to={settings.defaultRoute}/>
+        
         <Route path="/" exact render={props => (
           <div className="sideBar">
             <Calender settings={settings}/>
             <Tasks settings={settings}/>
             <Link to="/settings/customization" className="settingsButton">⚙</Link>
-        </div>
+          </div>
+            
+        
         )} />
 
 
@@ -65,9 +69,15 @@ const [itemFullscreen, setItemFullscreen] = useState(0);
           </div>
           
         )}/>
+        <Route path="/AddLink" render={()=>(
+          <div className="sideBar">
+             <AddQuickAccessItem {...prop}/>
+          </div>
+        )}/>
+
+        
+        
         </React.Fragment>
-        
-        
       
         
     )

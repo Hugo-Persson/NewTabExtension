@@ -7,6 +7,7 @@ import Sidebar from './Pages/Sidebar';
 import {Redirect} from "react-router-dom"
 import WinterRoad from "./Wallpapers/WinterRoad.jpg";
 import {MemoryRouter} from "react-router-dom";
+import AddButton from "./addButton.png";
 export default function App() {
   const [, updateState] = useState();
   const forceUpdate = useCallback(() => updateState({}), []);
@@ -57,7 +58,7 @@ const [settings, setSetting] = useState({
     ]
   },
   backgroundImage: WinterRoad,
-  defaultRoute: "/settings/sidebar",
+  defaultRoute: "/addlink",
   dateFormat: "automatic",
   units: "metric",
   location:{
@@ -122,7 +123,14 @@ const [QuickAccessLinks] = useState([
       url:"https://www.reddit.com",
       image: "https://api.faviconkit.com/reddit.com/64",
       reRender:undefined
-  }
+  },
+  
+  {
+    name: "Add Link",
+    url:"#",
+    image: AddButton,
+    reRender:undefined
+}
 
   
   

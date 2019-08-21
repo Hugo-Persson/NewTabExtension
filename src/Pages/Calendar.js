@@ -6,8 +6,8 @@ import CalendarEvents from './Components/Sidebar/CalendarEvents';
 
 
 export default function Calendar(props) {
-  var anyCalenderEnabled = false;
-  console.log(props.settings.calendar.calenderIDs.length);
+  var anyCalendarEnabled = false;
+  console.log(props.settings.calendar.calendarIDs.length);
     const[events, setEvents] = useState([
         {
           summary: "Name",
@@ -131,13 +131,13 @@ export default function Calendar(props) {
               var events =[];
               //Wil go through all calendar and add the events togheter
               
-              if(props.setttings.calendar.calenderIDs.length!==0){
-                props.settings.calendar.calenderIDs.map((item)=>{
+              if(props.setttings.calendar.calendarIDs.length!==0){
+                props.settings.calendar.calendarIDs.map((item)=>{
 
                   //TODO: Maybe add settings for params
                   //TODO: Add maxTime that can be configured in the settings
                   if(item.enabled) {
-                    anyCalenderEnabled=true;
+                    anyCalendarEnabled=true;
                     fetch("https://www.googleapis.com/calendar/v3/calendars/"+item.id+"/events?maxResults=5&timeMin:"+(new Date()).toJSON())
                   .then((response) => response.json()) // Transform the data into json
                     .then(function(data) {
@@ -154,11 +154,11 @@ export default function Calendar(props) {
           }
       },[])
       
-      if(anyCalenderEnabled){
+      if(anyCalendarEnabled){
         return(
           <div className="calendar">
             <h1><Link to="/hideCalendar">Calendar ▼</Link></h1>
-            Please select the calenders you which to use in the setting to start to use the calendar. 
+            Please select the calendars you which to use in the setting to start to use the calendar. 
             
           </div>
         )

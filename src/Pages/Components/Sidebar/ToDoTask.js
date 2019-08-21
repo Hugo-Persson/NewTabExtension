@@ -4,8 +4,8 @@ export default function ToDoTask(props) {
     
     return props.tasks.map((task)=>(
         <div className="task">
-            <input  id="checkbox" className="checkBox" type="checkbox"/>
-            <label htmlFor="checkbox" className="checkLabel"></label>
+            <input   className="checkBox" type="checkbox"/>
+            <label htmlFor="checkbox" className="checkLabel"><div></div></label>
             <span>{task.title}</span>
         </div>
     ))

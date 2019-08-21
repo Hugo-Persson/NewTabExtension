@@ -408,6 +408,7 @@ button:hover{
     background-color: rgba(117, 117, 117, 0.685);
     cursor: pointer;
     transition: 1s;
+    
 }
 
 .task:nth-child(even){

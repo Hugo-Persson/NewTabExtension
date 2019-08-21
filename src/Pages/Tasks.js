@@ -88,7 +88,7 @@ export default function Tasks(props) {
       return(
         <div className="tasks">
         <h1><Link to="/hideTasks">Tasks ▼</Link></h1>
-          Please select the calenders you which to use in the setting to start to use the calendar. 
+          Please select the calendars you which to use in the setting to start to use the calendar. 
       </div>
       )
       

@@ -51,7 +51,7 @@ const [itemFullscreen, setItemFullscreen] = useState(0);
             
         </div>
         )}/>
-        <Route path="/CalenderFullScreen" render={props=>(
+        <Route path="/CalendarFullScreen" render={props=>(
           <div className="sideBar">
             <calendar settings={settings} />
             <h1><Link to="/">Tasks ▲</Link></h1>

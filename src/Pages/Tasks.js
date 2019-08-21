@@ -9,9 +9,9 @@ export default function Tasks(props) {
         [
           {
             //Use later to specify task
-            id: "loading",
+            id: "ID",
             //Name
-            title: "Loading",
+            title: "Name",
             hidden: false,
             notes: undefined,
             due: "2019-07-26T00:00:00.000Z",
@@ -20,15 +20,16 @@ export default function Tasks(props) {
           },
           {
             //Use later to specify task
-            id: "loading",
+            id: "ID",
             //Name
-            title: "Loading",
+            title: "Name",
             hidden: false,
             notes: undefined,
             due: "2019-07-26T00:00:00.000Z",
             parent: "The parents id"
       
           },
+          
         ]
       )
       useEffect(()=>{
@@ -87,7 +88,7 @@ export default function Tasks(props) {
       return(
         <div className="tasks">
         <h1><Link to="/hideTasks">Tasks ▼</Link></h1>
-          Please select the calenders you which to use in the setting to start to use the calender. 
+          Please select the calenders you which to use in the setting to start to use the calendar. 
       </div>
       )
       

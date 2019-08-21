@@ -8,7 +8,7 @@ export default function SideBarSettings(props) {
         <div className="sidebarSettings">
             
             <div className="calenderSettings">
-                <h2>Calender</h2>
+                <h2>calendar</h2>
                 
                 <CalenderSettings settings={props.settings}/>
             </div>

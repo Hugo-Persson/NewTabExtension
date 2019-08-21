@@ -3,7 +3,7 @@ import React,{useEffect, useState, useRef} from 'react'
 import {Route, Link} from "react-router-dom"
 import SelectCollection from './SelectCollection';
 export default function CalenderSettings(props) {
-    const [calenders, setCalenders] = useState(props.settings.calender.calenderIDs);
+    const [calenders, setCalenders] = useState(props.settings.calendar.calenderIDs);
     const selectCalenders = useRef(null);
     function GetCalenders(){
         chrome.identity.getAuthToken({"interactive":true, "scopes": "https://www.googleapis.com/auth/calendar"},function(token){
@@ -40,7 +40,7 @@ export default function CalenderSettings(props) {
         return (
         
             <div className="calenderSettings">
-                <button onClick={GetCalenders}>Enable Google Calender</button>
+                <button onClick={GetCalenders}>Enable Google calendar</button>
             </div>
         )
     }

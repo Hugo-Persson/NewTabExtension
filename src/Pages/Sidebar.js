@@ -1,7 +1,7 @@
 
 import React, {useState} from 'react'
 import {MemoryRouter, Route, Link, Redirect} from "react-router-dom"
-import Calender from './Calender';
+import Calendar from './Calendar';
 import Tasks from './Tasks';
 import Settings from './Settings';
 import EditQuickAccessItem from "./EditQuickAccessItem";
@@ -20,7 +20,7 @@ const [itemFullscreen, setItemFullscreen] = useState(0);
         
         <Route path="/" exact render={props => (
           <div className="sideBar">
-            <Calender {...prop}/>
+            <Calendar {...prop}/>
             <Tasks settings={settings}/>
             <Link to="/settings/customization" className="settingsButton">⚙</Link>
           </div>
@@ -30,9 +30,9 @@ const [itemFullscreen, setItemFullscreen] = useState(0);
 
 
 
-        <Route path="/hideCalender" render={props=>(
+        <Route path="/hideCalendar" render={props=>(
           <div className="sideBar">
-            <h1><Link to="/">Calender ▲</Link></h1>
+            <h1><Link to="/">Calendar ▲</Link></h1>
             
             <Tasks settings={settings}/>
             <Link to="/settings/customization" className="settingsButton">⚙</Link>
@@ -40,7 +40,7 @@ const [itemFullscreen, setItemFullscreen] = useState(0);
         )}/>
         <Route path="/hideTasks" render={props=>(
           <div className="sideBar">
-            <Calender settings={settings} />
+            <Calendar settings={settings} />
             <h1><Link to="/">Tasks ▲</Link></h1>
             <Link to="/settings/customization" className="settingsButton">⚙</Link>
         </div>
@@ -53,7 +53,7 @@ const [itemFullscreen, setItemFullscreen] = useState(0);
         )}/>
         <Route path="/CalenderFullScreen" render={props=>(
           <div className="sideBar">
-            <Calender settings={settings} />
+            <calendar settings={settings} />
             <h1><Link to="/">Tasks ▲</Link></h1>
             <Link to="/settings/customization" className="settingsButton">⚙</Link>
         </div>

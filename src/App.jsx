@@ -57,7 +57,7 @@ const [settings, setSetting] = useState({
 
     ]
   },
-  calender:{
+  calendar:{
     calenderIDs:[
       {
         name:"SUMMARY",

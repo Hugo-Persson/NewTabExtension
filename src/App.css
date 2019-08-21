@@ -5,6 +5,7 @@
 
 */
 
+
 html{
     max-height: 100vh;
     background-size: 100%;
@@ -130,7 +131,7 @@ button:hover{
 
 .settingsButton{
     position: absolute;
-    bottom: 2vw;
+    bottom: 1vw;
     right: 2vw;
     
     font-size: 32px;
@@ -310,24 +311,28 @@ button:hover{
 }
 /*
 --------------------------------- 
-        Calender
+        calendar
 ---------------------------------
 
 */
-.calender, .tasks{
-    height: 50%;
+.calendar, .tasks{
+    height: 45%;
     overflow: auto;
+    position: relative;
+    
     
 
 }
 
-.calender::-webkit-scrollbar , .tasks::-webkit-scrollbar {
+
+
+.calendar::-webkit-scrollbar , .tasks::-webkit-scrollbar {
     width: 6px;
     background-color: rgba(59, 59, 59, 0.486);
     
     
 }
-.calender::-webkit-scrollbar-thumb , .tasks::-webkit-scrollbar-thumb{
+.calendar::-webkit-scrollbar-thumb , .tasks::-webkit-scrollbar-thumb{
     background-color: white;
     border-radius: 25%;
 }
@@ -402,8 +407,9 @@ button:hover{
     padding: 2%;
     background-color: rgba(117, 117, 117, 0.685);
     cursor: pointer;
-    
+    transition: 1s;
 }
+
 .task:nth-child(even){
     background-color: rgba(43, 43, 43, 0.685);
     

@@ -2,12 +2,12 @@
 import React, {useState, useEffect} from 'react'
 import {BrowserRouter as Router, Route, Link} from "react-router-dom"
 
-import CalenderEvents from './Components/Sidebar/CalenderEvents';
+import CalendarEvents from './Components/Sidebar/CalendarEvents';
 
 
-export default function Calender(props) {
+export default function Calendar(props) {
   var anyCalenderEnabled = false;
-  console.log(props.settings.calender.calenderIDs.length);
+  console.log(props.settings.calendar.calenderIDs.length);
     const[events, setEvents] = useState([
         {
           summary: "Name",
@@ -129,10 +129,10 @@ export default function Calender(props) {
 
               })
               var events =[];
-              //Wil go through all calender and add the events togheter
+              //Wil go through all calendar and add the events togheter
               
-              if(props.setttings.calender.calenderIDs.length!==0){
-                props.settings.calender.calenderIDs.map((item)=>{
+              if(props.setttings.calendar.calenderIDs.length!==0){
+                props.settings.calendar.calenderIDs.map((item)=>{
 
                   //TODO: Maybe add settings for params
                   //TODO: Add maxTime that can be configured in the settings
@@ -156,9 +156,9 @@ export default function Calender(props) {
       
       if(anyCalenderEnabled){
         return(
-          <div className="calender">
-            <h1><Link to="/hideCalender">Calender ▼</Link></h1>
-            Please select the calenders you which to use in the setting to start to use the calender. 
+          <div className="calendar">
+            <h1><Link to="/hideCalendar">Calendar ▼</Link></h1>
+            Please select the calenders you which to use in the setting to start to use the calendar. 
             
           </div>
         )
@@ -167,10 +167,13 @@ export default function Calender(props) {
         return (
         
          
-          <div className="calender">
-          <h1><Link to="/hideCalender">Calender ▼</Link></h1>
+          <div className="calendar">
+            <div className="fadeOutOverlay">
+
+            </div>
+          <h1><Link to="/hideCalendar">Calendar ▼</Link></h1>
           {events.map((event)=>(
-            <CalenderEvents {...props} event={event} events={events}/>
+            <CalendarEvents {...props} event={event} events={events}/>
           ))}
             
           </div>

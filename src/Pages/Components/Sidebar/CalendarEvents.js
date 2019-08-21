@@ -1,7 +1,7 @@
 /*global chrome*/
 import React,{useState} from 'react'
 
-export default function CalenderEvents(props) {
+export default function CalendarEvents(props) {
     
     const [edit, setEdit] = useState(false);
     const {event} = props;

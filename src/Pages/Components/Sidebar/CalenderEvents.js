@@ -1,3 +1,4 @@
+/*global chrome*/
 import React,{useState} from 'react'
 
 export default function CalenderEvents(props) {
@@ -24,16 +25,45 @@ export default function CalenderEvents(props) {
 
         return location.substring(0,index);
     }
+    function Delete(){
+        chrome.identity.getAuthToken({"interactive":false, "scopes": "https://www.googleapis.com/auth/calendar"},(token)=>{
+            let init = {
+                method: 'GET',
+                async: true,
+                headers: {
+                  Authorization: 'Bearer ' + token,
+                  
+                  'Content-Type': 'application/json'
+                },
+                
+                'contentType': 'json'
+              };
+              fetch("https://www.googleapis.com/calendar/v3/calendars/"+event.organizer.email+"/events/"+event.id, init)
+              .then()
+              .then(()=>{
+                  
+              })
+              
+        })
+        console.log(props.events);
+        props.events.splice((props.events.findIndex((item)=>(item==event))),1);
+        console.log(props.events);
+        props.UpdateApp();
+    }
+    function Edit(){
+
+    }
     if(edit){
     return(
         <div className="event">
             <div onClick={()=>setEdit(false)} className="hamburgerMenu">X</div>
-            <button className="edit">Edit</button>
+            <button className="edit" onClick={Edit}>Edit</button>
             <br/>
-            <button className="delete">Delete</button>
+            <button className="delete" onClick={Delete}>Delete</button>
         </div>
     )
     }
+    
     else{
         return (
             <div className="event">

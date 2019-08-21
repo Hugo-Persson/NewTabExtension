@@ -5,8 +5,8 @@ import ToDoTask from './Components/Sidebar/ToDoTask';
 
 export default function Tasks(props) {
   var anyToDoListEnabled = false;
-    const[tasks, setTasks] = useState({
-        items:[
+    const[tasks, setTasks] = useState(
+        [
           {
             //Use later to specify task
             id: "loading",
@@ -17,9 +17,20 @@ export default function Tasks(props) {
             due: "2019-07-26T00:00:00.000Z",
             parent: "The parents id"
       
-          }
+          },
+          {
+            //Use later to specify task
+            id: "loading",
+            //Name
+            title: "Loading",
+            hidden: false,
+            notes: undefined,
+            due: "2019-07-26T00:00:00.000Z",
+            parent: "The parents id"
+      
+          },
         ]
-      })
+      )
       useEffect(()=>{
         //TODO: Chrome
       //   fetchData();

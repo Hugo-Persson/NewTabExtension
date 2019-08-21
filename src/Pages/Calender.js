@@ -12,51 +12,103 @@ export default function Calender(props) {
         {
           summary: "Name",
           location: "Location",
+          id: "id",
+          organizer:{
+            displayName: "Calendar name",
+            email: "calendarID",
+
+          },
           start:{
             dateTime:"2019-08-13T08:15:00+02:00",
       
           },
-          end:{
-            dateTime: "2019-08-13T12:30:00+02:00"
-          },
-          id: "loading"
         },
         {
           summary: "Name",
           location: "Location",
+          id: "id",
+          organizer:{
+            displayName: "Calendar name",
+            email: "calendarID",
+
+          },
           start:{
             dateTime:"2019-08-13T08:15:00+02:00",
       
           },
-          end:{
-            dateTime: "2019-08-13T12:30:00+02:00"
-          },
-          id: "loading"
         },
         {
           summary: "Name",
           location: "Location",
+          id: "id",
+          organizer:{
+            displayName: "Calendar name",
+            email: "calendarID",
+
+          },
           start:{
             dateTime:"2019-08-13T08:15:00+02:00",
       
           },
-          end:{
-            dateTime: "2019-08-13T12:30:00+02:00"
-          },
-          id: "loading"
         },
         {
           summary: "Name",
           location: "Location",
+          id: "id",
+          organizer:{
+            displayName: "Calendar name",
+            email: "calendarID",
+
+          },
           start:{
             dateTime:"2019-08-13T08:15:00+02:00",
       
           },
-          end:{
-            dateTime: "2019-08-13T12:30:00+02:00"
-          },
-          id: "loading"
         },
+        {
+          summary: "Name",
+          location: "Location",
+          id: "id",
+          organizer:{
+            displayName: "Calendar name",
+            email: "calendarID",
+
+          },
+          start:{
+            dateTime:"2019-08-13T08:15:00+02:00",
+      
+          },
+        },
+        {
+          summary: "Name",
+          location: "Location",
+          id: "id",
+          organizer:{
+            displayName: "Calendar name",
+            email: "calendarID",
+
+          },
+          start:{
+            dateTime:"2019-08-13T08:15:00+02:00",
+      
+          },
+        },
+        {
+          summary: "Name",
+          location: "Location",
+          id: "id",
+          organizer:{
+            displayName: "Calendar name",
+            email: "calendarID",
+
+          },
+          start:{
+            dateTime:"2019-08-13T08:15:00+02:00",
+      
+          },
+        },
+          
+        
       ]);
       useEffect(()=>{
           //TODO: Chrome
@@ -118,7 +170,7 @@ export default function Calender(props) {
           <div className="calender">
           <h1><Link to="/hideCalender">Calender ▼</Link></h1>
           {events.map((event)=>(
-            <CalenderEvents event={event} settings={props.settings}/>
+            <CalenderEvents {...props} event={event} events={events}/>
           ))}
             
           </div>

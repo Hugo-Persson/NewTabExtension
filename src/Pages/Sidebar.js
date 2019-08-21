@@ -20,7 +20,7 @@ const [itemFullscreen, setItemFullscreen] = useState(0);
         
         <Route path="/" exact render={props => (
           <div className="sideBar">
-            <Calender settings={settings}/>
+            <Calender {...prop}/>
             <Tasks settings={settings}/>
             <Link to="/settings/customization" className="settingsButton">⚙</Link>
           </div>

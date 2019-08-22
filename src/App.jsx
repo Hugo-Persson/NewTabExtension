@@ -1,3 +1,5 @@
+
+//"Global CHrome" tells eslint that chrome is a valid variable which later will work when the code is run in chrome
 /*global chrome*/
 import React, {useState,useEffect, useCallback} from 'react'
 import "./App.css"

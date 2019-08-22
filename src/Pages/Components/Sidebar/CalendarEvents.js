@@ -41,21 +41,21 @@ export default function CalendarEvents(props) {
               fetch("https://www.googleapis.com/calendar/v3/calendars/"+event.organizer.email+"/events/"+event.id, init)
               .then()
               .then(()=>{
-                  
+                console.log(props.events);
+                props.events.splice((props.events.findIndex((item)=>(item==event))),1);
+                console.log(props.events);
+                props.UpdateApp();
               })
               
         })
-        console.log(props.events);
-        props.events.splice((props.events.findIndex((item)=>(item==event))),1);
-        console.log(props.events);
-        props.UpdateApp();
+        
     }
     function Edit(){
 
     }
     if(edit){
     return(
-        <div className="event">
+        <div className="event" >
             <div onClick={()=>setEdit(false)} className="hamburgerMenu">X</div>
             <button className="edit" onClick={Edit}>Edit</button>
             <br/>
@@ -66,7 +66,7 @@ export default function CalendarEvents(props) {
     
     else{
         return (
-            <div className="event">
+            <div className="event" >
     
     
                 <div className="hamburgerMenu" onClick={()=> setEdit(true)}>

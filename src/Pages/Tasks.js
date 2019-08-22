@@ -9,7 +9,7 @@ export default function Tasks(props) {
         [
           {
             //Use later to specify task
-            id: "ID",
+            id: "1",
             //Name
             title: "Name",
             hidden: false,
@@ -20,7 +20,40 @@ export default function Tasks(props) {
           },
           {
             //Use later to specify task
-            id: "ID",
+            id: "2",
+            //Name
+            title: "Name",
+            hidden: false,
+            notes: undefined,
+            due: "2019-07-26T00:00:00.000Z",
+            parent: "The parents id"
+      
+          },
+          {
+            //Use later to specify task
+            id: "2",
+            //Name
+            title: "Name",
+            hidden: false,
+            notes: undefined,
+            due: "2019-07-26T00:00:00.000Z",
+            parent: "The parents id"
+      
+          },
+          {
+            //Use later to specify task
+            id: "2",
+            //Name
+            title: "Name",
+            hidden: false,
+            notes: undefined,
+            due: "2019-07-26T00:00:00.000Z",
+            parent: "The parents id"
+      
+          },
+          {
+            //Use later to specify task
+            id: "2",
             //Name
             title: "Name",
             hidden: false,
@@ -78,10 +111,15 @@ export default function Tasks(props) {
     },[])
     if(!anyToDoListEnabled){
       return (
+        <div className="toDo">
+          <h1><Link to="/hideTasks">Tasks ▼</Link></h1>
         <div className="tasks">
-            <h1><Link to="/hideTasks">Tasks ▼</Link></h1>
+            
             <ToDoTask tasks={tasks}/>
         </div>
+        <button>Add Task</button>
+        </div>
+        
     )
     }
     else{

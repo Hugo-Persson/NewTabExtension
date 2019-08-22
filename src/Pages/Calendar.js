@@ -12,7 +12,7 @@ export default function Calendar(props) {
         {
           summary: "Name",
           location: "Location",
-          id: "id",
+          id: 1,
           organizer:{
             displayName: "Calendar name",
             email: "calendarID",
@@ -26,7 +26,7 @@ export default function Calendar(props) {
         {
           summary: "Name",
           location: "Location",
-          id: "id",
+          id: 2,
           organizer:{
             displayName: "Calendar name",
             email: "calendarID",
@@ -40,7 +40,7 @@ export default function Calendar(props) {
         {
           summary: "Name",
           location: "Location",
-          id: "id",
+          id: 2,
           organizer:{
             displayName: "Calendar name",
             email: "calendarID",
@@ -54,7 +54,7 @@ export default function Calendar(props) {
         {
           summary: "Name",
           location: "Location",
-          id: "id",
+          id: 2,
           organizer:{
             displayName: "Calendar name",
             email: "calendarID",
@@ -65,48 +65,7 @@ export default function Calendar(props) {
       
           },
         },
-        {
-          summary: "Name",
-          location: "Location",
-          id: "id",
-          organizer:{
-            displayName: "Calendar name",
-            email: "calendarID",
-
-          },
-          start:{
-            dateTime:"2019-08-13T08:15:00+02:00",
-      
-          },
-        },
-        {
-          summary: "Name",
-          location: "Location",
-          id: "id",
-          organizer:{
-            displayName: "Calendar name",
-            email: "calendarID",
-
-          },
-          start:{
-            dateTime:"2019-08-13T08:15:00+02:00",
-      
-          },
-        },
-        {
-          summary: "Name",
-          location: "Location",
-          id: "id",
-          organizer:{
-            displayName: "Calendar name",
-            email: "calendarID",
-
-          },
-          start:{
-            dateTime:"2019-08-13T08:15:00+02:00",
-      
-          },
-        },
+        
           
         
       ]);
@@ -172,9 +131,12 @@ export default function Calendar(props) {
 
             </div>
           <h1><Link to="/hideCalendar">Calendar ▼</Link></h1>
-          {events.map((event)=>(
-            <CalendarEvents {...props} event={event} events={events}/>
-          ))}
+          <div className="events">
+            {events.map((event)=>(
+              <CalendarEvents key={event.id} {...props} event={event} events={events}/>
+            ))}
+          </div>
+          <button>Add Event</button>
             
           </div>
   )

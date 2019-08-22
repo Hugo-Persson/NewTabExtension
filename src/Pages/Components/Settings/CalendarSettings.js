@@ -6,7 +6,7 @@ export default function CalendarSettings(props) {
     const [calendars, setCalendars] = useState(props.settings.calendar.calendarIDs);
     const selectCalendars = useRef(null);
     function GetCalendars(){
-        chrome.identity.getAuthToken({"interactive":true, "scopes": "https://www.googleapis.com/auth/calendar"},function(token){
+        chrome.identity.getAuthToken({"interactive":true, "scopes": ["https://www.googleapis.com/auth/calendar"]},function(token){
             let init = {
                 method: 'GET',
                 async: true,

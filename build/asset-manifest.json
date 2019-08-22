@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/static/css/main.da3b8e93.chunk.css",
+    "main.js": "/static/js/main.13490abe.chunk.js",
+    "main.js.map": "/static/js/main.13490abe.chunk.js.map",
+    "runtime~main.js": "/static/js/runtime~main.a8a9905a.js",
+    "runtime~main.js.map": "/static/js/runtime~main.a8a9905a.js.map",
+    "static/js/2.daf90f56.chunk.js": "/static/js/2.daf90f56.chunk.js",
+    "static/js/2.daf90f56.chunk.js.map": "/static/js/2.daf90f56.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.84e48961f18b93fcdc91bbb4ab15fdf2.js": "/precache-manifest.84e48961f18b93fcdc91bbb4ab15fdf2.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.da3b8e93.chunk.css.map": "/static/css/main.da3b8e93.chunk.css.map",
+    "static/media/AbandonedHouse.jpg": "/static/media/AbandonedHouse.2b5249b2.jpg",
+    "static/media/Fire.jpg": "/static/media/Fire.f7e49dd3.jpg",
+    "static/media/Landscape.jpg": "/static/media/Landscape.e0ac4c32.jpg",
+    "static/media/PersonCloseToFire.jpg": "/static/media/PersonCloseToFire.eb08bf15.jpg",
+    "static/media/Plants.jpg": "/static/media/Plants.a351b57c.jpg",
+    "static/media/WinterRoad.jpg": "/static/media/WinterRoad.cab04278.jpg"
+  }
+}

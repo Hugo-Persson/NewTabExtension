@@ -1,0 +1,22 @@
+{
+    "name": "New Tab",
+    "version": "1.1",
+    "manifest_version": 2,
+    "permissions": [
+        "bookmarks",
+        "file:///*",
+        "storage",
+        "identity",
+        "geolocation"
+    ],
+    "oauth2":{
+        "client_id": "1097177321404-0d1mlt2qkrbbe48rpkebdap1oaib8qvr.apps.googleusercontent.com",
+        "scopes": ["https://www.googleapis.com/auth/calendar", "https://www.googleapis.com/auth/tasks"]
+    },
+
+    "chrome_url_overrides" : {
+        "newtab": "index.html"
+    },
+    "content_security_policy": "script-src 'self' 'sha256-t6n6r6q3cL5b7tTzlPP16Ir5nUjBXtFxlX4pJHaNYvQ='; object-src 'self'"
+    
+}

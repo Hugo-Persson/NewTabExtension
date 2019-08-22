@@ -70,7 +70,7 @@ export default function Tasks(props) {
       //   fetchData();
         async function fetchData(){
           var array =[];
-            chrome.identity.getAuthToken({"interactive":false, "scopes":"https://www.googleapis.com/auth/tasks"},function(token){
+            chrome.identity.getAuthToken({"interactive":false, "scopes":["https://www.googleapis.com/auth/tasks"]},function(token){
               let init = {
                   method: 'GET',
                   async: true,

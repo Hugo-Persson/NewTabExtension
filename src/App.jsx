@@ -22,6 +22,7 @@ export default function App() {
 
   
   useEffect(()=>{
+    //TODO: Enable
     async function LoadChrome(){
       chrome.storage.sync.get("settings", function(chromeSettings){
         if(chromeSettings!=undefined){

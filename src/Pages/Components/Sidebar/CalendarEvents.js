@@ -26,7 +26,7 @@ export default function CalendarEvents(props) {
         return location.substring(0,index);
     }
     function Delete(){
-        chrome.identity.getAuthToken({"interactive":false, "scopes": "https://www.googleapis.com/auth/calendar"},(token)=>{
+        chrome.identity.getAuthToken({"interactive":false, "scopes": ["https://www.googleapis.com/auth/calendar"}],(token)=>{
             let init = {
                 method: 'GET',
                 async: true,

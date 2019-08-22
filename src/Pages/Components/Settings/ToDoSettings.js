@@ -6,7 +6,7 @@ import SelectCollection from './SelectCollection';
 export default function ToDoSettings(props) {
     const [TaskLists, setTaskLists] = useState(props.settings.ToDo.taskLists)
     function GetTaskLists(){
-        chrome.identity.getAuthToken({"interactive": true, "scopes": "https://www.googleapis.com/auth/tasks"},function(token){
+        chrome.identity.getAuthToken({"interactive": true, "scopes": ["https://www.googleapis.com/auth/tasks"]},function(token){
             let init={
                 method: "GET",
                 async: true,

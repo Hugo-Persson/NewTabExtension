@@ -22,11 +22,15 @@ export default function App() {
 
   
   useEffect(()=>{
+    
     //TODO: Enable
+     LoadChrome();
     async function LoadChrome(){
       chrome.storage.sync.get("settings", function(chromeSettings){
-        if(chromeSettings!=undefined){
-          setSetting(chromeSettings);
+        if(chromeSettings.settings!=undefined){
+          console.log("ISN*T UNDEFINDE");
+          console.log(chromeSettings.settings);
+          setSetting(chromeSettings.settings);
         }
         else{
           chrome.storage.sync.set({"settings": settings});
@@ -34,8 +38,10 @@ export default function App() {
         
       })
       chrome.storage.sync.get("QuickAccessLinks", function(data){
-        if(data!=undefined){
-          setQuickAccessLinks(data);
+        if(data.QuickAccessLinks!=undefined){
+          console.log("******");
+          
+          setQuickAccessLinks(data.QuickAccessLinks);
         }
         else{
           chrome.storage.sync.set({"QuickAccessLinks": QuickAccessLinks});
@@ -43,7 +49,10 @@ export default function App() {
         
       })
     }
-    
+    console.log("Quick");
+    console.log(QuickAccessLinks);
+    console.log("Sett");
+    console.log(settings);
   
 
   },[])
@@ -164,6 +173,8 @@ const [QuickAccessLinks, setQuickAccessLinks ] = useState([
 
 console.log("Render");
 document.querySelector("html").style.backgroundImage = "url("+settings.backgroundImage +")";
+
+
   return (
     <MemoryRouter >
       <React.Fragment>
@@ -176,4 +187,6 @@ document.querySelector("html").style.backgroundImage = "url("+settings.backgroun
       </MemoryRouter>
     
   )
+
+  
 }

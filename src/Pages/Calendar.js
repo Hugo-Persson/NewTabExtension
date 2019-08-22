@@ -7,7 +7,8 @@ import CalendarEvents from './Components/Sidebar/CalendarEvents';
 
 export default function Calendar(props) {
   var anyCalendarEnabled = false;
-  console.log(props.settings.calendar.calendarIDs.length);
+  console.log(props.settings.calendar);
+  
     const[events, setEvents] = useState([
         {
           summary: "Name",
@@ -90,7 +91,7 @@ export default function Calendar(props) {
               var events =[];
               //Wil go through all calendar and add the events togheter
               
-              if(props.setttings.calendar.calendarIDs.length!==0){
+              if(props.settings.calendar.calendarIDs.length!==0){
                 props.settings.calendar.calendarIDs.map((item)=>{
 
                   //TODO: Maybe add settings for params

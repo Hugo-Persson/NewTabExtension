@@ -25,7 +25,7 @@ import axios from "axios"
                         props.settings.location.lat=result.data.coord.lat;
                         props.settings.location.lon = result.data.coord.lon;
                         props.settings.location.city = result.data.name;
-                        // TODO: chrome.storage.sync.set({"settings": props.settings});
+                        chrome.storage.sync.set({"settings": props.settings});
                        }
                        
                        console.log(weather);

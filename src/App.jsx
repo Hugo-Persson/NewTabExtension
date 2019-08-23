@@ -11,10 +11,121 @@ import WinterRoad from "./Wallpapers/WinterRoad.jpg";
 import {MemoryRouter} from "react-router-dom";
 import AddButton from "./addButton.png";
 export default function App() {
+
   const [, updateState] = useState();
   const forceUpdate = useCallback(() => updateState({}), []);
 
   const [selectedQuickAccessItem, setSelectedQuickAccessItem] = useState({});
+  const [settings, setSetting] = useState({
+    ToDo:{
+      taskLists:[
+        {
+          name:"TITLE",
+          id: null,
+          enabled:false,
+        },
+        
+  
+      ]
+    },
+    calendar:{
+      calendarIDs:[
+        {
+          name:"SUMMARY",
+          id:null,
+            enabled: false,
+        },
+        {
+          name:"SUMMARY",
+          id:null,
+            enabled: false,
+        },
+        {
+          name:"SUMMARY",
+          id:null,
+            enabled: false,
+        },
+        
+      ]
+    },
+    backgroundImage: WinterRoad,
+    defaultRoute: "/",
+    dateFormat: "automatic",
+    units: "metric",
+    location:{
+      auto: true,
+      city:undefined,
+      lat: undefined,
+      lon: undefined,
+      
+    }
+  })
+  function UpdateApp(){
+    forceUpdate();
+  
+  }
+  
+  const [QuickAccessLinks, setQuickAccessLinks ] = useState([
+    {
+        name: "1",
+        url:"https://www.reddit.com",
+        image: "https://api.faviconkit.com/reddit.com/64",
+        reRender:undefined
+    },
+    {
+        name: "2",
+        url:"https://www.reddit.com",
+        image: "https://api.faviconkit.com/reddit.com/64",
+        reRender:undefined
+    },
+    {
+        name: "3",
+        url:"https://www.reddit.com",
+        image: "https://cdn.freebiesupply.com/images/large/2x/facebook-logo-circle-transparent.png",
+        reRender:undefined
+    },
+    {
+        name: "4",
+        url:"https://www.reddit.com",
+        image: "https://api.faviconkit.com/reddit.com/64",
+        reRender:undefined
+    },
+    {
+        name: "5",
+        url:"https://www.reddit.com",
+        image: "https://api.faviconkit.com/reddit.com/64",
+        reRender:undefined
+    },
+    {
+        name: "6",
+        url:"https://www.reddit.com",
+        image: "https://api.faviconkit.com/reddit.com/64",
+        reRender:undefined
+    },
+    {
+        name: "7",
+        url:"https://www.reddit.com",
+        image: "https://api.faviconkit.com/reddit.com/64",
+        reRender:undefined
+        
+    },
+    {
+        name: "8",
+        url:"https://www.reddit.com",
+        image: "https://api.faviconkit.com/reddit.com/64",
+        reRender:undefined
+    },
+    
+    {
+      name: "Add Link",
+      url:"#",
+      image: AddButton,
+      reRender:undefined
+  }
+  
+    
+    
+  ]);
   
 
 
@@ -25,15 +136,20 @@ export default function App() {
     
     //TODO: Enable
      LoadChrome();
-    async function LoadChrome(){
+     function LoadChrome(){
+      console.log("Load chrome run");
       chrome.storage.sync.get("settings", function(chromeSettings){
-        if(chromeSettings.settings!=undefined){
+        if(chromeSettings.settings===undefined){
+          console.log("First set up");
+          chrome.storage.sync.set({"settings": settings},()=>{
+            console.log("First set up");
+          });
+        }
+        else{
+          
           console.log("ISN*T UNDEFINDE");
           console.log(chromeSettings.settings);
           setSetting(chromeSettings.settings);
-        }
-        else{
-          chrome.storage.sync.set({"settings": settings});
         }
         
       })
@@ -57,116 +173,7 @@ export default function App() {
 
   },[])
 
-const [settings, setSetting] = useState({
-  ToDo:{
-    taskLists:[
-      {
-        name:"TITLE",
-        id: null,
-        enabled:false,
-      },
-      
 
-    ]
-  },
-  calendar:{
-    calendarIDs:[
-      {
-        name:"SUMMARY",
-        id:null,
-          enabled: false,
-      },
-      {
-        name:"SUMMARY",
-        id:null,
-          enabled: false,
-      },
-      {
-        name:"SUMMARY",
-        id:null,
-          enabled: false,
-      },
-      
-    ]
-  },
-  backgroundImage: WinterRoad,
-  defaultRoute: "/",
-  dateFormat: "automatic",
-  units: "metric",
-  location:{
-    auto: true,
-    city:undefined,
-    lat: undefined,
-    lon: undefined,
-    
-  }
-})
-function UpdateApp(){
-  forceUpdate();
-
-}
-
-const [QuickAccessLinks, setQuickAccessLinks ] = useState([
-  {
-      name: "1",
-      url:"https://www.reddit.com",
-      image: "https://api.faviconkit.com/reddit.com/64",
-      reRender:undefined
-  },
-  {
-      name: "2",
-      url:"https://www.reddit.com",
-      image: "https://api.faviconkit.com/reddit.com/64",
-      reRender:undefined
-  },
-  {
-      name: "3",
-      url:"https://www.reddit.com",
-      image: "https://cdn.freebiesupply.com/images/large/2x/facebook-logo-circle-transparent.png",
-      reRender:undefined
-  },
-  {
-      name: "4",
-      url:"https://www.reddit.com",
-      image: "https://api.faviconkit.com/reddit.com/64",
-      reRender:undefined
-  },
-  {
-      name: "5",
-      url:"https://www.reddit.com",
-      image: "https://api.faviconkit.com/reddit.com/64",
-      reRender:undefined
-  },
-  {
-      name: "6",
-      url:"https://www.reddit.com",
-      image: "https://api.faviconkit.com/reddit.com/64",
-      reRender:undefined
-  },
-  {
-      name: "7",
-      url:"https://www.reddit.com",
-      image: "https://api.faviconkit.com/reddit.com/64",
-      reRender:undefined
-      
-  },
-  {
-      name: "8",
-      url:"https://www.reddit.com",
-      image: "https://api.faviconkit.com/reddit.com/64",
-      reRender:undefined
-  },
-  
-  {
-    name: "Add Link",
-    url:"#",
-    image: AddButton,
-    reRender:undefined
-}
-
-  
-  
-])
 
  
 

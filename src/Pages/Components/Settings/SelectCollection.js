@@ -7,7 +7,7 @@ export default function SelectCollection(props) {
         console.log(item);
         item.enabled=!item.enabled;
         console.log(item);
-        
+        console.log(props.settings)
     }
     
     return props.collections.map((item)=>(

@@ -1,10 +1,13 @@
 /*global chrome*/
-import React,{useEffect, useState, useRef} from 'react'
+import React,{useEffect, useState, useRef, useCallback} from 'react'
 import {Route, Link} from "react-router-dom"
 import SelectCollection from './SelectCollection';
 export default function CalendarSettings(props) {
-    const [calendars, setCalendars] = useState(props.settings.calendar.calendarIDs);
+    
+    const {calendarIDs} = props.settings.calendar; 
     const selectCalendars = useRef(null);
+    const [, updateState] = useState();
+  const forceUpdate = useCallback(() => updateState({}), []);
     function GetCalendars(){
         chrome.identity.getAuthToken({"interactive":true, "scopes": ["https://www.googleapis.com/auth/calendar"]},function(token){
             let init = {
@@ -32,11 +35,16 @@ export default function CalendarSettings(props) {
                           
                       })
                   })
-                  setCalendars(calendarArray);
+                  props.settings.calendar.calendarIDs=calendarArray;
+                  
+                  console.log(calendarIDs);
+                  console.log(props.settings);
+                  forceUpdate();
               })
         })
     }
-    if(calendars[0].id===null){
+    console.log(calendarIDs);
+    if(calendarIDs[0].id===null){
         return (
         
             <div className="calendarSettings">
@@ -49,7 +57,7 @@ export default function CalendarSettings(props) {
             <div className="calendarSettings">
                 Select calendars that you want to include in the sidebar
                 <div className="options">
-                <SelectCollection collections={calendars}/>
+                <SelectCollection collections={calendarIDs} settings={props.settings}/>
                 </div>
                 
             </div>

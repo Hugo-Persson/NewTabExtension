@@ -12,7 +12,9 @@ export default function EditQuickAccessItem(props) {
     console.log("rendering edit");
     function Save(){
         
-        chrome.storage.sync.set({"QuickAccessLinks":props.QuickAccessLinks});
+        chrome.storage.sync.set({"QuickAccessLinks":props.QuickAccessLinks},()=>{
+            alert("Save Successful");
+        });
         
         
     }

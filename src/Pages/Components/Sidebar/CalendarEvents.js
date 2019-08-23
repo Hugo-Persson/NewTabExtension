@@ -18,6 +18,9 @@ export default function CalendarEvents(props) {
         
     }
     function locationFormatter(location){
+        if(location===undefined){
+            return("");
+        }
         var index = location.indexOf(",");
         if(index==-1){
             return location;
@@ -78,6 +81,7 @@ export default function CalendarEvents(props) {
                 <br/>
                 <span className="date">{dateStringFromatter(event.start.dateTime)}</span>
                 <br/>
+                
                  <span className="location">{locationFormatter(event.location)}</span>
             </div>
         )

@@ -26,6 +26,7 @@ export default function Calendar(props) {
       useEffect(()=>{
           //TODO: Chrome
           console.log("Use effect ran in calender");
+          // Toggle
           // fetchData();
           async function fetchData(){
               chrome.identity.getAuthToken({"interactive":false, "scopes": ["https://www.googleapis.com/auth/calendar"]},function(token){
@@ -43,6 +44,7 @@ export default function Calendar(props) {
                 var events =[];
               //Wil go through all calendar and add the events togheter
               console.log(props.settings)
+              var fetches = [];
               if(props.settings.calendar.calendarIDs.length!==0){
                 console.log("IS THIS THE EEEERRROOOOO")
                 props.settings.calendar.calendarIDs.map((item)=>{
@@ -52,21 +54,29 @@ export default function Calendar(props) {
                   if(item.enabled) {
                     anyCalendarEnabled=true;
                     console.log("https://www.googleapis.com/calendar/v3/calendars/"+item.id+"/events?maxResults=5&timeMin="+(new Date()).toJSON());
-                    fetch("https://www.googleapis.com/calendar/v3/calendars/"+item.id+"/events?maxResults=5&timeMin="+(new Date()).toJSON(),init)
+                    fetches.push(
+                      fetch("https://www.googleapis.com/calendar/v3/calendars/"+item.id+"/events?maxResults=5&timeMin="+(new Date()).toJSON(),init)
                   .then((response) => response.json()) // Transform the data into json
                     .then(function(data) {
                       console.log("Fetch successful")
                         console.log(data);
                         data.items.map(value => {events.push(value)});
                         console.log(events);
-                        setEvents(events);
+                        
                     })
+                    );
+                    
 
                   }
                 
                   
               })
-              
+              // Wait until all promise function in var fetches are done and then executes
+              Promise.all(fetches)
+              .then(()=>{
+                console.log("Setting events");
+                setEvents(events);
+              });
               }
             })
               

@@ -31,7 +31,7 @@ export default function CalendarEvents(props) {
     function Delete(){
         chrome.identity.getAuthToken({"interactive":false, "scopes": ["https://www.googleapis.com/auth/calendar"]},(token)=>{
             let init = {
-                method: 'GET',
+                method: 'DELETE',
                 async: true,
                 headers: {
                   Authorization: 'Bearer ' + token,
@@ -42,12 +42,19 @@ export default function CalendarEvents(props) {
                 'contentType': 'json'
               };
               fetch("https://www.googleapis.com/calendar/v3/calendars/"+event.organizer.email+"/events/"+event.id, init)
-              .then()
-              .then(()=>{
+              .then(response => response.json())
+              .then((data)=>{
+                  alert("Deleted the event");
+                  console.log(data);
                 console.log(props.events);
                 props.events.splice((props.events.findIndex((item)=>(item==event))),1);
                 console.log(props.events);
                 props.UpdateApp();
+              })
+              .catch(error=>{
+                  alert("Didn't succefully save");
+                  console.log(error);
+
               })
               
         })

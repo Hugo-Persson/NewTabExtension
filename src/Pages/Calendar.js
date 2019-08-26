@@ -10,11 +10,23 @@ export default function Calendar(props) {
   console.log(props.settings.calendar);
   
     const[events, setEvents] = useState([
+      {
+        summary: "Name",
+        location: "Location",
+        start:{
+          dateTime:"2019-08-13T08:15:00+02:00",
+    
+        },
+        end:{
+          dateTime: "2019-08-13T12:30:00+02:00"
+        },
+        id: "loading"
+      },
       ]);
       useEffect(()=>{
           //TODO: Chrome
           console.log("Use effect ran in calender");
-          fetchData();
+          // fetchData();
           async function fetchData(){
               chrome.identity.getAuthToken({"interactive":false, "scopes": ["https://www.googleapis.com/auth/calendar"]},function(token){
                 const init = {

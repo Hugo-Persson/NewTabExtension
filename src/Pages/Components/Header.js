@@ -10,6 +10,7 @@ import axios from "axios"
      
      useEffect(() =>{
          const fetchData = async () =>{
+             
              //TODO: Error handeling
              if(props.settings.location.auto){
                 if("geolocation" in navigator){
@@ -20,12 +21,13 @@ import axios from "axios"
                         )
                        
                        console.log(result);
+
                        if(result!=undefined){
                         setWeather(result);
                         props.settings.location.lat=result.data.coord.lat;
                         props.settings.location.lon = result.data.coord.lon;
                         props.settings.location.city = result.data.name;
-                        chrome.storage.sync.set({"settings": props.settings});
+                        
                        }
                        
                        console.log(weather);
@@ -33,6 +35,7 @@ import axios from "axios"
     
                 }
              }
+             //TODO: is this really gonna work?
              else{
                  const result = await axios(
                     "https://api.openweathermap.org/data/2.5/weather?lat="+props.settings.location.lat+"&lon="+props.settings.location.lon + "&appid=182687c0b69f8681a9c697a2ac368d68"

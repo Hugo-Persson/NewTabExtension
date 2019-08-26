@@ -39,8 +39,8 @@ export default function Calendar(props) {
                   //TODO: Add maxTime that can be configured in the settings
                   if(item.enabled) {
                     anyCalendarEnabled=true;
-                    console.log("https://www.googleapis.com/calendar/v3/calendars/"+item.id+"/events?maxResults=5&timeMin:"+(new Date()).toJSON());
-                    fetch("https://www.googleapis.com/calendar/v3/calendars/"+item.id+"/events?maxResults=5&timeMin:"+(new Date()).toJSON(),init)
+                    console.log("https://www.googleapis.com/calendar/v3/calendars/"+item.id+"/events?maxResults=5&timeMin="+(new Date()).toJSON());
+                    fetch("https://www.googleapis.com/calendar/v3/calendars/"+item.id+"/events?maxResults=5&timeMin="+(new Date()).toJSON(),init)
                   .then((response) => response.json()) // Transform the data into json
                     .then(function(data) {
                       console.log("Fetch successful")

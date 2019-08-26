@@ -10,7 +10,7 @@
         "geolocation"
     ],
     "oauth2":{
-        "client_id": "1097177321404-0d1mlt2qkrbbe48rpkebdap1oaib8qvr.apps.googleusercontent.com",
+        "client_id": "247502443065-917ofage76a70u02dtu0p29g5gk9d3jp.apps.googleusercontent.com",
         "scopes": ["https://www.googleapis.com/auth/calendar", "https://www.googleapis.com/auth/tasks"]
     },
 
@@ -18,6 +18,6 @@
         "newtab": "index.html"
     },
 
-    "content_security_policy": "script-src 'self' 'sha256-5As4+3YpY62+l38PsxCEkjB1R4YtyktBtRScTJ3fyLU='; object-src 'self'",
-    "key":"cjdbceclnoakkliiablfakphigompaeh"
+    "content_security_policy": "script-src 'self' 'sha256-5As4+3YpY62+l38PsxCEkjB1R4YtyktBtRScTJ3fyLU='; object-src 'self'"
+    
 }

@@ -85,7 +85,9 @@ export default function Calendar(props) {
           }
            
       },[props.settings])
-      
+      function AddEvent(){
+        props.history.push("/AddEvent");
+      }
       if(anyCalendarEnabled){
         return(
           <div className="calendar">
@@ -109,7 +111,7 @@ export default function Calendar(props) {
               <CalendarEvents key={event.id} {...props} event={event} events={events}/>
             ))}
           </div>
-          <button>Add Event</button>
+          <button onClick={AddEvent}>Add Event</button>
             
           </div>
   )

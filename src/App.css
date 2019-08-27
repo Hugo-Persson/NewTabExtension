@@ -518,3 +518,12 @@ button:hover {
 .checkBox:checked ~ .lineThrough{
     width: 80% !important;
 }
+/*
+--------------------------------- 
+        Add Event
+---------------------------------
+
+*/
+.addEvent span{
+    margin-right: 10px;
+}

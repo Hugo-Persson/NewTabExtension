@@ -6,6 +6,7 @@ import Tasks from './Tasks';
 import Settings from './Settings';
 import EditQuickAccessItem from "./EditQuickAccessItem";
 import AddQuickAccessItem from './AddQuickAccessItem';
+import AddEvent from './AddEvent';
 export default function Sidebar(prop) {
 
   const {settings} = prop;
@@ -17,10 +18,10 @@ const [itemFullscreen, setItemFullscreen] = useState(0);
 
       <React.Fragment>
         <Redirect to={settings.defaultRoute}/>
-        
-        <Route path="/" exact render={props => (
+    
+        <Route path="/" exact render={({history}) => (
           <div className="sideBar">
-            <Calendar {...prop}/>
+            <Calendar {...prop} history={history}/>
             <Tasks settings={settings}/>
             <Link to="/settings/customization" className="settingsButton">⚙</Link>
           </div>
@@ -72,6 +73,11 @@ const [itemFullscreen, setItemFullscreen] = useState(0);
         <Route path="/AddLink" render={()=>(
           <div className="sideBar">
              <AddQuickAccessItem {...prop}/>
+          </div>
+        )}/>
+        <Route path="/AddEvent" render={()=>(
+          <div className="sideBar">
+             <AddEvent {...prop}/>
           </div>
         )}/>
 

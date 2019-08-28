@@ -1,7 +1,7 @@
 /* global chrome*/
 import React from 'react'
 import {Link} from "react-router-dom"
-import Calendar from './Components/Calendar';
+import Calendar from './Components/PickDate';
 
 export default function AddEvent(props) {
     var event = {
@@ -33,6 +33,7 @@ export default function AddEvent(props) {
               
         })
     }
+
     return (
         <div className="settings addEvent" key={+ new Date()}>
                     <div className="settingsReturn">
@@ -66,7 +67,7 @@ export default function AddEvent(props) {
                                 event.end.date=e.currentTarget.value;
                             }
                         }}/> */}
-                        <Calendar/>
+                        <Calendar onChange={date => console.log(date)}/>
                         <br/>
                         <span>Which calendar do you want to use</span> 
 

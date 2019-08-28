@@ -527,3 +527,45 @@ button:hover {
 .addEvent span{
     margin-right: 10px;
 }
+
+/*
+--------------------------------- 
+          <Pick Date>
+---------------------------------
+*/
+.pickDate{
+    user-select: none;
+}
+.pickDate table{
+    border-collapse: collapse;
+    
+}
+
+.pickDate .empty{
+    background-color: #0e0d0d;
+}
+.pickDate td{
+    padding: 10px;
+}
+.pickDate .day{
+    background-color: #1f1f1fbd;
+    cursor: pointer;
+}
+.pickDate .day:hover{
+    background-color: #3f3f3fab;
+}
+.pickDate th:nth-last-child(1),.day:nth-last-child(1){
+    color: red;
+}
+.pickDate th:first-child, .day:first-child{
+    color: red;
+}
+.pickDate .clicked{
+    background-color: blue;
+}
+
+/*
+--------------------------------- 
+          </Pick Date>
+---------------------------------
+*/

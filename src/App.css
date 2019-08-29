@@ -533,12 +533,13 @@ button:hover {
           <Pick Date>
 ---------------------------------
 */
-.pickDate{
+.pickDate table{
     user-select: none;
+    
 }
 .pickDate table{
     border-collapse: collapse;
-    
+    width: 100%;
 }
 
 .pickDate .empty{
@@ -554,7 +555,10 @@ button:hover {
 .pickDate .day:hover{
     background-color: #3f3f3fab;
 }
-.pickDate th:nth-last-child(1),.day:nth-last-child(1){
+/* .pickDate th:nth-last-child(1),.day:nth-last-child(1){
+    color: red;
+} */
+.pickDate th:nth-last-child(1){
     color: red;
 }
 .pickDate th:first-child, .day:first-child{
@@ -563,7 +567,22 @@ button:hover {
 .pickDate .clicked{
     background-color: blue;
 }
-
+#dateHeader{
+    width: 100%;
+    text-align: center;
+}
+#dateHeader #month{
+    width: 50%;
+    display: inline-block;
+    font-size: 30px;
+}
+#dateHeader button{
+    display: inline;
+}
+#dateHeader #year{
+    font-size: 24px;
+    width: 20%;
+}
 /*
 --------------------------------- 
           </Pick Date>

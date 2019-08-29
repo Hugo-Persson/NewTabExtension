@@ -27,11 +27,13 @@ export default function QuickAccess(props) {
     
     console.log("Testing if quickaccesslinks are undefined");
     console.log(props.QuickAccessLinks)
+    
     return(
         <Route render={({history}) =>(
             <Flipper flipKey={props.QuickAccessLinks.map(e=>e.name).join("")} className="main">
                 {console.log(props)}
             {props.QuickAccessLinks.map(link => (
+                
                 <Flipped flipId={link.name} key={link.name}>
                     
                     <a className="quickAccessItem" onClick={e =>{

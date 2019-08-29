@@ -49,7 +49,7 @@ export default function App() {
       ]
     },
     backgroundImage: WinterRoad,
-    defaultRoute: "/",
+    defaultRoute: "/AddEvent",
     dateFormat: "automatic",
     units: "metric",
     location:{

@@ -56,17 +56,7 @@ export default function AddEvent(props) {
                         }}/>
                         <br/>
                         <span>Date:</span>
-                        {/*will customize this late*/}
-                        {/* <input type="date" onChange={e=>{
-                            if(e.currentTarget.value===""){
-                                event.start.date=undefined;
-                                event.end.date=undefined;
-                            }
-                            else{
-                                event.start.date=e.currentTarget.value;
-                                event.end.date=e.currentTarget.value;
-                            }
-                        }}/> */}
+                        
                         <Calendar onChange={date => console.log(date)}/>
                         <br/>
                         <span>Which calendar do you want to use</span> 

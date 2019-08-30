@@ -110,6 +110,13 @@ button {
 button:hover {
     background-color: rgba(99, 98, 98, 0.212)
 }
+select, option{
+    background-color: rgba(12, 12, 12, 0.459);
+    color: white;
+    border: rgb(59, 59, 59) solid;
+    padding: 10px;
+    margin: 10px;
+}
 
 /*
 --------------------------------- 
@@ -355,9 +362,7 @@ button:hover {
 ---------------------------------
 
 */
-.calendar h1, .toDo h1{
-    
-}
+
 .events{
     margin-bottom: 4%;
     
@@ -583,6 +588,11 @@ button:hover {
     font-size: 24px;
     width: 20%;
 }
+.time{
+    width:70% !important;
+    margin-left: 15px;
+}
+
 /*
 --------------------------------- 
           </Pick Date>

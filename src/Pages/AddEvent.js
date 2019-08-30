@@ -1,7 +1,9 @@
 /* global chrome*/
-import React from 'react'
+import React,{useState} from 'react'
 import {Link} from "react-router-dom"
 import Calendar from './Components/PickDate';
+import moment from 'moment'
+
 
 export default function AddEvent(props) {
     var event = {
@@ -13,9 +15,27 @@ export default function AddEvent(props) {
             date:undefined,
         }
     };
+    const [useTime, setUseTime] = useState(false);
     var calendarID;
     function Add(){
-        chrome.identity.getAuthToken({"interactive":false, "scopes": ["https://www.googleapis.com/auth/calendar"]}, token=>{
+        Object.values(event).map(i=>{
+            if(i==="object"){
+                Object.values(i).map(n=>{
+                    if(i===undefined){
+                        alert("Please enter all values before submitting");
+                        return;
+                    }
+                })
+            }
+            else if(i===undefined){
+                alert("Please enter all values before submitting");
+                return;
+            }
+        })
+        console.log(Object.values(event));
+        /* chrome.identity.getAuthToken({"interactive":false, "scopes": ["https://www.googleapis.com/auth/calendar"]}, token=>{
+            
+
             let init = {
                 method: 'POST',
                 async: true,
@@ -31,9 +51,27 @@ export default function AddEvent(props) {
                 'contentType': 'json'
               };
               
-        })
+              
+        }) */
     }
-
+    function Time(){
+        console.log(useTime);
+        if(useTime){
+            /* TODO: Support 12 hour and 24 hour */
+            return(
+                <React.Fragment>
+                    Time:
+                <input className="time" type="text" placeholder={moment().hour()+":" + moment().minute()} />
+                </React.Fragment>
+                
+            )
+        }
+        else{
+            return(
+                <button onClick={()=>setUseTime(true)}>Specify time</button>
+            )
+        }
+    }
     return (
         <div className="settings addEvent" key={+ new Date()}>
                     <div className="settingsReturn">
@@ -59,6 +97,9 @@ export default function AddEvent(props) {
                         
                         <Calendar onChange={date => console.log(date)}/>
                         <br/>
+                        {Time()}
+                        <br/>
+
                         <span>Which calendar do you want to use</span> 
 
                         <select>
@@ -66,7 +107,7 @@ export default function AddEvent(props) {
                                 <option value={i.id}>{i.name}</option>
                             ))}
                         </select>
-                        Add More options
+                        
                         {/*will make it possible to add time*/}
                     </div>
                     <div className="saveSettings" onClick={Add}>Add Event</div>

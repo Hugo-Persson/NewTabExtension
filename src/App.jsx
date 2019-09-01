@@ -136,7 +136,7 @@ export default function App() {
     
     //TODO: Enable
     // Toggle
-      // LoadChrome();
+       LoadChrome();
      function LoadChrome(){
       console.log("Load chrome run");
       chrome.storage.sync.get("settings", function(chromeSettings){

@@ -6,7 +6,8 @@ import moment from 'moment'
 
 
 export default function AddEvent(props) {
-    var event = {
+    
+    const [event] = useState({
         summary:undefined,
         end:{
             date: undefined,
@@ -14,9 +15,9 @@ export default function AddEvent(props) {
         start:{
             date:undefined,
         }
-    };
+    });
     const [useTime, setUseTime] = useState(false);
-    var calendarID;
+    var calendarID = props.settings.calendar.calendarIDs[0].id;
     function Add(){
         Object.values(event).map(i=>{
             if(i==="object"){
@@ -32,8 +33,20 @@ export default function AddEvent(props) {
                 return;
             }
         })
+        
+        console.log(event);
+        if(useTime){
+            event.start.date=event.start.date.toJSON();
+            event.end.date=event.end.date.toJSON();
+        }
+        else{
+            event.start.date=moment(event.start.date).format("YYYY-MM-DD");
+            event.end.date.setDate(event.end.date.getDate()+1);
+            event.end.date=moment(event.end.date).format("YYYY-MM-DD");
+        }
+        console.log(event);
         console.log(Object.values(event));
-        /* chrome.identity.getAuthToken({"interactive":false, "scopes": ["https://www.googleapis.com/auth/calendar"]}, token=>{
+        chrome.identity.getAuthToken({"interactive":false, "scopes": ["https://www.googleapis.com/auth/calendar"]}, token=>{
             
 
             let init = {
@@ -44,15 +57,20 @@ export default function AddEvent(props) {
                   
                   'Content-Type': 'application/json'
                 },
-                body:{
-                    event,
-                },
+                body:JSON.stringify(event),
                 
                 'contentType': 'json'
               };
+              console.log(init);
+              fetch("https://www.googleapis.com/calendar/v3/calendars/"+calendarID+"/events", init)
+              .then(repsone=>repsone.json())
+              .then(data=>{
+                  console.log("success");
+                  console.log(data);
+              });
               
-              
-        }) */
+        })
+
     }
     function Time(){
         console.log(useTime);
@@ -61,7 +79,24 @@ export default function AddEvent(props) {
             return(
                 <React.Fragment>
                     Time:
-                <input className="time" type="text" placeholder={moment().hour()+":" + moment().minute()} />
+                <input className="time" type="text" placeholder={moment().hour()+":" + moment().minute()} onBlur={e=>{
+                    console.log(event);
+                    if(event.start.date===undefined){
+                        event.start.date=new Date();
+                    }
+                    
+                    if(moment(e.currentTarget.value,"HH-mm").format("HH")===undefined||moment(e.currentTarget.value,"HH-mm").format("mm")==undefined){
+                        alert("Time not valid");
+                    }
+                    else{
+                        event.start.date.setHours(moment(e.currentTarget.value,"HH-mm").format("HH"));
+                        event.start.date.setHours(moment(e.currentTarget.value,"HH-mm").format("mm"));
+
+                        event.end.date.setHours(moment(e.currentTarget.value,"HH-mm").format("HH"));
+                        event.end.date.setHours(moment(e.currentTarget.value,"HH-mm").format("mm"));
+                    }
+                    
+                }}/>
                 </React.Fragment>
                 
             )
@@ -95,16 +130,45 @@ export default function AddEvent(props) {
                         <br/>
                         <span>Date:</span>
                         
-                        <Calendar onChange={date => console.log(date)}/>
+                        <Calendar onChange={date => {
+                            console.log("ran");
+                            if(useTime){
+                                if(event.start.date===undefined){
+                                    console.log("CAH");
+                                    event.start.date=date;
+                                    event.end.date=date;
+                                }
+                                else{
+                                    let hours = event.start.date.getHours();
+                                    let minutes = event.start.date.getMinutes();
+
+                                    event.start.date=date;
+                                    event.start.date.setHours(hours);
+                                    event.start.date.setMinutes(minutes);
+
+                                    event.end.date=date;
+                                    event.end.date.setHours(hours);
+                                    event.end.date.setMinutes(minutes);
+                                }
+                                
+
+                            }
+                            else{
+                                console.log("YAH");
+                                event.start.date=date;
+                                event.end.date=date;
+                                console.log(event);
+                            }
+                        }}/>
                         <br/>
-                        {Time()}
+                        
                         <br/>
 
                         <span>Which calendar do you want to use</span> 
 
                         <select>
                             {props.settings.calendar.calendarIDs.map(i =>(
-                                <option value={i.id}>{i.name}</option>
+                                <option onClick={e=>calendarID=e.currentTarget.value} value={i.id}>{i.name}</option>
                             ))}
                         </select>
                         

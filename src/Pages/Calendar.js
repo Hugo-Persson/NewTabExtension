@@ -27,7 +27,7 @@ export default function Calendar(props) {
           //TODO: Chrome
           console.log("Use effect ran in calender");
           // Toggle
-          // fetchData();
+           fetchData();
           async function fetchData(){
               chrome.identity.getAuthToken({"interactive":false, "scopes": ["https://www.googleapis.com/auth/calendar"]},function(token){
                 const init = {

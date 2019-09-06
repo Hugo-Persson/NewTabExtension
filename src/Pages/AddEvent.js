@@ -64,8 +64,8 @@ export default function AddEvent(props) {
         console.log(init);
         fetch(
           "https://www.googleapis.com/calendar/v3/calendars/" +
-          calendarID +
-          "/events",
+            calendarID +
+            "/events",
           init
         )
           .then(repsone => repsone.json())
@@ -95,7 +95,7 @@ export default function AddEvent(props) {
 
               if (
                 moment(e.currentTarget.value, "HH-mm").format("HH") ===
-                undefined ||
+                  undefined ||
                 moment(e.currentTarget.value, "HH-mm").format("mm") == undefined
               ) {
                 alert("Time not valid");

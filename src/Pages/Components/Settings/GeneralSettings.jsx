@@ -3,7 +3,7 @@ import React, { useRef } from 'react'
 export default function GeneralSettings(props) {
 
     function UnitChange(e) {
-        console.log(e.currentTarget.value);
+
         props.settings.units = e.currentTarget.value;
         props.updateApp();
     }

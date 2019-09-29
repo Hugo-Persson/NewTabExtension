@@ -45,10 +45,10 @@ export default function CalendarEvents(props) {
                 .then(response => response.json())
                 .then((data) => {
                     alert("Deleted the event");
-                    console.log(data);
-                    console.log(props.events);
+
+
                     props.events.splice((props.events.findIndex((item) => (item == event))), 1);
-                    console.log(props.events);
+
                     props.UpdateApp();
                 })
                 .catch(error => {

@@ -52,7 +52,7 @@ export default function AddQuickAccessItem(props) {
             })
             .catch((error) => {
                 alert("Getting the icon automaticlly was not successful");
-                console.log("Automatic icon error", error);
+
 
             });
     }

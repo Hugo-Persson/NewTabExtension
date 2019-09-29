@@ -58,7 +58,7 @@ export default function AddEvent(props) {
                 })
                 .catch(error => {
                     alert("Couldn't add evet, try again later");
-                    console.log("Adding event failed", error)
+
                 });
 
         })
@@ -66,14 +66,14 @@ export default function AddEvent(props) {
     }
     //TODO: Add time component
     function time() {
-        console.log(useTime);
+
         if (useTime) {
             /* TODO: Support 12 hour and 24 hour */
             return (
                 <React.Fragment>
                     Time:
                 <input className="time" type="text" placeholder={moment().hour() + ":" + moment().minute()} onBlur={e => {
-                        console.log(event);
+
                         if (!event.start.date) {
                             event.start.date = new Date();
                         }

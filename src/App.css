@@ -10,6 +10,7 @@ html {
     max-height: 100vh;
     background-size: 100%;
     color: white;
+    background-color: #323639;
 }
 
 a {
@@ -110,7 +111,9 @@ button {
 button:hover {
     background-color: rgba(99, 98, 98, 0.212)
 }
-select, option{
+
+select,
+option {
     background-color: rgba(12, 12, 12, 0.459);
     color: white;
     border: rgb(59, 59, 59) solid;
@@ -222,7 +225,10 @@ select, option{
 
 .availableWallpapers img {
     width: 5vw;
+    height: 2.8125vw;
+
     cursor: pointer;
+    margin: 0.1vw;
 }
 
 .availableWallpapers {
@@ -363,10 +369,11 @@ select, option{
 
 */
 
-.events{
+.events {
     margin-bottom: 4%;
-    
+
 }
+
 .events,
 .tasks {
     height: 63%;
@@ -376,9 +383,11 @@ select, option{
 
 
 }
-.calendar, .toDo{
+
+.calendar,
+.toDo {
     height: 45%;
-    
+
 }
 
 
@@ -407,7 +416,7 @@ select, option{
     margin: auto;
     padding: 3%;
     position: relative;
-    
+
 }
 
 .event:hover {
@@ -417,6 +426,7 @@ select, option{
 .event span {
     font-size: 0.8vw;
 }
+
 .event .name {
     font-size: 1.2vw;
 }
@@ -463,18 +473,21 @@ select, option{
     border: solid 1px rgb(59, 59, 59);
     margin: 2px;
 }
-.calendar h1{
+
+.calendar h1 {
     margin-top: 0;
 }
+
 /*
 --------------------------------- 
         ToDo- List
 ---------------------------------
 
 */
-.toDo button{
+.toDo button {
     margin-top: 1vw;
 }
+
 .task {
     border: solid black;
 
@@ -492,11 +505,11 @@ select, option{
     top: 28%;
     left: 0.4vw;
     margin-top: 0;
-    
+
 
 }
 
-.task .delete{
+.task .delete {
     position: absolute;
     right: 0.4vw;
     top: 25%;
@@ -511,7 +524,8 @@ select, option{
     background-color: rgba(43, 43, 43, 0.685);
 
 }
-.lineThrough{
+
+.lineThrough {
     transition: 0.8s;
     position: absolute;
     left: 2vw;
@@ -520,16 +534,18 @@ select, option{
     height: 10%;
     top: 50%;
 }
-.checkBox:checked ~ .lineThrough{
+
+.checkBox:checked~.lineThrough {
     width: 80% !important;
 }
+
 /*
 --------------------------------- 
         Add Event
 ---------------------------------
 
 */
-.addEvent span{
+.addEvent span {
     margin-right: 10px;
 }
 
@@ -538,58 +554,71 @@ select, option{
           <Pick Date>
 ---------------------------------
 */
-.pickDate table{
+.pickDate table {
     user-select: none;
-    
+
 }
-.pickDate table{
+
+.pickDate table {
     border-collapse: collapse;
     width: 100%;
 }
 
-.pickDate .empty{
+.pickDate .empty {
     background-color: #0e0d0d;
 }
-.pickDate td{
+
+.pickDate td {
     padding: 10px;
 }
-.pickDate .day{
+
+.pickDate .day {
     background-color: #1f1f1fbd;
     cursor: pointer;
 }
-.pickDate .day:hover{
+
+.pickDate .day:hover {
     background-color: #3f3f3fab;
 }
+
 /* .pickDate th:nth-last-child(1),.day:nth-last-child(1){
     color: red;
 } */
-.pickDate th:nth-last-child(1){
+.pickDate th:nth-last-child(1) {
     color: red;
 }
-.pickDate th:first-child, .day:first-child{
+
+.pickDate th:first-child,
+.day:first-child {
     color: red;
 }
-.pickDate .clicked{
+
+.pickDate .clicked {
     background-color: blue;
 }
-#dateHeader{
+
+#dateHeader {
     width: 100%;
     text-align: center;
 }
-#dateHeader #month{
+
+#dateHeader #month {
     width: 50%;
     display: inline-block;
     font-size: 30px;
 }
-#dateHeader button{
+
+#dateHeader button {
     display: inline;
 }
-#dateHeader #year{
+
+#dateHeader #year {
     font-size: 24px;
     width: 20%;
 }
-.time{
-    width:70% !important;
+
+.time {
+    width: 70% !important;
     margin-left: 15px;
 }
 

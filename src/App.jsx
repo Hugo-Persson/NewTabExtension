@@ -1,200 +1,174 @@
 
-//"Global CHrome" tells eslint that chrome is a valid variable which later will work when the code is run in chrome
+//"Global Chrome" tells eslint that chrome is a valid variable which later will work when the code is run as an extensionin chrome
 /*global chrome*/
-import React, {useState,useEffect, useCallback} from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import "./App.css"
 import Header from './Pages/Components/Header';
 import MainContent from './Pages/MainContent';
 import Sidebar from './Pages/Sidebar';
-import {Redirect} from "react-router-dom"
-import WinterRoad from "./Wallpapers/WinterRoad.jpg";
-import {MemoryRouter} from "react-router-dom";
+import AbandonedHouse from "./Wallpapers/AbandonedHouse.jpg";
+import { MemoryRouter } from "react-router-dom";
 import AddButton from "./addButton.png";
 export default function App() {
 
   const [, updateState] = useState();
+  //forceUpdate forces the 
   const forceUpdate = useCallback(() => updateState({}), []);
 
   const [selectedQuickAccessItem, setSelectedQuickAccessItem] = useState({});
   const [settings, setSetting] = useState({
-    ToDo:{
-      taskLists:[
+    ToDo: {
+      taskLists: [
         {
-          name:"TITLE",
+          name: "TITLE",
           id: null,
-          enabled:false,
+          enabled: false,
         },
-        
-  
+
+
       ]
     },
-    calendar:{
-      calendarIDs:[
+    calendar: {
+      calendarIDs: [
         {
-          name:"SUMMARY",
-          id:null,
-            enabled: false,
+          name: "SUMMARY",
+          id: null,
+          enabled: false,
         },
         {
-          name:"SUMMARY",
-          id:null,
-            enabled: false,
+          name: "SUMMARY",
+          id: null,
+          enabled: false,
         },
         {
-          name:"SUMMARY",
-          id:null,
-            enabled: false,
+          name: "SUMMARY",
+          id: null,
+          enabled: false,
         },
-        
+
       ]
     },
-    backgroundImage: WinterRoad,
-    defaultRoute: "/AddEvent",
+    backgroundImage: AbandonedHouse,
+    defaultRoute: "/settings/customization",
     dateFormat: "automatic",
     units: "metric",
-    location:{
+    location: {
       auto: true,
-      city:undefined,
+      city: undefined,
       lat: undefined,
       lon: undefined,
-      
+
     }
   })
-  function UpdateApp(){
+  function updateApp() {
     forceUpdate();
-  
+
   }
-  
-  const [QuickAccessLinks, setQuickAccessLinks ] = useState([
+
+  const [quickAccessLinks, setQuickAccessLinks] = useState([
     {
-        name: "1",
-        url:"https://www.reddit.com",
-        image: "https://api.faviconkit.com/reddit.com/64",
-        reRender:undefined
+      name: "1",
+      url: "https://www.reddit.com",
+      image: "https://api.faviconkit.com/reddit.com/64",
+      reRender: undefined
     },
     {
-        name: "2",
-        url:"https://www.reddit.com",
-        image: "https://api.faviconkit.com/reddit.com/64",
-        reRender:undefined
+      name: "2",
+      url: "https://www.reddit.com",
+      image: "https://api.faviconkit.com/reddit.com/64",
+      reRender: undefined
     },
     {
-        name: "3",
-        url:"https://www.reddit.com",
-        image: "https://cdn.freebiesupply.com/images/large/2x/facebook-logo-circle-transparent.png",
-        reRender:undefined
+      name: "3",
+      url: "https://www.reddit.com",
+      image: "https://cdn.freebiesupply.com/images/large/2x/facebook-logo-circle-transparent.png",
+      reRender: undefined
     },
     {
-        name: "4",
-        url:"https://www.reddit.com",
-        image: "https://api.faviconkit.com/reddit.com/64",
-        reRender:undefined
+      name: "4",
+      url: "https://www.reddit.com",
+      image: "https://api.faviconkit.com/reddit.com/64",
+      reRender: undefined
     },
     {
-        name: "5",
-        url:"https://www.reddit.com",
-        image: "https://api.faviconkit.com/reddit.com/64",
-        reRender:undefined
+      name: "5",
+      url: "https://www.reddit.com",
+      image: "https://api.faviconkit.com/reddit.com/64",
+      reRender: undefined
     },
     {
-        name: "6",
-        url:"https://www.reddit.com",
-        image: "https://api.faviconkit.com/reddit.com/64",
-        reRender:undefined
+      name: "6",
+      url: "https://www.reddit.com",
+      image: "https://api.faviconkit.com/reddit.com/64",
+      reRender: undefined
     },
     {
-        name: "7",
-        url:"https://www.reddit.com",
-        image: "https://api.faviconkit.com/reddit.com/64",
-        reRender:undefined
-        
+      name: "7",
+      url: "https://www.reddit.com",
+      image: "https://api.faviconkit.com/reddit.com/64",
+      reRender: undefined
+
     },
     {
-        name: "8",
-        url:"https://www.reddit.com",
-        image: "https://api.faviconkit.com/reddit.com/64",
-        reRender:undefined
+      name: "8",
+      url: "https://www.reddit.com",
+      image: "https://api.faviconkit.com/reddit.com/64",
+      reRender: undefined
     },
-    
+
     {
       name: "Add Link",
-      url:"#",
+      url: "#",
       image: AddButton,
-      reRender:undefined
-  }
-  
-    
-    
+      reRender: undefined
+    }
+
+
+
   ]);
-  
 
-
-
-
-  
-  useEffect(()=>{
-    
-    //TODO: Enable
+  useEffect(() => {
     // Toggle
-       LoadChrome();
-     function LoadChrome(){
-      console.log("Load chrome run");
-      chrome.storage.sync.get("settings", function(chromeSettings){
-        if(chromeSettings.settings===undefined){
-          console.log("First set up");
-          chrome.storage.sync.set({"settings": settings},()=>{
-            console.log("First set up");
+    // LoadChrome();
+    function LoadChrome() {
+
+      chrome.storage.sync.get("settings", function (chromeSettings) {
+        if (chromeSettings.settings === undefined) {
+          chrome.storage.sync.set({ "settings": settings }, () => {
           });
         }
-        else{
-          
-          console.log("ISN*T UNDEFINDE");
-          console.log(chromeSettings.settings);
+        else {
           setSetting(chromeSettings.settings);
         }
-        
+
       })
-      chrome.storage.sync.get("QuickAccessLinks", function(data){
-        if(data.QuickAccessLinks!=undefined){
-          console.log("******");
-          
-          setQuickAccessLinks(data.QuickAccessLinks);
+      chrome.storage.sync.get("quickAccessLinks", function (data) {
+        if (data.quickAccessLinks != undefined) {
+
+
+          setQuickAccessLinks(data.quickAccessLinks);
         }
-        else{
-          chrome.storage.sync.set({"QuickAccessLinks": QuickAccessLinks});
+        else {
+          chrome.storage.sync.set({ "quickAccessLinks": quickAccessLinks });
         }
-        
       })
     }
-    console.log("Quick");
-    console.log(QuickAccessLinks);
-    console.log("Sett");
-    console.log(settings);
-  
+  }, [])
 
-  },[])
-
-
-
- 
-
-
-console.log("Render");
-document.querySelector("html").style.backgroundImage = "url("+settings.backgroundImage +")";
-
+  document.querySelector("html").style.backgroundImage = "url(" + settings.backgroundImage + ")";
 
   return (
     <MemoryRouter >
       <React.Fragment>
-        
-        <Header name="Hugo Persson" settings={settings}/>
-        <MainContent QuickAccessLinks={QuickAccessLinks} UpdateApp={UpdateApp} settings={settings} selectedQuickAccessItem={selectedQuickAccessItem} asignSelectedQuickAccessItem={(object) => setSelectedQuickAccessItem(object)}/>
-        <Sidebar settings={settings}  UpdateApp={UpdateApp} QuickAccessLinks={QuickAccessLinks} selectedQuickAccessItem={selectedQuickAccessItem}/>
-        
-        </React.Fragment>
-      </MemoryRouter>
-    
+
+        <Header name="Hugo Persson" settings={settings} />
+        <MainContent quickAccessLinks={quickAccessLinks} updateApp={updateApp} settings={settings} selectedQuickAccessItem={selectedQuickAccessItem} asignSelectedQuickAccessItem={(object) => setSelectedQuickAccessItem(object)} />
+        <Sidebar settings={settings} updateApp={updateApp} quickAccessLinks={quickAccessLinks} selectedQuickAccessItem={selectedQuickAccessItem} />
+
+      </React.Fragment>
+    </MemoryRouter>
+
   )
 
-  
+
 }

@@ -17,7 +17,7 @@ export default function Header(props) {
                         .then(respone => respone.json())
                         .then(data => {
                             setWeather(data);
-                            console.log(data);
+
                         });
 
 
@@ -32,8 +32,8 @@ export default function Header(props) {
         fetchData();
 
     }, [])
-    function WeatherFormatter() {
-        var celcius = Math.round((weather.main.temp - 273) * 10) / 10
+    function weatherFormatter() {
+        const celcius = Math.round((weather.main.temp - 273) * 10) / 10
         if (props.settings.units === "metric") {
             return celcius + " °C";
         }
@@ -44,7 +44,7 @@ export default function Header(props) {
     return (
         <div className="header">
             <h1>Welcome {props.name}</h1>
-            <h2>The current weather in {weather.name} is {WeatherFormatter()}</h2>
+            <h2>The current weather in {weather.name} is {weatherFormatter()}</h2>
 
         </div>
     )

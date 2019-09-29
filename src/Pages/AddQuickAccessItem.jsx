@@ -3,7 +3,11 @@ import React from 'react'
 import { Link } from "react-router-dom";
 
 export default function AddQuickAccessItem(props) {
-
+    let syncObj = {
+        name: undefined,
+        url: undefined,
+        image: undefined
+    }
     let obj = {
         name: undefined,
         url: undefined,
@@ -20,6 +24,7 @@ export default function AddQuickAccessItem(props) {
 
             const reader = new FileReader();
             reader.onload = function (e) {
+                syncObj.image = "auto";
                 obj.image = reader.result;
             }
             reader.readAsDataURL(file);
@@ -32,40 +37,21 @@ export default function AddQuickAccessItem(props) {
     function formatUrl(url) {
         return url.substring(url.indexOf(".") + 1)
     }
-    function getAutomaticIcon() {
-
-        const init = {
-            method: 'GET',
-            mode: 'cors',
-            cache: 'default'
-        }
-        fetch("https://api.faviconkit.com/" + formatUrl(obj.url) + "/64", init)
-            .then((res) => res.blob())
-            .then(blob => {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    const src = "data:image/png;base64," + btoa(reader.result);
-                    obj.image = src;
-                }
-                reader.readAsBinaryString(blob);
-
-            })
-            .catch((error) => {
-                alert("Getting the icon automaticlly was not successful");
-
-
-            });
+    async function getAutomaticIcon() {
+        const src = fetchImageFromRemoteHost("https://api.faviconkit.com/" + formatUrl(obj.url) + "/64");
+        obj.image = src;
+        syncObj.image = "auto";
     }
     function addLink() {
-        if (props.QuickAccessLinks.findIndex((element) => (element.name === obj.name)) !== -1) {
-            alert("You can not have two linksr with the same name");
+        if (props.quickAccessLinks.findIndex((element) => (element.name === obj.name)) !== -1) {
+            alert("You can not have two links with the same name");
         }
         else {
             if (obj.image === undefined) {
                 getAutomaticIcon();
             }
-            if (moveToPos > props.QuickAccessLinks.length - 2) {
-                moveToPos = props.QuickAccessLinks.length - 1;
+            if (moveToPos > props.quickAccessLinks.length - 2) {
+                moveToPos = props.quickAccessLinks.length - 1;
             }
             if (moveToPos === undefined) {
                 moveToPos = 1;
@@ -74,12 +60,40 @@ export default function AddQuickAccessItem(props) {
                 //Maybe add seperate if statements for url and name
                 alert("You need to specify url and name");
             }
-            props.QuickAccessLinks.splice(moveToPos, 0, obj);
-            chrome.storage.sync.set({ "QuickAccessLinks": props.QuickAccessLinks });
+            props.quickAccessLinks.splice(moveToPos, 0, obj);
+            const quickAccessLinksDeepCopy = JSON.parse(JSON.stringify(props.quickAccessLinks))
+            quickAccessLinksDeepCopy.image = syncObj.image
+            chrome.storage.sync.set({ "quickAccessLinks": quickAccessLinksDeepCopy });
             props.UpdateApp();
 
         }
 
+    }
+    function fetchImageFromRemoteHost(url) {
+        const init = {
+            method: 'GET',
+            mode: 'cors',
+            cache: 'default'
+        }
+        fetch(url, init)
+            .then((res) => res.blob())
+            .then(blob => {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const src = "data:image/png;base64," + btoa(reader.result);
+                    return src;
+                }
+                reader.readAsBinaryString(blob);
+
+            })
+            .catch(error => {
+                alert("Getting the icon automaticlly was not successful");
+            });
+    }
+    function getImageUrl(url) {
+        const src = fetchImageFromRemoteHost(url);
+        syncObj.image = url;
+        obj.image = src;
     }
     function urlInputFormatter(e) {
         const text = e.currentTarget.value;
@@ -119,11 +133,11 @@ export default function AddQuickAccessItem(props) {
 
                 Icon (Pick one):
                             <br />
-                <input name="file" id="file" className="uploadFile" type="file" onChange={(e) => { localIcon(e) }} />
+                <input name="file" id="file" className="uploadFile" type="file" onChange={(e) => localIcon(e)} />
                 <label htmlFor="file" className="uploadFileLabel">Upload Local Image</label>
 
                 <br />
-                <span className="ImageUrl">Image Url: <input type="text" placeholder="Enter the image url for the image you want to use" onChange={e => obj.image = e.currentTarget.value} /></span>
+                <span className="ImageUrl">Image Url: <input type="text" placeholder="Enter the image url for the image you want to use" onChange={e => getImageUrl(e.currentTarget.value)} /></span>
                 <button onClick={getAutomaticIcon}>Automatic Icon</button>
 
             </div>

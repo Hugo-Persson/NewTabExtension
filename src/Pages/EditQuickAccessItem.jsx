@@ -12,7 +12,7 @@ export default function EditQuickAccessItem(props) {
     const formEl = useRef(null);
 
     function save() {
-        chrome.storage.sync.set({ "QuickAccessLinks": props.QuickAccessLinks }, () => alert("Save Successful"));
+        chrome.storage.sync.set({ "quickAccessLinks": props.quickAccessLinks }, () => alert("Save Successful"));
     }
 
     function moveLink(from, to) {
@@ -41,7 +41,7 @@ export default function EditQuickAccessItem(props) {
 
 
             const reader = new FileReader();
-            reader.onload = e=> {
+            reader.onload = e => {
 
 
                 const result = reader.result;
@@ -100,10 +100,10 @@ export default function EditQuickAccessItem(props) {
         history.push("/EditQuickAccessItem/Delete")
     }
     function confirmDeletion(history) {
-        props.QuickAccessLinks.splice(index, 1);
+        props.quickAccessLinks.splice(index, 1);
         save();
         history.push("/");
-        
+
 
     }
 

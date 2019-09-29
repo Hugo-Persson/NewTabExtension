@@ -30,9 +30,9 @@ export default function QuickAccess(props) {
 
     return (
         <Route render={({ history }) => (
-            <Flipper flipKey={props.QuickAccessLinks.map(e => e.name).join("")} className="main">
+            <Flipper flipKey={props.quickAccessLinks.map(e => e.name).join("")} className="main">
                 {}
-                {props.QuickAccessLinks.map(link => (
+                {props.quickAccessLinks.map(link => (
 
                     <Flipped flipId={link.name} key={link.name}>
 

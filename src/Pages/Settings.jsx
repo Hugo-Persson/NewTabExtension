@@ -22,14 +22,17 @@ import GeneralSettings from './Components/Settings/GeneralSettings';
 import SideBarSettings from './Components/Settings/SideBarSettings';
 
 export default function Settings(props) {
-    const [settings, setSettings] = useState(props.settings);
-    setBackgroundImage.bind(Fire);
+    const { updateBackgroundImage, backgroundImage, updateApp, settings } = props;
+
+
     function setBackgroundImage(image) {
-        settings.backgroundImage = image;
-        props.updateApp();
+
+        updateBackgroundImage(image);
+
 
     }
     function saveSettings() {
+        chrome.storage.local.set({ "backgroundImage": backgroundImage })
         chrome.storage.sync.set({ "settings": settings }, function () {
             alert("Save Successful");
         })
@@ -46,8 +49,8 @@ export default function Settings(props) {
 
 
                 const result = reader.result;
-                settings.backgroundImage = result;
-                props.UpdateApp();
+                backgroundImage = result;
+                updateApp();
             }
             reader.readAsDataURL(file);
         }

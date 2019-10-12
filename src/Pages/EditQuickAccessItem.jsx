@@ -6,28 +6,56 @@ export default function EditQuickAccessItem(props) {
     /* Force rerender */
     const [, updateState] = useState();
     const forceUpdate = useCallback(() => updateState({}), []);
+    const { quickAccessLinks, syncQuickAccessLinks, selectedQuickAccessItem } = props;
 
+    let index = (quickAccessLinks.findIndex((element) => (element === selectedQuickAccessItem)))
 
-    let index = (props.quickAccessLinks.findIndex((element) => (element === props.selectedQuickAccessItem)))
-    const formEl = useRef(null);
+    let syncImage;
+
 
     function save() {
-        chrome.storage.sync.set({ "quickAccessLinks": props.quickAccessLinks }, () => alert("Save Successful"));
+        const syncItem = getSyncItem();
+
+
+        let selectedItemDeepCopy = JSON.parse(JSON.stringify(selectedQuickAccessItem));
+        if (syncImage === undefined) {
+            const originalImage = syncItem.value.image;
+            selectedItemDeepCopy.image = originalImage;
+
+        }
+        else {
+            selectedItemDeepCopy.image = syncImage;
+        }
+
+        syncQuickAccessLinks[syncItem.index] = selectedItemDeepCopy;
+        // Fix sync 
+        chrome.storage.sync.set({ "quickAccessLinks": syncQuickAccessLinks }, () => console.log("Sync successful"));
+        chrome.storage.local.set({ "quickAccessLinks": quickAccessLinks }, () => alert("Save Successful"));
+        chrome.storage.local.set({ "syncQuickAccessLinks": syncQuickAccessLinks });
+
+    }
+    function getSyncItem() {
+        let item;
+        syncQuickAccessLinks.map((value, index) => {
+            if (value.url === selectedQuickAccessItem.url) item = { value: value, index: index };
+        });
+        console.log(item);
+        return item;
     }
 
     function moveLink(from, to) {
         if (to > from) {
             //Move foward
-            props.quickAccessLinks.splice(to, 0, props.selectedQuickAccessItem);
-            props.quickAccessLinks.splice(from, 1);
+            quickAccessLinks.splice(to, 0, selectedQuickAccessItem);
+            quickAccessLinks.splice(from, 1);
         }
         else {
             //Move backwards
-            props.quickAccessLinks.splice(from, 1);
-            props.quickAccessLinks.splice((to - 1), 0, props.selectedQuickAccessItem);
+            quickAccessLinks.splice(from, 1);
+            quickAccessLinks.splice((to - 1), 0, selectedQuickAccessItem);
         }
         forceUpdate();
-        props.selectedQuickAccessItem.reRender();
+        selectedQuickAccessItem.reRender();
     }
 
     function formatUrl(url) {
@@ -45,8 +73,9 @@ export default function EditQuickAccessItem(props) {
 
 
                 const result = reader.result;
-                props.selectedQuickAccessItem.image = result;
-                props.selectedQuickAccessItem.reRender();
+                syncImage = "auto";
+                selectedQuickAccessItem.image = result;
+                selectedQuickAccessItem.reRender();
             }
             reader.readAsDataURL(file);
         }
@@ -54,33 +83,35 @@ export default function EditQuickAccessItem(props) {
             alert("File type not supported");
         }
     }
-    function automaticIcon(e) {
-        e.preventDefault();
+    function fetchImageFromRemoteHost(url, callback) {
         const init = {
             method: 'GET',
             mode: 'cors',
             cache: 'default'
         }
-        fetch(`https://api.faviconkit.com/${formatUrl(props.selectedQuickAccessItem.url)}/64`, init)
-            .then(res => res.blob())
+        fetch(url, init)
+            .then((res) => res.blob())
             .then(blob => {
                 const reader = new FileReader();
                 reader.onload = function (e) {
                     const src = "data:image/png;base64," + btoa(reader.result);
-                    props.selectedQuickAccessItem.image = src;
-                    props.selectedQuickAccessItem.reRender();
+                    callback(src);
+
                 }
                 reader.readAsBinaryString(blob);
 
             })
-            .catch(() => {
+            .catch(error => {
                 alert("Getting the icon automaticlly was not successful");
-
             });
+    }
 
-
-
-
+    function automaticIcon(e) {
+        fetchImageFromRemoteHost(`https://api.faviconkit.com/${formatUrl(selectedQuickAccessItem.url)}/64`, src => {
+            syncImage = "auto";
+            selectedQuickAccessItem.image = src;
+            selectedQuickAccessItem.reRender();
+        });
     }
     function urlInputFormatter(e) {
         const text = e.currentTarget.value;
@@ -100,7 +131,7 @@ export default function EditQuickAccessItem(props) {
         history.push("/EditQuickAccessItem/Delete")
     }
     function confirmDeletion(history) {
-        props.quickAccessLinks.splice(index, 1);
+        quickAccessLinks.splice(index, 1);
         save();
         history.push("/");
 
@@ -117,21 +148,21 @@ export default function EditQuickAccessItem(props) {
 
                 <div className="settingsHeader">
 
-                    <h1>Edit {props.selectedQuickAccessItem.name}</h1>
+                    <h1>Edit {selectedQuickAccessItem.name}</h1>
                 </div>
 
                 <div className="settingsBody">
-                    <form ref={formEl}>
+                    <form>
 
 
-                        Name: <input placeholder={props.selectedQuickAccessItem.name} type="text" onChange={(e) => {
-                            props.selectedQuickAccessItem.name = e.currentTarget.value;
-                            props.selectedQuickAccessItem.reRender();
+                        Name: <input placeholder={selectedQuickAccessItem.name} type="text" onChange={(e) => {
+                            selectedQuickAccessItem.name = e.currentTarget.value;
+                            selectedQuickAccessItem.reRender();
                         }} />
                         <br />
-                        Url: <input placeholder={formatUrl(props.selectedQuickAccessItem.url)} type="text" onChange={(e) => {
-                            props.selectedQuickAccessItem.url = urlInputFormatter(e);
-                            props.selectedQuickAccessItem.reRender();
+                        Url: <input placeholder={formatUrl(selectedQuickAccessItem.url)} type="text" onChange={(e) => {
+                            selectedQuickAccessItem.url = urlInputFormatter(e);
+                            selectedQuickAccessItem.reRender();
 
 
 
@@ -151,10 +182,16 @@ export default function EditQuickAccessItem(props) {
                         <label htmlFor="file" className="uploadFileLabel">Upload Local Image</label>
 
                         <br />
-                        <span className="ImageUrl">Image Url: <input type="text" placeholder="Enter the image url for the image you want to use" onChange={e => {
+                        <span className="ImageUrl">Image Url: <input type="text" placeholder="Enter the image url for the image you want to use" onBlur={e => {
                             if (e.currentTarget.value !== undefined) {
-                                props.selectedQuickAccessItem.image = e.currentTarget.value;
-                                props.selectedQuickAccessItem.reRender();
+                                fetchImageFromRemoteHost(e.currentTarget.value, src => {
+                                    syncImage = e.currentTarget.value;
+                                    selectedQuickAccessItem.image = src;
+                                    selectedQuickAccessItem.reRender();
+
+                                })
+
+
 
                             }
                         }} /></span>

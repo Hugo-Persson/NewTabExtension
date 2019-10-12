@@ -3,11 +3,9 @@ import React from 'react'
 import { Link } from "react-router-dom";
 
 export default function AddQuickAccessItem(props) {
-    let syncObj = {
-        name: undefined,
-        url: undefined,
-        image: undefined
-    }
+    const { quickAccessLinks, syncQuickAccessLinks } = props;
+
+    let syncImage;
     let obj = {
         name: undefined,
         url: undefined,
@@ -24,7 +22,7 @@ export default function AddQuickAccessItem(props) {
 
             const reader = new FileReader();
             reader.onload = function (e) {
-                syncObj.image = "auto";
+                syncImage = "auto";
                 obj.image = reader.result;
             }
             reader.readAsDataURL(file);
@@ -38,38 +36,46 @@ export default function AddQuickAccessItem(props) {
         return url.substring(url.indexOf(".") + 1)
     }
     async function getAutomaticIcon() {
-        const src = fetchImageFromRemoteHost("https://api.faviconkit.com/" + formatUrl(obj.url) + "/64");
-        obj.image = src;
-        syncObj.image = "auto";
+        fetchImageFromRemoteHost("https://api.faviconkit.com/" + formatUrl(obj.url) + "/64", src => {
+            obj.image = src;
+            syncImage = "auto";
+        });
+
     }
     function addLink() {
-        if (props.quickAccessLinks.findIndex((element) => (element.name === obj.name)) !== -1) {
+        if (quickAccessLinks.findIndex((element) => (element.url === obj.url)) !== -1) {
             alert("You can not have two links with the same name");
         }
         else {
             if (obj.image === undefined) {
                 getAutomaticIcon();
             }
-            if (moveToPos > props.quickAccessLinks.length - 2) {
-                moveToPos = props.quickAccessLinks.length - 1;
+            if (moveToPos > quickAccessLinks.length - 2) {
+                moveToPos = quickAccessLinks.length - 1;
             }
             if (moveToPos === undefined) {
                 moveToPos = 1;
             }
             if (obj.name === undefined || obj.url === undefined) {
-                //Maybe add seperate if statements for url and name
+                //TODO: Maybe add seperate if statements for url and name
                 alert("You need to specify url and name");
+                return;
             }
-            props.quickAccessLinks.splice(moveToPos, 0, obj);
-            const quickAccessLinksDeepCopy = JSON.parse(JSON.stringify(props.quickAccessLinks))
-            quickAccessLinksDeepCopy.image = syncObj.image
-            chrome.storage.sync.set({ "quickAccessLinks": quickAccessLinksDeepCopy });
-            props.UpdateApp();
+            const deepCopyObj = JSON.parse(JSON.stringify(obj));
+            deepCopyObj.image = syncImage;
+            quickAccessLinks.splice(moveToPos, 0, obj);
+            syncQuickAccessLinks.splice(moveToPos, 0, deepCopyObj);
+            console.log("deep copy", deepCopyObj);
+            console.log("sync", syncQuickAccessLinks);
+            chrome.storage.sync.set({ "quickAccessLinks": syncQuickAccessLinks }, () => console.log("Successfully uploaded sync"));
+            chrome.storage.local.set({ "quickAccessLinks": quickAccessLinks }, () => console.log("Successfully saved"));
+            chrome.storage.local.set({ "syncQuickAccessLinks": syncQuickAccessLinks }, () => console.log("Successfully saved sync"));
+            props.updateApp();
 
         }
 
     }
-    function fetchImageFromRemoteHost(url) {
+    function fetchImageFromRemoteHost(url, callback) {
         const init = {
             method: 'GET',
             mode: 'cors',
@@ -81,7 +87,8 @@ export default function AddQuickAccessItem(props) {
                 const reader = new FileReader();
                 reader.onload = function (e) {
                     const src = "data:image/png;base64," + btoa(reader.result);
-                    return src;
+                    callback(src);
+
                 }
                 reader.readAsBinaryString(blob);
 
@@ -90,10 +97,12 @@ export default function AddQuickAccessItem(props) {
                 alert("Getting the icon automaticlly was not successful");
             });
     }
-    function getImageUrl(url) {
-        const src = fetchImageFromRemoteHost(url);
-        syncObj.image = url;
-        obj.image = src;
+    async function getImageUrl(url) {
+        fetchImageFromRemoteHost(url, src => {
+            syncImage = url;
+            obj.image = src;
+        });
+
     }
     function urlInputFormatter(e) {
         const text = e.currentTarget.value;

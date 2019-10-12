@@ -68,7 +68,7 @@ export default function Tasks(props) {
   )
   useEffect(() => {
     // Toggle
-    //   fetchData();
+    fetchData();
     async function fetchData() {
       //TODO: FIX TODO WITH PROMISE.ALL and similiar
 

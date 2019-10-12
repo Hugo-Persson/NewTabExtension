@@ -7,17 +7,19 @@
         "file:///*",
         "storage",
         "identity",
-        "geolocation"
+        "geolocation",
+        "unlimitedStorage"
+
     ],
-    "oauth2":{
+    "oauth2": {
         "client_id": "247502443065-917ofage76a70u02dtu0p29g5gk9d3jp.apps.googleusercontent.com",
         "scopes": ["https://www.googleapis.com/auth/calendar", "https://www.googleapis.com/auth/tasks"]
     },
 
-    "chrome_url_overrides" : {
+    "chrome_url_overrides": {
         "newtab": "index.html"
     },
 
     "content_security_policy": "script-src 'self' 'sha256-5As4+3YpY62+l38PsxCEkjB1R4YtyktBtRScTJ3fyLU='; object-src 'self'"
-    
+
 }

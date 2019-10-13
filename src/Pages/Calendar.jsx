@@ -4,8 +4,9 @@ import { Link } from "react-router-dom"
 import CalendarEvents from './Components/Sidebar/CalendarEvents';
 
 export default function Calendar(props) {
-  let anyCalendarEnabled = false;
-  const [events, setEvents] = useState([{
+  const [anyCalendarEnabled, setAnyCalendarEnabled] = useState(false);
+  const [events, setEvents] = useState([
+    /* {
     summary: "Name",
     location: "Location",
     start: {
@@ -16,7 +17,8 @@ export default function Calendar(props) {
       dateTime: "2019-08-13T12:30:00+02:00"
     },
     id: "loading"
-  },]);
+  }, */
+  ]);
   useEffect(() => {
     // Toggle
     fetchData();
@@ -42,7 +44,7 @@ export default function Calendar(props) {
             //TODO: Maybe add settings for params
             //TODO: Add maxTime that can be configured in the settings
             if (item.enabled) {
-              anyCalendarEnabled = true;
+              setAnyCalendarEnabled(true);
               fetches.push(
                 fetch(`https://www.googleapis.com/calendar/v3/calendars/${item.id}/events?maxResults=5&timeMin=${(new Date()).toJSON()}`, init)
                   .then((response) => response.json()) // Transform the data into json
@@ -71,7 +73,7 @@ export default function Calendar(props) {
   function addEvent() {
     props.history.push("/AddEvent");
   }
-  if (anyCalendarEnabled) {
+  if (!anyCalendarEnabled) {
     return (
       <div className="calendar">
         <h1 > <Link to="/hideCalendar" > Calendar▼ </Link></h1 >

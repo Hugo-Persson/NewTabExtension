@@ -5,10 +5,10 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom"
 import ToDoTask from './Components/Sidebar/ToDoTask';
 
 export default function Tasks(props) {
-  let anyToDoListEnabled = false;
+  const [anyToDoListEnabled, setAnyToDoListEnabled] = useState(false);
   const [tasks, setTasks] = useState(
     [
-      {
+      /* {
         //Use later to specify task
         id: "1",
         //Name
@@ -18,51 +18,7 @@ export default function Tasks(props) {
         due: "2019-07-26T00:00:00.000Z",
         parent: "The parents id"
 
-      },
-      {
-        //Use later to specify task
-        id: "2",
-        //Name
-        title: "Name",
-        hidden: false,
-        notes: undefined,
-        due: "2019-07-26T00:00:00.000Z",
-        parent: "The parents id"
-
-      },
-      {
-        //Use later to specify task
-        id: "2",
-        //Name
-        title: "Name",
-        hidden: false,
-        notes: undefined,
-        due: "2019-07-26T00:00:00.000Z",
-        parent: "The parents id"
-
-      },
-      {
-        //Use later to specify task
-        id: "2",
-        //Name
-        title: "Name",
-        hidden: false,
-        notes: undefined,
-        due: "2019-07-26T00:00:00.000Z",
-        parent: "The parents id"
-
-      },
-      {
-        //Use later to specify task
-        id: "2",
-        //Name
-        title: "Name",
-        hidden: false,
-        notes: undefined,
-        due: "2019-07-26T00:00:00.000Z",
-        parent: "The parents id"
-
-      },
+      }, */
 
     ]
   )
@@ -85,28 +41,31 @@ export default function Tasks(props) {
 
           'contentType': 'json'
         };
+        let fetches = [];
         props.settings.ToDo.taskLists.map((item) => {
           if (item.enabled) {
-            anyToDoListEnabled = true;
-            fetch("https://www.googleapis.com/tasks/v1/lists/" + item.id + "/tasks?showHidden=true", init)
+            setAnyToDoListEnabled(true);
+
+            const promise = fetch("https://www.googleapis.com/tasks/v1/lists/" + item.id + "/tasks", init)
               .then(response => response.json()) // Transform the data into json
               .then(data => {
 
-                data.map(task => {
-                  tempTasks.push(task)
+                data.items.map(task => {
+                  tempTasks.push(task);
                 })
 
-              })
+              });
+            fetches.push(promise);
           }
-        }
-
-        )
-
-      })
-      setTasks(tempTasks);
+        });
+        Promise.all(fetches).then(() => {
+          console.log("Task fetches done", tempTasks);
+          setTasks(tempTasks);
+        });
+      });
     }
   }, [])
-  if (anyToDoListEnabled) {
+  if (!anyToDoListEnabled) {
     return (
       <div className="tasks">
         <h1><Link to="/hideTasks">Tasks ▼</Link></h1>

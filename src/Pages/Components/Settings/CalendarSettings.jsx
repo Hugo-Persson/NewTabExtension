@@ -42,7 +42,7 @@ export default function CalendarSettings(props) {
         })
     }
 
-    if (calendarIDs[0] === undefined) {
+    if (calendarIDs.length === 0) {
         return (
             <div className="calendarSettings">
                 <button onClick={getCalendars}>Enable Google Calendar</button>

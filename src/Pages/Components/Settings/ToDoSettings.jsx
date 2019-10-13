@@ -1,12 +1,16 @@
 /* global chrome*/
 
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 import SelectCollection from './SelectCollection';
 
 export default function ToDoSettings(props) {
-    const [taskLists, setTaskLists] = useState(props.settings.ToDo.taskLists)
+    const [, updateState] = useState();
+    const forceUpdate = useCallback(() => updateState({}), []);
+
+    const { settings } = props;
 
     function getTaskLists() {
+
         chrome.identity.getAuthToken({ "interactive": true, "scopes": ["https://www.googleapis.com/auth/tasks"] }, token => {
             const init = {
                 method: "GET",
@@ -28,12 +32,14 @@ export default function ToDoSettings(props) {
                             enabled: false,
                         });
                     });
-                    setTaskLists(taskListsTemp)
+                    settings.ToDo.taskLists = taskListsTemp;
+                    forceUpdate();
+
                 });
         })
     }
 
-    if (taskLists[0] === undefined) {
+    if (settings.ToDo.taskLists.length === 0) {
         return (
 
             <div className="toDoSettings">
@@ -47,7 +53,7 @@ export default function ToDoSettings(props) {
                 Select TaskLists that you want to include in the sidebar
                 <div className="options">
 
-                    <SelectCollection collections={taskLists} />
+                    <SelectCollection collections={settings.ToDo.taskLists} />
                 </div>
 
             </div>

@@ -3,12 +3,12 @@ import React, { useState } from 'react'
 import { BrowserRouter as Router, Route, Link } from "react-router-dom"
 import Navbar from '../../../Components/Navbar';
 //Loading all default wallpapers
-import WinterRoad from "../../../../../../Wallpapers/WinterRoad.jpg";
-import Fire from "../../../../Wallpapers/Fire.jpg";
-import AbandonedHouse from "../../../../Wallpapers/AbandonedHouse.jpg";
-import Landscape from "../../../../Wallpapers/Landscape.jpg";
-import PersonCloseToFire from "../../../../Wallpapers/PersonCloseToFire.jpg";
-import Plants from "../../../../Wallpapers/Plants.jpg";
+import WinterRoad from "../../../Wallpapers/WinterRoad.jpg";
+import Fire from "../../../Wallpapers/Fire.jpg";
+import AbandonedHouse from "../../../Wallpapers/AbandonedHouse.jpg";
+import Landscape from "../../../Wallpapers/Landscape.jpg";
+import PersonCloseToFire from "../../../Wallpapers/PersonCloseToFire.jpg";
+import Plants from "../../../Wallpapers/Plants.jpg";
 
 //Loading all the default wallpaper icons
 import WinterRoadIcon from "./WallpaperIcons/WinterRoad.jpg";

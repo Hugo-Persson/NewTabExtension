@@ -327,6 +327,7 @@ option {
     grid-template-columns: repeat(5, 1fr);
     grid-area: main;
     padding: 2vw;
+    position: relative;
 
 }
 
@@ -359,6 +360,38 @@ option {
 .quickAccessItem img {
     width: 3.6vw;
     background-color: transparent;
+
+}
+
+#addOptions {
+    position: absolute;
+    bottom: 2%;
+    right: 2%;
+    text-align: center;
+
+}
+
+#addOptions * {
+    margin: 10px;
+
+}
+
+#addOptions button {
+    float: right;
+}
+
+#addOptions a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    border: solid rgb(59, 59, 59);
+    text-align: center;
+    padding: 10px;
+    cursor: pointer;
+}
+
+#addOptions a:hover {
+    background-color: rgba(99, 98, 98, 0.212);
 
 }
 

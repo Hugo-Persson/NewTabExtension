@@ -3,9 +3,9 @@
 /*global chrome*/
 import React, { useState, useEffect, useCallback } from 'react'
 import "./App.css"
-import Header from './Components/Header';
+import Header from './Pages/Header';
 import MainContent from './Pages/MainContent';
-import Sidebar from './Pages/Sidebar';
+import Sidebar from './Pages/Sidebar/Sidebar';
 import abandonedHouse from "./Wallpapers/AbandonedHouse.jpg";
 import { MemoryRouter } from "react-router-dom";
 import addButton from "./addButton.png";
@@ -52,7 +52,7 @@ export default function App() {
   }
 
   const [quickAccessLinks, setQuickAccessLinks] = useState([
-    /* {
+    {
       name: "1",
       url: "https://www.reddit.com",
       image: "https://api.faviconkit.com/reddit.com/64",
@@ -100,7 +100,13 @@ export default function App() {
       url: "https://www.reddit.com",
       image: "https://api.faviconkit.com/reddit.com/64",
       reRender: undefined
-    }, */
+    },
+    {
+      name: "8",
+      url: "https://www.reddit.com",
+      image: "https://api.faviconkit.com/reddit.com/64",
+      reRender: undefined
+    },
 
     {
       name: "Add Link",
@@ -121,7 +127,7 @@ export default function App() {
 
   useEffect(() => {
     // Toggle
-    loadChrome();
+    // loadChrome();
     function loadChrome() {
 
       chrome.storage.local.get("backgroundImage", (data => {

@@ -3,7 +3,7 @@ import React from 'react'
 export default function ToDoTask(props) {
     function Delete(task) {
 
-        props.events.splice((props.events.findIndex((item) => (item == task))), 1);
+        props.events.splice((props.events.findIndex((item) => (item === task))), 1);
 
         props.UpdateApp();
     }

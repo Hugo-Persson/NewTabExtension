@@ -2,6 +2,7 @@
 import React, { useState, useCallback } from 'react'
 import { Route } from "react-router-dom"
 import { Flipper, Flipped } from "react-flip-toolkit"
+import AddOption from "../Components/AddOptions"
 
 export default function MainContent(props) {
     const [, updateState] = useState();
@@ -21,6 +22,7 @@ export default function MainContent(props) {
     // When the flipKey changes in flipper the animation gets rendered
     return (
         <Route render={({ history }) => (
+
             <Flipper flipKey={props.quickAccessLinks.map(e => e.name).join("")} className="main">
                 {props.quickAccessLinks.map(link => (
 
@@ -39,7 +41,10 @@ export default function MainContent(props) {
                     </Flipped>
 
                 ))}
+                <AddOption />
             </Flipper>
+
+
         )} />
     )
 }

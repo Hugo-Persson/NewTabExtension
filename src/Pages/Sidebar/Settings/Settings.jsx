@@ -64,16 +64,16 @@ export default function Settings(props) {
         <React.Fragment>
 
             <div className="settings">
-                <div className="settingsReturn">
+                <div className="sidebarReturn">
                     <Link to="/">←</Link>
                 </div>
 
-                <div className="settingsHeader">
+                <div className="sidebarHeader">
 
                     <h1>Settings</h1>
                 </div>
 
-                <div className="settingsBody">
+                <div className="sidebarBody">
                     <Route path="/settings/customization" exact render={() => (
                         <div className="customization">
                             <h2>Background image</h2>

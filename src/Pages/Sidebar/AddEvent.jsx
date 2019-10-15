@@ -93,16 +93,16 @@ export default function AddEvent(props) {
     }
     return (
         <div className="settings addEvent" key={+ new Date()}>
-            <div className="settingsReturn">
+            <div className="sidebarReturn">
                 <Link to="/">←</Link>
             </div>
 
-            <div className="settingsHeader">
+            <div className="sidebarHeader">
 
                 <h1>Add Event</h1>
             </div>
 
-            <div className="settingsBody">
+            <div className="sidebarBody">
                 Name: <input type="text" onChange={e => event.summary = e.currentTarget.value} />
                 <br />
                 <span>Date:</span>

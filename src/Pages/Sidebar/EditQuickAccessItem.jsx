@@ -143,16 +143,16 @@ export default function EditQuickAccessItem(props) {
         <React.Fragment>
 
             <div className="settings editQuickAccessItem" key={+ new Date()}>
-                <div className="settingsReturn">
+                <div className="sidebarReturn">
                     <Link to="/">←</Link>
                 </div>
 
-                <div className="settingsHeader">
+                <div className="sidebarHeader">
 
                     <h1>Edit {selectedQuickAccessItem.name}</h1>
                 </div>
 
-                <div className="settingsBody">
+                <div className="sidebarBody">
                     <form>
 
 

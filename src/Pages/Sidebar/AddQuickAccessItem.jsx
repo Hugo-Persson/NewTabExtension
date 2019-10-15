@@ -120,15 +120,15 @@ export default function AddQuickAccessItem(props) {
     }
     return (
         <div className="settings editQuickAccessItem" key={+ new Date()}>
-            <div className="settingsReturn">
+            <div className="sidebarReturn">
                 <Link to="/">←</Link>
             </div>
 
-            <div className="settingsHeader">
+            <div className="sidebarHeader">
                 <h1>Create Quickaccess link</h1>
             </div>
 
-            <div className="settingsBody">
+            <div className="sidebarBody">
                 Name: <input placeholder="Enter a name for the link" type="text" onChange={(e) => obj.name = e.currentTarget.value} />
                 <br />
                 Url: <input placeholder="Enter a url for the link" type="text" onChange={(e) => {

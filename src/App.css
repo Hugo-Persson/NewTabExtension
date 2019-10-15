@@ -41,12 +41,26 @@ input[type=text]:hover {
     background-color: rgba(99, 98, 98, 0.212);
 }
 
-.checkBox {
-    position: absolute;
-    visibility: hidden;
+.checkbox {
+    height: 0.8vw;
+    width: 0.8vw;
+    display: inline-block;
+    border: rgb(59, 59, 59) solid;
+    cursor: pointer;
+    user-select: none;
 }
 
-.checkLabel>span {
+.checkbox span {
+    vertical-align: top;
+    font-size: 0.7rem;
+}
+
+.checkbox:hover {
+    background-color: rgba(99, 98, 98, 0.212);
+
+}
+
+/* .checkLabel>span {
     vertical-align: middle;
     margin: 1vw;
 }
@@ -75,7 +89,7 @@ input[type=text]:hover {
 
 
 
-}
+} */
 
 .uploadFile {
     visibility: hidden;
@@ -186,13 +200,13 @@ option {
     align-items: stretch;
 }
 
-.settingsBody {
+.sidebarBody {
     flex: 12;
     margin: 0 1vw;
     overflow: auto;
 }
 
-.settingsHeader {
+.sidebarHeader {
     flex: 0.5;
 
 }
@@ -235,11 +249,11 @@ option {
     margin: 0px 15px;
 }
 
-.settingsReturn {
+.sidebarReturn {
     flex: 0.1;
 }
 
-.settingsReturn a {
+.sidebarReturn a {
 
     font-size: 1.7vw;
     float: left;
@@ -282,7 +296,7 @@ option {
 ---------------------------------
 */
 
-.editQuickAccessItem .settingsBody * {
+.editQuickAccessItem .sidebarBody * {
     margin: 0.5vw 0;
 }
 
@@ -533,13 +547,8 @@ option {
 
 }
 
-.task label>div {
-    position: absolute;
-    top: 28%;
-    left: 0.4vw;
-    margin-top: 0;
-
-
+.task .checkbox {
+    float: left;
 }
 
 .task .delete {
@@ -568,8 +577,11 @@ option {
     top: 50%;
 }
 
-.checkBox:checked~.lineThrough {
+.checkBox:checked~.lineThrough {}
+
+.fullLine {
     width: 80% !important;
+
 }
 
 /*

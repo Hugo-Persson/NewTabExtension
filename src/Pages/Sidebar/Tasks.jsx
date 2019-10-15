@@ -8,7 +8,7 @@ export default function Tasks(props) {
   const [anyToDoListEnabled, setAnyToDoListEnabled] = useState(false);
   const [tasks, setTasks] = useState(
     [
-      /* {
+      {
         //Use later to specify task
         id: "1",
         //Name
@@ -18,7 +18,7 @@ export default function Tasks(props) {
         due: "2019-07-26T00:00:00.000Z",
         parent: "The parents id"
 
-      }, */
+      },
 
     ]
   )
@@ -65,7 +65,7 @@ export default function Tasks(props) {
       });
     }
   }, [])
-  if (!anyToDoListEnabled) {
+  if (anyToDoListEnabled) {
     return (
       <div className="tasks">
         <h1><Link to="/hideTasks">Tasks ▼</Link></h1>

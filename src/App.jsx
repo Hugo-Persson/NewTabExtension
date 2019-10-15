@@ -21,17 +21,18 @@ export default function App() {
   const [settings, setSettings] = useState({
     ToDo: {
       taskLists: [
-        /* {
+        {
           name: "TITLE",
           id: null,
           enabled: false,
-        }, */
+        },
 
 
       ]
     },
     calendar: {
       calendarIDs: [
+
       ]
     },
     backgroundImage: abandonedHouse,

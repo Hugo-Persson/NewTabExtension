@@ -1,7 +1,7 @@
 /*global chrome*/
-import React, { useEffect, useState, useRef, useCallback } from 'react'
-import { Route, Link } from "react-router-dom"
-import SelectCollection from './SelectCollection';
+import React, { useState, useCallback } from 'react'
+import SelectCollection from '../../../Components/SelectCollection';
+
 export default function CalendarSettings(props) {
 
     const { calendarIDs } = props.settings.calendar;

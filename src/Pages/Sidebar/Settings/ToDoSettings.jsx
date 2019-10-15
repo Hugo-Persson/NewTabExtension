@@ -1,7 +1,7 @@
 /* global chrome*/
 
 import React, { useState, useCallback } from 'react'
-import SelectCollection from './SelectCollection';
+import SelectCollection from "../../../Components/SelectCollection";
 
 export default function ToDoSettings(props) {
     const [, updateState] = useState();

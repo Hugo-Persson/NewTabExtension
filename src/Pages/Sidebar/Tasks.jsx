@@ -1,8 +1,8 @@
 /*global chrome*/
 //Component implements the ToDo-List
 import React, { useState, useEffect } from 'react'
-import { BrowserRouter as Router, Route, Link } from "react-router-dom"
-import ToDoTask from './Components/Sidebar/ToDoTask';
+import { Link } from "react-router-dom"
+import ToDoTask from '../../Components/ToDoTask';
 
 export default function Tasks(props) {
   const [anyToDoListEnabled, setAnyToDoListEnabled] = useState(false);

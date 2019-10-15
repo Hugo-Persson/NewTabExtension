@@ -3,7 +3,7 @@
 /*global chrome*/
 import React, { useState, useEffect, useCallback } from 'react'
 import "./App.css"
-import Header from './Pages/Components/Header';
+import Header from './Components/Header';
 import MainContent from './Pages/MainContent';
 import Sidebar from './Pages/Sidebar';
 import abandonedHouse from "./Wallpapers/AbandonedHouse.jpg";

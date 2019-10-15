@@ -1,9 +1,9 @@
 
 import React, { useState } from 'react'
-import { MemoryRouter, Route, Link, Redirect } from "react-router-dom"
+import { Route, Link, Redirect } from "react-router-dom"
 import Calendar from './Calendar';
 import Tasks from './Tasks';
-import Settings from './Settings';
+import Settings from './Settings/Settings';
 import EditQuickAccessItem from "./EditQuickAccessItem";
 import AddQuickAccessItem from './AddQuickAccessItem';
 import AddEvent from './AddEvent';

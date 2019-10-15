@@ -1,7 +1,7 @@
 /* global chrome*/
 import React, { useState, useEffect } from 'react'
 import { Link } from "react-router-dom"
-import CalendarEvents from './Components/Sidebar/CalendarEvents';
+import CalendarEvent from "../../Components/CalendarEvent";
 
 export default function Calendar(props) {
   const [anyCalendarEnabled, setAnyCalendarEnabled] = useState(false);
@@ -89,7 +89,7 @@ export default function Calendar(props) {
         </div>
         <h1> <Link to="/hideCalendar" > Calendar▼ </Link></h1>
         <div className="events" > {events.map((event) => (
-          <CalendarEvents key={event.id} {...props} event={event} events={events} />))}
+          <CalendarEvent key={event.id} {...props} event={event} events={events} />))}
         </div>
         <button onClick={addEvent} > Add Event </button>
 

@@ -1,25 +1,25 @@
 /*global chrome*/
 import React, { useState } from 'react'
 import { BrowserRouter as Router, Route, Link } from "react-router-dom"
-import Navbar from './Components/Settings/Navbar';
+import Navbar from '../../../Components/Navbar';
 //Loading all default wallpapers
-import WinterRoad from "../Wallpapers/WinterRoad.jpg";
-import Fire from "../Wallpapers/Fire.jpg";
-import AbandonedHouse from "../Wallpapers/AbandonedHouse.jpg";
-import Landscape from "../Wallpapers/Landscape.jpg";
-import PersonCloseToFire from "../Wallpapers/PersonCloseToFire.jpg";
-import Plants from "../Wallpapers/Plants.jpg";
+import WinterRoad from "../../../../../../Wallpapers/WinterRoad.jpg";
+import Fire from "../../../../Wallpapers/Fire.jpg";
+import AbandonedHouse from "../../../../Wallpapers/AbandonedHouse.jpg";
+import Landscape from "../../../../Wallpapers/Landscape.jpg";
+import PersonCloseToFire from "../../../../Wallpapers/PersonCloseToFire.jpg";
+import Plants from "../../../../Wallpapers/Plants.jpg";
 
 //Loading all the default wallpaper icons
-import WinterRoadIcon from "./Components/Settings/WallpaperIcons/WinterRoad.jpg";
-import FireIcon from "./Components/Settings/WallpaperIcons/Fire.jpg";
-import AbandonedHouseIcon from "./Components/Settings/WallpaperIcons/AbandonedHouse.jpg";
-import LandscapeIcon from "./Components/Settings/WallpaperIcons/Landscape.jpg";
-import PersonCloseToFireIcon from "./Components/Settings/WallpaperIcons/PersonCloseToFire.jpg";
-import PlantsIcon from "./Components/Settings/WallpaperIcons/Plants.jpg";
+import WinterRoadIcon from "./WallpaperIcons/WinterRoad.jpg";
+import FireIcon from "./WallpaperIcons/Fire.jpg";
+import AbandonedHouseIcon from "./WallpaperIcons/AbandonedHouse.jpg";
+import LandscapeIcon from "./WallpaperIcons/Landscape.jpg";
+import PersonCloseToFireIcon from "./WallpaperIcons/PersonCloseToFire.jpg";
+import PlantsIcon from "./WallpaperIcons/Plants.jpg";
 
-import GeneralSettings from './Components/Settings/GeneralSettings';
-import SideBarSettings from './Components/Settings/SideBarSettings';
+import GeneralSettings from "./GeneralSettings";
+import SideBarSettings from './SideBarSettings';
 
 export default function Settings(props) {
     const { updateBackgroundImage, backgroundImage, updateApp, settings } = props;

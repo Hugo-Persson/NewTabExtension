@@ -1,6 +1,7 @@
 /*global chrome*/
-import React, { useState, useRef, useEffect, useCallback } from 'react'
+import React, { useState, useCallback } from 'react'
 import { Link, Route } from "react-router-dom";
+
 export default function EditQuickAccessItem(props) {
 
     /* Force rerender */

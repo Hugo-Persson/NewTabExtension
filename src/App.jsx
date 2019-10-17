@@ -36,7 +36,7 @@ export default function App() {
       ]
     },
     backgroundImage: abandonedHouse,
-    defaultRoute: "/settings/customization",
+    defaultRoute: "/addFolder",
     dateFormat: "automatic",
     units: "metric",
     location: {

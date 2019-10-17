@@ -12,7 +12,7 @@ export default function AddOptions() {
         return (
             <div id="addOptions">
 
-                <Link to="/AddLink">Add Folder</Link>
+                <Link to="/AddFolder">Add Folder</Link>
                 <Link to="/AddLink">Add Link</Link>
                 <button onClick={toggleShowOptions}>+</button>
             </div>

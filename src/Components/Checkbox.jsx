@@ -10,7 +10,10 @@ export default function Checkbox(props) {
     }
     return (
         <div className="checkbox" onClick={() => {
-            onCheck(!checked);
+            if (onCheck !== undefined) {
+                onCheck(!checked);
+
+            }
             setChecked(!checked);
         }}>
             <span>

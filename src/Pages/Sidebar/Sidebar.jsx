@@ -7,6 +7,7 @@ import Settings from './Settings/Settings';
 import EditQuickAccessItem from "./EditQuickAccessItem";
 import AddQuickAccessItem from './AddQuickAccessItem';
 import AddEvent from './AddEvent';
+import AddFolder from './AddFolder';
 export default function Sidebar(props) {
 
   const { settings } = props;
@@ -57,6 +58,7 @@ export default function Sidebar(props) {
       <Route path="/AddLink" render={() => <AddQuickAccessItem {...props} />} />
 
       <Route path="/AddEvent" render={() => <AddEvent {...props} />} />
+      <Route path="/AddFolder" render={() => <AddFolder {...props} />} />
 
       <Redirect to={settings.defaultRoute} />
     </div>

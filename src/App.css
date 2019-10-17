@@ -48,11 +48,16 @@ input[type=text]:hover {
     border: rgb(59, 59, 59) solid;
     cursor: pointer;
     user-select: none;
+    margin: 5px;
+    vertical-align: middle;
 }
 
 .checkbox span {
     vertical-align: top;
+    text-align: center;
+
     font-size: 0.7rem;
+    margin: 0 !important;
 }
 
 .checkbox:hover {
@@ -133,6 +138,11 @@ option {
     border: rgb(59, 59, 59) solid;
     padding: 10px;
     margin: 10px;
+}
+
+.noFocus {
+    color: rgb(104, 104, 104);
+
 }
 
 /*

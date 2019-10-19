@@ -3,42 +3,22 @@ import { Switch, useHistory } from "react-router-dom"
 import { Flipper, Flipped } from "react-flip-toolkit"
 import AddOption from "../Components/AddOptions"
 import InsideFolder from "./InsideFolder"
+import QuickAccessItem from '../Components/QuickAccessItem'
 
 
 export default function QuickAccessGrid(props) {
-    const history = useHistory();
 
-
-    function RightClick(e, history, link) {
-        e.preventDefault();
-        history.push("/EditQuickAccessItem");
-        link.reRender = ReRender;
-        props.asignSelectedQuickAccessItem(link);
-    }
+    const { quickAccessLinks } = props;
+    //react-flip-toolkit is a library that handle animations for items changing order in a grid.
+    // I use two components in this library Flipper and Flipped. 
+    // Flipper is the container for all items and Flipped is the container for each individual item
+    // When the flipKey changes in flipper the animation gets rendered
     return (
-        <Flipper flipKey={props.quickAccessLinks.map(e => e.name).join("")} className="main">
-            {props.quickAccessLinks.map((link, index) => (
+        <Flipper flipKey={quickAccessLinks.map(e => e.name).join("")} className="main">
+            {quickAccessLinks.map((link, index) => (
 
                 <Flipped flipId={link.name} key={link.name}>
-                    <a className="quickAccessItem" onClick={e => {
-                        if (link.name === "Add Link") {
-                            history.push("/AddLink");
-                        }
-                        else if (link.type === "folder") {
-                            history.push("/folder/" + index)
-                        }
-                    }} onContextMenu={(e) => {
-                        if (link.name !== "Add Link" && link.type !== "folder") RightClick(e, history, link)
-                        else e.preventDefault()
-                    }}
-
-
-                        href={link.url}>
-                        <ul>
-                            <li><img src={link.image} alt={"Image failed to load"} /></li>
-                            <li><span>{link.name}</span></li>
-                        </ul>
-                    </a>
+                    <QuickAccessItem link={link} index={index} />
 
                 </Flipped>
 

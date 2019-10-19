@@ -1,23 +1,7 @@
-import React, { useState, useCallback } from 'react'
-import { Switch, useHistory } from "react-router-dom"
+<Flipper flipKey={props.quickAccessLinks.map(e => e.name).join("")} className="main">
+    {props.quickAccessLinks.map((link, index) => (
 
-export default function QuickAccessItem(props) {
-
-    const history = useHistory();
-    const { link, index } = props;
-
-    const [, updateState] = useState();
-    const forceUpdate = useCallback(() => updateState({}), []);
-
-    function RightClick(e, history, link) {
-        e.preventDefault();
-        history.push("/EditQuickAccessItem");
-        link.reRender = forceUpdate();
-        props.asignSelectedQuickAccessItem(link);
-    }
-
-    return (
-        <React.Fragment>
+        <Flipped flipId={link.name} key={link.name}>
             <a className="quickAccessItem" onClick={e => {
                 if (link.name === "Add Link") {
                     history.push("/AddLink");
@@ -37,6 +21,9 @@ export default function QuickAccessItem(props) {
                     <li><span>{link.name}</span></li>
                 </ul>
             </a>
-        </React.Fragment>
-    )
-}
+
+        </Flipped>
+
+    ))}
+    <AddOption />
+</Flipper>

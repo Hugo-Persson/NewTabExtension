@@ -1,8 +1,9 @@
 /*global chrome*/
 import React, { useState, useCallback } from 'react'
-import { Route } from "react-router-dom"
+import { Route, Switch } from "react-router-dom"
 import { Flipper, Flipped } from "react-flip-toolkit"
 import AddOption from "../Components/AddOptions"
+import InsideFolder from "./InsideFolder"
 
 export default function MainContent(props) {
     const [, updateState] = useState();
@@ -21,30 +22,44 @@ export default function MainContent(props) {
     // Flipper is the container for all items and Flipped is the container for each individual item
     // When the flipKey changes in flipper the animation gets rendered
     return (
-        <Route render={({ history }) => (
+        <React.Fragment>
+            <Switch>
+                <Route path="/folder/:index" children={<InsideFolder {...props} />} />
+                <Route path="/" render={({ history }) => (
 
-            <Flipper flipKey={props.quickAccessLinks.map(e => e.name).join("")} className="main">
-                {props.quickAccessLinks.map(link => (
+                    <Flipper flipKey={props.quickAccessLinks.map(e => e.name).join("")} className="main">
+                        {props.quickAccessLinks.map((link, index) => (
 
-                    <Flipped flipId={link.name} key={link.name}>
-                        <a className="quickAccessItem" onClick={e => {
-                            if (link.name === "Add Link") {
-                                history.push("/AddLink");
-                            }
-                        }} onContextMenu={(e) => { if (link.name !== "Add Link") { RightClick(e, history, link) } else { e.preventDefault() } }} href={link.url}>
-                            <ul>
-                                <li><img src={link.image} alt={"Image failed to load"} /></li>
-                                <li><span>{link.name}</span></li>
-                            </ul>
-                        </a>
-
-                    </Flipped>
-
-                ))}
-                <AddOption />
-            </Flipper>
+                            <Flipped flipId={link.name} key={link.name}>
+                                <a className="quickAccessItem" onClick={e => {
+                                    if (link.name === "Add Link") {
+                                        history.push("/AddLink");
+                                    }
+                                    else if (link.type === "folder") {
+                                        history.push("/folder/" + index)
+                                    }
+                                }} onContextMenu={(e) => {
+                                    if (link.name !== "Add Link" && link.type !== "folder") RightClick(e, history, link)
+                                    else e.preventDefault()
+                                }}
 
 
-        )} />
+                                    href={link.url}>
+                                    <ul>
+                                        <li><img src={link.image} alt={"Image failed to load"} /></li>
+                                        <li><span>{link.name}</span></li>
+                                    </ul>
+                                </a>
+
+                            </Flipped>
+
+                        ))}
+                        <AddOption />
+                    </Flipper>
+
+
+                )} />
+            </Switch>
+        </React.Fragment>
     )
 }

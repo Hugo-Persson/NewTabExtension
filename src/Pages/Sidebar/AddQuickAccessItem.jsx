@@ -3,7 +3,7 @@ import React from 'react'
 import { Link } from "react-router-dom";
 
 export default function AddQuickAccessItem(props) {
-    const { quickAccessLinks, syncQuickAccessLinks } = props;
+    const { quickAccessLinks, syncQuickAccessLinks, fetchImageFromRemoteHost } = props;
 
     let syncImage;
     let obj = {
@@ -36,10 +36,14 @@ export default function AddQuickAccessItem(props) {
         return url.substring(url.indexOf(".") + 1)
     }
     async function getAutomaticIcon() {
-        fetchImageFromRemoteHost("https://api.faviconkit.com/" + formatUrl(obj.url) + "/64", src => {
+        fetchImageFromRemoteHost("https://api.faviconkit.com/" + formatUrl(obj.url) + "/64").then(src => {
             obj.image = src;
             syncImage = "auto";
-        });
+        })
+            .catch(err => {
+                alert(err);
+
+            });
 
     }
     function addLink() {
@@ -75,28 +79,7 @@ export default function AddQuickAccessItem(props) {
         }
 
     }
-    function fetchImageFromRemoteHost(url, callback) {
-        const init = {
-            method: 'GET',
-            mode: 'cors',
-            cache: 'default'
-        }
-        fetch(url, init)
-            .then((res) => res.blob())
-            .then(blob => {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    const src = "data:image/png;base64," + btoa(reader.result);
-                    callback(src);
 
-                }
-                reader.readAsBinaryString(blob);
-
-            })
-            .catch(error => {
-                alert("Getting the icon automaticlly was not successful");
-            });
-    }
     async function getImageUrl(url) {
         fetchImageFromRemoteHost(url, src => {
             syncImage = url;
@@ -107,8 +90,12 @@ export default function AddQuickAccessItem(props) {
     function urlInputFormatter(e) {
         const text = e.currentTarget.value;
         let formattedText;
-        if (text.substring(0, 7) === "http://" || text.substring(0, 7) === "https://") {
+        if (text.substring(0, 11) === "http://www." || text.substring(0, 12) === "https://www.") {
             formattedText = text;
+        }
+        else if (text.substring(0, 7) === "http://" || text.substring(0, 8) === "https://") {
+            const newUrl = text.slice(0, 8) + "www." + text.slice(8);
+            formattedText = newUrl;
         }
         else if (text.substring(0, 4) === "www.") {
             formattedText = "https://" + text;

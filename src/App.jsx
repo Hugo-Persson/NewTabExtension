@@ -8,7 +8,7 @@ import MainContent from './Pages/MainContent';
 import Sidebar from './Pages/Sidebar/Sidebar';
 import abandonedHouse from "./Wallpapers/AbandonedHouse.jpg";
 import { MemoryRouter } from "react-router-dom";
-import addButton from "./addButton.png";
+import addButton from "./Assets/addButton.png";
 import iconNotFound from "./iconNotFound.png";
 export default function App() {
 
@@ -102,13 +102,6 @@ export default function App() {
       image: "https://api.faviconkit.com/reddit.com/64",
       reRender: undefined
     },
-    {
-      name: "8",
-      url: "https://www.reddit.com",
-      image: "https://api.faviconkit.com/reddit.com/64",
-      reRender: undefined
-    },
-
     {
       name: "Add Link",
       url: "#",
@@ -236,7 +229,7 @@ export default function App() {
         .catch(async (error) => {
 
           resolve(iconNotFound);
-          console.log("Getting the icon automaticlly was not successful");
+          console.log("Getting the icon was not successful");
 
         });
     })
@@ -250,7 +243,9 @@ export default function App() {
 
         <Header name="Hugo Persson" settings={settings} />
         <MainContent quickAccessLinks={quickAccessLinks} updateApp={updateApp} settings={settings} selectedQuickAccessItem={selectedQuickAccessItem} asignSelectedQuickAccessItem={(object) => setSelectedQuickAccessItem(object)} />
-        <Sidebar backgroundImage={backgroundImage} updateBackgroundImage={image => setBackgroundImage(image)} syncQuickAccessLinks={syncQuickAccessLinks} settings={settings} updateApp={updateApp} quickAccessLinks={quickAccessLinks} selectedQuickAccessItem={selectedQuickAccessItem} />
+        <Sidebar backgroundImage={backgroundImage} updateBackgroundImage={image => setBackgroundImage(image)}
+          syncQuickAccessLinks={syncQuickAccessLinks} settings={settings} updateApp={updateApp} quickAccessLinks={quickAccessLinks}
+          selectedQuickAccessItem={selectedQuickAccessItem} fetchImageFromRemoteHost={fetchImageFromRemoteHost} />
 
       </React.Fragment>
     </MemoryRouter>

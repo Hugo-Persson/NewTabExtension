@@ -13,6 +13,8 @@ export default function EditQuickAccessItem(props) {
 
     let syncImage;
 
+    const { uploadImage } = props;
+
 
     function save() {
         const syncItem = getSyncItem();
@@ -20,7 +22,7 @@ export default function EditQuickAccessItem(props) {
 
         let selectedItemDeepCopy = JSON.parse(JSON.stringify(selectedQuickAccessItem));
         if (syncImage === undefined) {
-            const originalImage = syncItem.value.image;
+            const originalImage = syncImage;
             selectedItemDeepCopy.image = originalImage;
 
         }
@@ -28,7 +30,7 @@ export default function EditQuickAccessItem(props) {
             selectedItemDeepCopy.image = syncImage;
         }
 
-        syncQuickAccessLinks[syncItem.index] = selectedItemDeepCopy;
+        syncQuickAccessLinks[index] = selectedItemDeepCopy;
         // Fix sync 
         chrome.storage.sync.set({ "quickAccessLinks": syncQuickAccessLinks }, () => console.log("Sync successful"));
         chrome.storage.local.set({ "quickAccessLinks": quickAccessLinks }, () => alert("Save Successful"));
@@ -64,25 +66,15 @@ export default function EditQuickAccessItem(props) {
     }
 
     function localIcon(e) {
-        const file = e.currentTarget.files[0];
-        const imageType = /image.*/;
-        if (file.type.match(imageType)) {
-
-
-            const reader = new FileReader();
-            reader.onload = e => {
-
-
-                const result = reader.result;
+        uploadImage(e)
+            .then(result => {
                 syncImage = "auto";
                 selectedQuickAccessItem.image = result;
                 selectedQuickAccessItem.reRender();
-            }
-            reader.readAsDataURL(file);
-        }
-        else {
-            alert("File type not supported");
-        }
+            })
+            .catch(reason => {
+                console.log(reason);
+            })
     }
     function fetchImageFromRemoteHost(url, callback) {
         const init = {
@@ -117,8 +109,12 @@ export default function EditQuickAccessItem(props) {
     function urlInputFormatter(e) {
         const text = e.currentTarget.value;
         let formattedText;
-        if (text.substring(0, 6) === "http://" || text.substring(0, 7) === "https://") {
+        if (text.substring(0, 11) === "http://www." || text.substring(0, 12) === "https://www.") {
             formattedText = text;
+        }
+        else if (text.substring(0, 7) === "http://" || text.substring(0, 8) === "https://") {
+            const newUrl = text.slice(0, 8) + "www." + text.slice(8);
+            formattedText = newUrl;
         }
         else if (text.substring(0, 4) === "www.") {
             formattedText = "https://" + text;

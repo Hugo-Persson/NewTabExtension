@@ -41,6 +41,162 @@ input[type=text]:hover {
     background-color: rgba(99, 98, 98, 0.212);
 }
 
+input[type=radio] {
+    padding: 10px;
+}
+
+.checkbox {
+    height: 0.8vw;
+    width: 0.8vw;
+    display: inline-block;
+    border: rgb(59, 59, 59) solid;
+    cursor: pointer;
+    user-select: none;
+    margin: 5px;
+    vertical-align: middle;
+}
+
+.checkbox span {
+    vertical-align: top;
+    text-align: center;
+
+    font-size: 0.7rem;
+    margin: 0 !important;
+}
+
+.checkbox:hover {
+    background-color: rgba(99, 98, 98, 0.212);
+
+}
+
+/* .checkLabel>span {
+    vertical-align: middle;
+    margin: 1vw;
+}
+
+.checkLabel>div {
+    border: rgb(59, 59, 59) solid;
+    width: 0.8vw;
+
+    height: 0.8vw;
+    cursor: pointer;
+    user-select: none;
+    display: inline-block;
+    vertical-align: middle;
+    margin: auto;
+    font-size: 0.65vw;
+    font-weight: bold;
+}
+
+.checkLabel>div:hover {
+    background-color: rgba(99, 98, 98, 0.212);
+}
+
+.checkBox:checked+.checkLabel>div::after {
+    content: "✓"
+
+
+
+
+} */
+
+.uploadFile {
+    visibility: hidden;
+    position: absolute;
+}
+
+.uploadFileLabel {
+    width: 60%;
+    margin: 0.5vw 2vw !important;
+    padding: 0.3vw;
+
+    display: inline-block;
+    border: rgb(59, 59, 59) solid;
+    cursor: pointer;
+
+
+}
+
+.uploadFileLabel:hover {
+    background-color: rgba(99, 98, 98, 0.212);
+}
+
+button {
+    background-color: transparent;
+    color: white;
+    padding: 0.5vw 0.7vw;
+    border: rgb(59, 59, 59) solid;
+    cursor: pointer;
+    font-size: 0.8vw;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: rgba(99, 98, 98, 0.212)
+}
+
+select,
+option {
+    background-color: rgba(12, 12, 12, 0.459);
+    color: white;
+    border: rgb(59, 59, 59) solid;
+    padding: 10px;
+    margin: 10px;
+}
+
+.noFocus {
+    color: rgb(104, 104, 104);
+
+}
+
+
+/*
+--------------------------------- 
+        Global
+---------------------------------
+
+*/
+
+
+html {
+    max-height: 100vh;
+    background-size: 100%;
+    color: white;
+    background-color: #323639;
+}
+
+a {
+    text-decoration: none;
+}
+
+#root {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 1fr 4fr;
+    grid-template-areas:
+        "header header header header header"
+        "main main main main sideBar"
+
+}
+
+input[type=text] {
+    background-color: transparent;
+    color: white;
+    border: solid rgb(59, 59, 59);
+    width: 90%;
+    padding: 0.3vw;
+}
+
+input[type=text]:hover {
+    background-color: rgba(99, 98, 98, 0.212);
+}
+
+input[type=radio] {
+    padding: 10px;
+}
+
 .checkbox {
     height: 0.8vw;
     width: 0.8vw;
@@ -193,6 +349,14 @@ option {
 }
 
 .generalSettings * {
+    margin: 10px;
+}
+
+.iconSelection {
+    text-align: start;
+}
+
+.iconSelection div {
     margin: 10px;
 }
 
@@ -587,7 +751,6 @@ option {
     top: 50%;
 }
 
-.checkBox:checked~.lineThrough {}
 
 .fullLine {
     width: 80% !important;

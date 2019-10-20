@@ -1,10 +1,8 @@
 /*global chrome*/
 import React, { useState, useCallback } from 'react'
 import { Route, Switch } from "react-router-dom"
-import { Flipper, Flipped } from "react-flip-toolkit"
-import AddOption from "../Components/AddOptions"
 import InsideFolder from "./InsideFolder"
-import QuickAccessGrid from './QuickAccessGrid'
+import QuickAccessGrid from '../../Components/QuickAccessGrid'
 
 export default function MainContent(props) {
     const { quickAccessLinks, asignSelectedQuickAccessItem } = props;
@@ -29,10 +27,10 @@ export default function MainContent(props) {
             <Switch>
                 <Route path="/folder/:index" children={<InsideFolder {...props} />} />
                 <Route path="/" render={({ history }) => (
+                    <div className="main">
+                        <QuickAccessGrid linkArray={quickAccessLinks} />
 
-                    <QuickAccessGrid quickAccessLinks={quickAccessLinks} />
-
-
+                    </div>
                 )} />
             </Switch>
         </React.Fragment>

@@ -583,6 +583,19 @@ option {
 
 }
 
+.main .goBack {
+    font-size: 30px;
+    color: white;
+    position: absolute;
+    left: 2%;
+    top: 2%;
+
+}
+
+.main .goBack:hover {
+    color: gray;
+}
+
 /*
 --------------------------------- 
         Calendar

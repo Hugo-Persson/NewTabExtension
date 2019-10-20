@@ -1,9 +1,8 @@
 /* global chrome */
-
 import React, { useState, useEffect } from 'react'
 
 
-export default function Header(props) {
+export default function Greeting(props) {
     const [weather, setWeather] = useState({ name: "loading", main: { temp: 0 } });
 
 

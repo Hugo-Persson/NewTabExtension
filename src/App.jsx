@@ -3,13 +3,14 @@
 /*global chrome*/
 import React, { useState, useEffect, useCallback } from 'react'
 import "./App.css"
-import Header from './Pages/Header';
-import MainContent from './Pages/MainContent';
+import Header from './Pages/Header/Header';
+import MainContent from './Pages/MainContent/MainContent';
 import Sidebar from './Pages/Sidebar/Sidebar';
 import abandonedHouse from "./Wallpapers/AbandonedHouse.jpg";
 import { MemoryRouter } from "react-router-dom";
 import addButton from "./Assets/addButton.png";
 import iconNotFound from "./iconNotFound.png";
+import folderIcon from "./Assets/folder.png"
 export default function App() {
 
   const [, updateState] = useState();
@@ -54,9 +55,18 @@ export default function App() {
 
   const [quickAccessLinks, setQuickAccessLinks] = useState([
     {
-      name: "1",
-      url: "https://www.reddit.com",
-      image: "https://api.faviconkit.com/reddit.com/64",
+      name: "Folder",
+      url: "#",
+      type: "folder",
+      image: folderIcon,
+      items: [
+        {
+          name: "2",
+          url: "https://www.reddit.com",
+          image: "https://api.faviconkit.com/reddit.com/64",
+          reRender: undefined
+        },
+      ],
       reRender: undefined
     },
     {
@@ -241,8 +251,9 @@ export default function App() {
     <MemoryRouter >
       <React.Fragment>
 
-        <Header name="Hugo Persson" settings={settings} />
-        <MainContent quickAccessLinks={quickAccessLinks} updateApp={updateApp} settings={settings} selectedQuickAccessItem={selectedQuickAccessItem} asignSelectedQuickAccessItem={(object) => setSelectedQuickAccessItem(object)} />
+        <Header name="Hugo Persson" quickAccessLinks={quickAccessLinks} settings={settings} />
+        <MainContent quickAccessLinks={quickAccessLinks} updateApp={updateApp}
+          settings={settings} selectedQuickAccessItem={selectedQuickAccessItem} asignSelectedQuickAccessItem={(object) => setSelectedQuickAccessItem(object)} />
         <Sidebar backgroundImage={backgroundImage} updateBackgroundImage={image => setBackgroundImage(image)}
           syncQuickAccessLinks={syncQuickAccessLinks} settings={settings} updateApp={updateApp} quickAccessLinks={quickAccessLinks}
           selectedQuickAccessItem={selectedQuickAccessItem} fetchImageFromRemoteHost={fetchImageFromRemoteHost} />

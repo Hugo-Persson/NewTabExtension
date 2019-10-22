@@ -1,6 +1,7 @@
 import React from 'react'
 import { useParams, Link } from "react-router-dom";
 import QuickAccessGrid from '../../Components/QuickAccessGrid';
+import AddOptions from '../../Components/AddOptions';
 
 
 export default function InsideFolder(props) {
@@ -12,6 +13,7 @@ export default function InsideFolder(props) {
         <div className="main">
             <Link to="/" className="goBack">←</Link>
             <QuickAccessGrid linkArray={folder.items} />
+            <AddOptions inFolder={true} />
         </div>
 
     )

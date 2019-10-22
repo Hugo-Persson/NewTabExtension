@@ -3,6 +3,7 @@ import React, { useState, useCallback } from 'react'
 import { Route, Switch } from "react-router-dom"
 import InsideFolder from "./InsideFolder"
 import QuickAccessGrid from '../../Components/QuickAccessGrid'
+import AddOptions from '../../Components/AddOptions';
 
 export default function MainContent(props) {
     const { quickAccessLinks, asignSelectedQuickAccessItem } = props;
@@ -29,7 +30,7 @@ export default function MainContent(props) {
                 <Route path="/" render={({ history }) => (
                     <div className="main">
                         <QuickAccessGrid linkArray={quickAccessLinks} />
-
+                        <AddOptions />
                     </div>
                 )} />
             </Switch>

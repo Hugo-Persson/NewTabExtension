@@ -23,7 +23,6 @@ export default function QuickAccessGrid(props) {
                 </Flipped>
 
             ))}
-            <AddOption />
         </Flipper>
     )
 }
